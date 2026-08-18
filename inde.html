@@ -1,0 +1,2306 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Shamshe Ilahi Academy</title>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+--primary:#5b21f4;
+--purple:#7c3aed;
+--pink:#ec4899;
+--blue:#0891b2;
+--green:#16a34a;
+--red:#ef4444;
+--dark:#172033;
+--bg:#f4f7ff;
+}
+
+body{
+font-family:Arial,Helvetica,sans-serif;
+background:linear-gradient(135deg,#eef2ff,#fdf2f8,#ecfeff);
+color:var(--dark);
+min-height:100vh
+}
+
+button,input,textarea{font:inherit}
+button{cursor:pointer}
+.app{max-width:950px;margin:auto;min-height:100vh;padding-bottom:85px}
+
+header{
+height:78px;background:#fff;display:flex;align-items:center;
+justify-content:space-between;padding:10px 18px;position:sticky;
+top:0;z-index:100;box-shadow:0 3px 20px #0001
+}
+
+.logo{
+font-size:22px;font-weight:900;color:#5146d8
+}
+
+.logo small{
+display:block;font-size:11px;color:#777;margin-top:3px
+}
+
+.avatar{
+width:49px;height:49px;border-radius:50%;
+object-fit:cover;border:3px solid white;
+box-shadow:0 4px 15px #0002
+}
+
+.screen{display:none}
+.screen.active{display:block}
+
+.hero{
+margin:18px;padding:27px;border-radius:28px;color:white;
+background:linear-gradient(135deg,#4f46e5,#7c3aed,#ec4899,#06b6d4);
+background-size:300% 300%;
+animation:gradient 8s ease infinite;
+box-shadow:0 20px 45px #4f46e544;
+position:relative;overflow:hidden
+}
+
+@keyframes gradient{
+0%{background-position:0 50%}
+50%{background-position:100% 50%}
+100%{background-position:0 50%}
+}
+
+.hero:after{
+content:"🌈 ✨ ⭐ 📚";
+position:absolute;
+right:14px;top:12px;font-size:25px;
+animation:float 3s infinite
+}
+
+@keyframes float{
+50%{transform:translateY(-10px) rotate(4deg)}
+}
+
+.hero h1{font-size:32px;margin:9px 0}
+.hero p{line-height:1.55}
+
+.whiteBtn{
+border:0;background:white;color:#4f46e5;
+padding:13px 18px;border-radius:13px;
+font-weight:900;margin-top:15px
+}
+
+.stats{
+display:grid;grid-template-columns:repeat(3,1fr);
+gap:10px;margin:18px
+}
+
+.stat{
+background:white;padding:15px;border-radius:18px;
+text-align:center;box-shadow:0 7px 25px #00000009
+}
+
+.stat b{display:block;color:#4f46e5;font-size:23px}
+.stat small{color:#777}
+
+section{padding:13px 18px 25px}
+h2{margin-bottom:15px}
+
+.grid{
+display:grid;grid-template-columns:repeat(2,1fr);
+gap:13px
+}
+
+.card{
+background:white;border-radius:20px;padding:17px;
+border:1px solid #e6e8f0;
+box-shadow:0 8px 28px #0000000b;
+transition:.2s
+}
+
+.card:hover{transform:translateY(-3px)}
+
+.icon{font-size:35px}
+.card h3{margin:8px 0 5px}
+.card p{font-size:13px;color:#6b7280;line-height:1.45}
+
+.card button{
+width:100%;padding:11px;margin-top:12px;
+border:0;border-radius:12px;
+background:#eef2ff;color:#4f46e5;font-weight:900
+}
+
+.aiBox{
+margin:18px;padding:21px;border-radius:24px;
+background:linear-gradient(135deg,#0891b2,#2563eb,#9333ea);
+color:white;box-shadow:0 15px 35px #2563eb33
+}
+
+.aiRow{
+display:flex;align-items:center;gap:14px
+}
+
+.aiFace{
+width:70px;height:70px;border-radius:50%;
+background:linear-gradient(135deg,#fde68a,#f9a8d4);
+border:4px solid white;
+display:flex;align-items:center;
+justify-content:center;font-size:40px;
+animation:float 3s infinite
+}
+
+.aiButtons{
+display:grid;grid-template-columns:1fr 1fr;
+gap:9px;margin-top:15px
+}
+
+.aiButtons button{
+border:0;background:white;color:#2563eb;
+padding:12px;border-radius:12px;font-weight:900
+}
+
+.service{
+margin:18px;padding:18px;border-radius:20px;
+background:linear-gradient(135deg,#16a34a,#059669);
+color:white;box-shadow:0 12px 30px #16a34a33
+}
+
+.service button{
+border:0;background:white;color:#15803d;
+padding:11px 14px;border-radius:12px;
+font-weight:900;margin:7px 5px 0 0
+}
+
+.search{
+width:100%;padding:14px;border:1px solid #ddd;
+border-radius:14px;background:white;outline:none;
+margin-bottom:12px
+}
+
+.pills{
+display:flex;gap:8px;overflow:auto;margin-bottom:15px
+}
+
+.pill{
+white-space:nowrap;border:1px solid #ddd;
+background:white;padding:9px 13px;border-radius:20px
+}
+
+.pill.active{
+background:#4f46e5;color:white;border-color:#4f46e5
+}
+
+.lessonHead{
+background:white;padding:15px;
+position:sticky;top:78px;z-index:50;
+display:flex;align-items:center;gap:10px;
+border-bottom:1px solid #eee
+}
+
+.back{
+width:42px;height:42px;border:0;
+border-radius:12px;background:#eef2ff;
+color:#4f46e5;font-size:20px
+}
+
+.quiz{
+margin:18px;background:white;
+padding:22px;border-radius:22px;
+box-shadow:0 8px 25px #0001
+}
+
+.question{
+font-size:21px;font-weight:800;
+line-height:1.45;margin:13px 0
+}
+
+.option{
+width:100%;text-align:left;
+padding:14px;margin:5px 0;
+border:2px solid #e5e7eb;
+background:white;border-radius:13px
+}
+
+.option.correct{
+background:#dcfce7;border-color:#22c55e
+}
+
+.option.wrong{
+background:#fee2e2;border-color:#ef4444
+}
+
+.next{
+width:100%;padding:14px;margin-top:12px;
+border:0;border-radius:13px;
+background:#4f46e5;color:white;font-weight:900
+}
+
+.next:disabled{opacity:.45}
+
+.explain{
+display:none;margin-top:12px;padding:13px;
+background:#f5f3ff;border-radius:12px;
+line-height:1.5
+}
+
+/* TEACHER */
+
+.teacher{
+background:white;border-radius:24px;
+overflow:hidden;box-shadow:0 10px 30px #0001
+}
+
+.teacherTop{
+padding:18px;color:white;
+background:linear-gradient(135deg,#f97316,#ec4899,#7c3aed);
+display:flex;align-items:center;gap:12px
+}
+
+.teacherFace{
+width:67px;height:67px;border-radius:50%;
+background:white;display:flex;
+align-items:center;justify-content:center;
+font-size:39px
+}
+
+.teacherTop b{font-size:21px}
+
+.chat{
+height:430px;overflow-y:auto;
+padding:15px;background:#f8fafc
+}
+
+.msg{
+max-width:87%;padding:13px 15px;
+border-radius:17px;margin-bottom:10px;
+line-height:1.52;font-size:14px;
+word-wrap:break-word
+}
+
+.teacherMsg{
+background:white;border:1px solid #e5e7eb
+}
+
+.userMsg{
+background:#5146e5;color:white;margin-left:auto
+}
+
+.typing{
+font-style:italic;color:#777
+}
+
+.chatInput{
+display:flex;gap:7px;padding:11px;
+border-top:1px solid #eee
+}
+
+.chatInput input{
+flex:1;padding:13px;
+border:1px solid #ddd;
+border-radius:13px;outline:none
+}
+
+.round{
+width:49px;border:0;border-radius:12px;
+background:#5146e5;color:white;font-size:19px
+}
+
+/* PROFILE */
+
+.profileBox,.adminBox{
+margin:18px;background:white;
+border-radius:22px;padding:22px;
+box-shadow:0 8px 25px #0001
+}
+
+.profileBox{text-align:center}
+
+.profilePhoto{
+width:115px;height:115px;border-radius:50%;
+object-fit:cover;background:#eee;
+border:5px solid #eef2ff
+}
+
+.upload{
+display:inline-block;margin-top:12px;
+padding:11px 16px;border-radius:12px;
+background:#4f46e5;color:white;
+font-weight:800
+}
+
+#photo{display:none}
+
+.name{
+width:100%;padding:13px;
+border:1px solid #ddd;
+border-radius:12px;margin-top:12px
+}
+
+.save{
+width:100%;padding:13px;margin-top:9px;
+border:0;border-radius:12px;
+background:#16a34a;color:white;
+font-weight:900
+}
+
+/* ADMIN */
+
+.adminInput{
+width:100%;padding:13px;
+border:1px solid #ddd;
+border-radius:12px;margin:6px 0
+}
+
+.adminButton{
+width:100%;padding:13px;
+border:0;border-radius:12px;
+background:#4f46e5;color:white;
+font-weight:900;margin-top:7px
+}
+
+.apiStatus{
+padding:12px;border-radius:12px;
+margin-top:12px;font-size:13px
+}
+
+.statusOff{background:#fee2e2;color:#991b1b}
+.statusOn{background:#dcfce7;color:#166534}
+
+/* BOTTOM */
+
+.bottom{
+position:fixed;bottom:0;left:50%;
+transform:translateX(-50%);
+width:100%;max-width:950px;height:72px;
+background:white;border-top:1px solid #eee;
+display:flex;justify-content:space-around;
+align-items:center;z-index:100
+}
+
+.nav{
+border:0;background:none;color:#777;
+font-size:11px;text-align:center
+}
+
+.nav span{
+display:block;font-size:22px
+}
+
+.nav.active{
+color:#4f46e5;font-weight:900
+}
+
+@media(max-width:550px){
+.hero h1{font-size:27px}
+.question{font-size:19px}
+.grid{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<header>
+
+<div class="logo">
+Shamshe Ilahi Academy
+<small>Learn • Practice • Grow 🌈</small>
+</div>
+
+<button
+onclick="show('profile')"
+style="background:none;border:0">
+
+<img id="headerPhoto" class="avatar">
+
+</button>
+
+</header>
+
+
+<!-- HOME -->
+
+<div id="home" class="screen active">
+
+<div class="hero">
+
+<p>👋 Welcome <b id="welcomeName">Student</b></p>
+
+<h1>Learn Smarter 🚀</h1>
+
+<p>
+English, Hindi, Maths, Science, GK, Computer,
+History और बहुत सारे subjects एक ही जगह।
+</p>
+
+<button
+class="whiteBtn"
+onclick="show('lessons')">
+
+📚 Start Learning
+
+</button>
+
+</div>
+
+
+<div class="stats">
+
+<div class="stat">
+<b id="score">0</b>
+<small>Score</small>
+</div>
+
+<div class="stat">
+<b id="completed">0</b>
+<small>Completed</small>
+</div>
+
+<div class="stat">
+<b>50+</b>
+<small>Chapters</small>
+</div>
+
+</div>
+
+
+<div class="aiBox">
+
+<div class="aiRow">
+
+<div class="aiFace">🤖</div>
+
+<div>
+<h2>AI Learning Zone</h2>
+<p>Practice and talk with your AI Teacher.</p>
+</div>
+
+</div>
+
+<div class="aiButtons">
+
+<button onclick="show('ai')">
+🎮 AI Student
+</button>
+
+<button onclick="show('teacher')">
+👩‍🏫 AI Teacher
+</button>
+
+</div>
+
+</div>
+
+
+<div class="service">
+
+<h3>📞 24×7 Student Service</h3>
+
+<p style="margin-top:5px">
+Help चाहिए? हमें contact करें।
+</p>
+
+<button onclick="callService()">
+📞 7209000233
+</button>
+
+<button onclick="whatsappService()">
+💬 WhatsApp
+</button>
+
+</div>
+
+
+<section>
+
+<h2>⭐ Featured Lessons</h2>
+
+<div class="grid" id="featured"></div>
+
+</section>
+
+</div>
+
+
+<!-- LESSONS -->
+
+<div id="lessons" class="screen">
+
+<section>
+
+<h2>📚 Learning Library</h2>
+
+<input
+id="search"
+class="search"
+placeholder="🔎 Search lesson..."
+oninput="renderLessons()">
+
+<div class="pills" id="pills"></div>
+
+<div class="grid" id="lessonList"></div>
+
+</section>
+
+</div>
+
+
+<!-- QUIZ -->
+
+<div id="quiz" class="screen">
+
+<div class="lessonHead">
+
+<button class="back" onclick="show('lessons')">
+←
+</button>
+
+<div>
+
+<b id="quizTitle">Lesson</b>
+
+<small
+id="quizInfo"
+style="display:block;color:#777">
+</small>
+
+</div>
+
+</div>
+
+
+<div class="quiz">
+
+<div id="qNumber"></div>
+
+<div id="question" class="question"></div>
+
+<div id="options"></div>
+
+<div id="explain" class="explain"></div>
+
+<button
+id="nextBtn"
+class="next"
+disabled
+onclick="nextQuestion()">
+
+Next →
+
+</button>
+
+</div>
+
+</div>
+
+
+<!-- AI TEACHER -->
+
+<div id="teacher" class="screen">
+
+<section>
+
+<h2>👩‍🏫 AI Teacher</h2>
+
+<div class="teacher">
+
+<div class="teacherTop">
+
+<div class="teacherFace">
+👩‍🏫
+</div>
+
+<div>
+
+<b>Smart AI Teacher</b>
+
+<small style="display:block;margin-top:4px">
+Ask • Speak • Translate • Learn
+</small>
+
+</div>
+
+</div>
+
+
+<div id="chat" class="chat">
+
+<div class="msg teacherMsg">
+
+👋 नमस्ते! मैं आपकी AI Teacher हूँ।<br><br>
+
+आप Hindi, English, Hinglish या Roman Hindi में सवाल पूछ सकते हैं।
+
+<br><br>
+
+<b>Example:</b><br>
+Aam ko English mein kya kehte hain?
+
+</div>
+
+</div>
+
+
+<div class="chatInput">
+
+<button
+class="round"
+onclick="startMic()">
+
+🎙️
+
+</button>
+
+<input
+id="teacherInput"
+placeholder="कोई भी सवाल पूछें..."
+onkeydown="if(event.key==='Enter')askTeacher()">
+
+<button
+class="round"
+onclick="askTeacher()">
+
+➤
+
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+</div>
+
+
+<!-- AI STUDENT -->
+
+<div id="ai" class="screen">
+
+<section>
+
+<h2>🤖 AI Student Practice</h2>
+
+<div class="aiBox">
+
+<div class="aiRow">
+
+<div class="aiFace">👦</div>
+
+<div>
+
+<h2>Hi! I'm Alex 👋</h2>
+
+<p>Let's practice English together.</p>
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="quiz">
+
+<div id="aiQuestion" class="question"></div>
+
+<input
+id="aiAnswer"
+class="name"
+placeholder="Write your answer...">
+
+<button
+class="next"
+onclick="checkAI()">
+
+✓ Check Answer
+
+</button>
+
+<div
+id="aiFeedback"
+class="explain">
+</div>
+
+<button
+class="next"
+style="background:#ec4899"
+onclick="newAIQuestion()">
+
+🎲 New Question
+
+</button>
+
+</div>
+
+</section>
+
+</div>
+
+
+<!-- PROFILE -->
+
+<div id="profile" class="screen">
+
+<section>
+
+<h2>👤 My Profile</h2>
+
+<div class="profileBox">
+
+<img
+id="profilePhoto"
+class="profilePhoto">
+
+<br>
+
+<label
+for="photo"
+class="upload">
+
+📷 Upload Photo
+
+</label>
+
+<input
+id="photo"
+type="file"
+accept="image/*"
+onchange="uploadPhoto(event)">
+
+<input
+id="name"
+class="name"
+placeholder="Your name">
+
+<button
+class="save"
+onclick="saveProfile()">
+
+💾 Save Profile
+
+</button>
+
+<p
+id="profileMessage"
+style="margin-top:10px;color:#16a34a">
+</p>
+
+</div>
+
+</section>
+
+</div>
+
+
+<!-- ADMIN -->
+
+<div id="admin" class="screen">
+
+<section>
+
+<h2>🔐 Admin Panel</h2>
+
+<div class="adminBox">
+
+<h3>Admin Login</h3>
+
+<input
+id="adminUser"
+class="adminInput"
+placeholder="Username">
+
+<input
+id="adminPass"
+class="adminInput"
+type="password"
+placeholder="Password">
+
+<button
+class="adminButton"
+onclick="loginAdmin()">
+
+🔑 Login
+
+</button>
+
+<p
+id="adminError"
+style="color:red;margin-top:9px">
+</p>
+
+</div>
+
+
+<div
+id="adminSettings"
+class="adminBox"
+style="display:none;text-align:left">
+
+<h3>🤖 AI Teacher Settings</h3>
+
+<p style="font-size:13px;color:#777;margin-top:7px">
+API key केवल इस browser की memory में रखी जाएगी।
+इसे public GitHub code में नहीं लिखा गया है।
+</p>
+
+<input
+id="apiKey"
+class="adminInput"
+type="password"
+placeholder="Paste your AI API key">
+
+<button
+class="adminButton"
+onclick="saveAIKey()">
+
+🔐 Activate AI Teacher
+
+</button>
+
+<button
+class="adminButton"
+style="background:#ef4444"
+onclick="removeAIKey()">
+
+🗑️ Remove AI Key
+
+</button>
+
+<div
+id="apiStatus"
+class="apiStatus statusOff">
+
+🔴 AI Teacher अभी inactive है।
+
+</div>
+
+<hr style="margin:18px 0;border:0;border-top:1px solid #eee">
+
+<h3>📊 Academy</h3>
+
+<p style="margin-top:10px">
+Student Score: <b id="adminScore">0</b>
+</p>
+
+<p style="margin-top:7px">
+Completed Lessons:
+<b id="adminCompleted">0</b>
+</p>
+
+</div>
+
+</section>
+
+</div>
+
+
+<!-- NAVIGATION -->
+
+<div class="bottom">
+
+<button
+id="navHome"
+class="nav active"
+onclick="show('home')">
+
+<span>🏠</span>
+Home
+
+</button>
+
+<button
+id="navLessons"
+class="nav"
+onclick="show('lessons')">
+
+<span>📚</span>
+Lessons
+
+</button>
+
+<button
+id="navTeacher"
+class="nav"
+onclick="show('teacher')">
+
+<span>👩‍🏫</span>
+Teacher
+
+</button>
+
+<button
+id="navProfile"
+class="nav"
+onclick="show('profile')">
+
+<span>👤</span>
+Profile
+
+</button>
+
+<button
+id="navAdmin"
+class="nav"
+onclick="show('admin')">
+
+<span>🔐</span>
+Admin
+
+</button>
+
+</div>
+
+</div>
+
+
+<script>
+
+/* =========================================
+   USER DATA
+========================================= */
+
+let userName=
+localStorage.getItem("academy_name")||"Student";
+
+let userPhoto=
+localStorage.getItem("academy_photo")||"";
+
+let score=
+Number(localStorage.getItem("academy_score")||0);
+
+let completed=
+JSON.parse(
+localStorage.getItem("academy_completed")||"{}"
+);
+
+
+/*
+IMPORTANT:
+API KEY IS KEPT ONLY IN MEMORY.
+It is NOT written in the HTML.
+*/
+
+let AI_KEY="";
+
+
+/* =========================================
+   SUBJECTS
+========================================= */
+
+const subjects=[
+["English","🔤"],
+["Hindi","🪔"],
+["Mathematics","➗"],
+["Science","🔬"],
+["EVS","🌱"],
+["History","🏺"],
+["Geography","🌍"],
+["Civics","⚖️"],
+["Computer","💻"],
+["GK","🧠"],
+["Reasoning","🧩"],
+["Art","🎨"],
+["Health","❤️"],
+["Environment","🌳"]
+];
+
+
+const chapters=[
+
+["English","Basic English Words","🔤"],
+["English","Daily Use English","🗣️"],
+["English","Nouns & Pronouns","📝"],
+["English","Verbs","🏃"],
+["English","Am Is Are","📖"],
+["English","Tenses","⏰"],
+["English","Question Words","❓"],
+["English","Speaking Practice","🎤"],
+
+["Hindi","हिंदी वर्णमाला","🪔"],
+["Hindi","मात्राएँ","🔤"],
+["Hindi","हिंदी शब्द ज्ञान","📚"],
+["Hindi","वाक्य रचना","✍️"],
+
+["Mathematics","Numbers 1-100","🔢"],
+["Mathematics","Addition","➕"],
+["Mathematics","Subtraction","➖"],
+["Mathematics","Multiplication","✖️"],
+["Mathematics","Division","➗"],
+["Mathematics","Fractions","🍕"],
+["Mathematics","Shapes","🔺"],
+["Mathematics","Time & Money","⏰"],
+
+["Science","Living & Non-Living","🔬"],
+["Science","Plants","🌱"],
+["Science","Animals","🦁"],
+["Science","Human Body","🫀"],
+["Science","Food & Nutrition","🍎"],
+["Science","Water","💧"],
+["Science","Air","💨"],
+["Science","Light & Sound","💡"],
+
+["EVS","My Family","👨‍👩‍👧"],
+["EVS","My School","🏫"],
+["EVS","Neighborhood","🏘️"],
+["EVS","Transport","🚌"],
+
+["History","Ancient India","🏺"],
+["History","Indus Valley","🏛️"],
+["History","Maurya Empire","👑"],
+["History","Medieval India","🏰"],
+["History","Freedom Movement","🇮🇳"],
+["History","Independent India","🇮🇳"],
+
+["Geography","Earth","🌍"],
+["Geography","India","🇮🇳"],
+["Geography","States of India","🗺️"],
+["Geography","Rivers & Mountains","🏔️"],
+
+["Civics","Constitution","📜"],
+["Civics","Rights & Duties","⚖️"],
+["Civics","Government","🏛️"],
+
+["Computer","Computer Basics","💻"],
+["Computer","Internet Safety","🔐"],
+["Computer","Typing & Files","⌨️"],
+
+["GK","India GK","🇮🇳"],
+["GK","World GK","🌎"],
+
+["Reasoning","Patterns & Logic","🧩"],
+
+["English","100 Animals Names","🦁"],
+["English","100 Fruits Names","🍎"]
+
+];
+
+
+/* =========================================
+   100 ANIMALS
+========================================= */
+
+const animals=[
+"Lion","Tiger","Elephant","Dog","Cat","Cow","Buffalo",
+"Goat","Sheep","Horse","Donkey","Camel","Monkey","Gorilla",
+"Bear","Deer","Rabbit","Fox","Wolf","Leopard","Cheetah",
+"Giraffe","Zebra","Kangaroo","Panda","Koala","Hippopotamus",
+"Rhinoceros","Crocodile","Alligator","Snake","Lizard","Turtle",
+"Tortoise","Frog","Fish","Shark","Whale","Dolphin","Octopus",
+"Crab","Lobster","Penguin","Eagle","Parrot","Sparrow","Peacock",
+"Owl","Crow","Pigeon","Duck","Swan","Flamingo","Ostrich","Bat",
+"Butterfly","Bee","Ant","Spider","Mosquito","Fly","Grasshopper",
+"Dragonfly","Ladybug","Snail","Worm","Yak","Bison","Moose",
+"Otter","Seal","Walrus","Reindeer","Squirrel","Hedgehog",
+"Porcupine","Mongoose","Jackal","Hyena","Puma","Jaguar",
+"Chameleon","Iguana","Salamander","Salmon","Tuna","Seahorse",
+"Jellyfish","Starfish","Pelican","Woodpecker","Kingfisher",
+"Hummingbird","Canary","Puffin","Turkey","Goose","Rooster",
+"Hen","Wild Boar","Antelope","Gazelle","Armadillo"
+];
+
+
+/* =========================================
+   100 FRUITS
+========================================= */
+
+const fruits=[
+"Apple","Mango","Banana","Orange","Grapes","Guava","Papaya",
+"Pomegranate","Watermelon","Muskmelon","Pineapple","Coconut",
+"Lemon","Lime","Strawberry","Blueberry","Raspberry","Blackberry",
+"Cherry","Peach","Pear","Plum","Apricot","Kiwi","Avocado","Fig",
+"Date","Jackfruit","Lychee","Dragon Fruit","Passion Fruit",
+"Custard Apple","Sapota","Chikoo","Jamun","Amla","Tamarind",
+"Bael","Ber","Karonda","Mulberry","Cranberry","Persimmon",
+"Cantaloupe","Honeydew","Nectarine","Grapefruit","Pomelo",
+"Mandarin","Tangerine","Clementine","Rambutan","Mangosteen",
+"Durian","Star Fruit","Carambola","Breadfruit","Plantain",
+"Olive","Quince","Prickly Pear","Blackcurrant","Redcurrant",
+"Goji Berry","Elderberry","Boysenberry","Cloudberry","Bilberry",
+"Acai","Soursop","Guinep","Sapodilla","Loquat","Longan","Salak",
+"Feijoa","Kumquat","Yuzu","Ugli Fruit","Miracle Fruit","Jujube",
+"Medlar","Rowan Berry","Sea Buckthorn","Rose Hip","Cupuacu",
+"Mamey","Cherimoya","Tangelo","Calamansi","Maracuja","Lucuma",
+"Noni","Prunes","Mamey Sapote","Red Banana","Kiwi Gold",
+"Green Apple","Black Cherry","White Peach"
+];
+
+
+/* =========================================
+   NAVIGATION
+========================================= */
+
+function show(id){
+
+document.querySelectorAll(".screen")
+.forEach(x=>x.classList.remove("active"));
+
+document.getElementById(id)
+.classList.add("active");
+
+document.querySelectorAll(".nav")
+.forEach(x=>x.classList.remove("active"));
+
+const map={
+home:"navHome",
+lessons:"navLessons",
+teacher:"navTeacher",
+profile:"navProfile",
+admin:"navAdmin"
+};
+
+if(map[id])
+document.getElementById(map[id]).classList.add("active");
+
+if(id==="lessons")
+renderLessons();
+
+if(id==="profile")
+loadProfile();
+
+if(id==="admin")
+updateAdmin();
+
+window.scrollTo(0,0);
+
+}
+
+
+/* =========================================
+   PROFILE
+========================================= */
+
+function svgAvatar(){
+
+return "data:image/svg+xml;charset=UTF-8,"+
+encodeURIComponent(`
+<svg xmlns="http://www.w3.org/2000/svg" width="120" height="120">
+<circle cx="60" cy="60" r="60" fill="#e0e7ff"/>
+<text x="60" y="78" text-anchor="middle" font-size="55">👤</text>
+</svg>`);
+
+}
+
+
+function loadProfile(){
+
+document.getElementById("name").value=userName;
+
+document.getElementById("welcomeName")
+.textContent=userName;
+
+document.getElementById("profilePhoto")
+.src=userPhoto||svgAvatar();
+
+document.getElementById("headerPhoto")
+.src=userPhoto||svgAvatar();
+
+}
+
+
+function saveProfile(){
+
+userName=
+document.getElementById("name")
+.value.trim()||"Student";
+
+localStorage.setItem(
+"academy_name",
+userName
+);
+
+document.getElementById("welcomeName")
+.textContent=userName;
+
+document.getElementById("profileMessage")
+.textContent=
+"✅ Profile saved successfully.";
+
+}
+
+
+function uploadPhoto(event){
+
+const file=event.target.files[0];
+
+if(!file)return;
+
+const reader=new FileReader();
+
+reader.onload=()=>{
+
+userPhoto=reader.result;
+
+localStorage.setItem(
+"academy_photo",
+userPhoto
+);
+
+loadProfile();
+
+};
+
+reader.readAsDataURL(file);
+
+}
+
+
+/* =========================================
+   SERVICE
+========================================= */
+
+function callService(){
+
+location.href="tel:7209000233";
+
+}
+
+function whatsappService(){
+
+window.open(
+"https://wa.me/917209000233?text=Hello%20I%20need%20student%20support",
+"_blank"
+);
+
+}
+
+
+/* =========================================
+   LESSONS
+========================================= */
+
+function renderLessons(){
+
+const list=
+document.getElementById("lessonList");
+
+const search=
+(document.getElementById("search").value||"")
+.toLowerCase();
+
+list.innerHTML="";
+
+chapters.forEach((c,i)=>{
+
+const text=
+(c[0]+" "+c[1]).toLowerCase();
+
+if(!text.includes(search))return;
+
+const d=document.createElement("div");
+
+d.className="card";
+
+d.innerHTML=`
+
+<div class="icon">${c[2]}</div>
+
+<h3>${c[1]}</h3>
+
+<p>${c[0]} • Interactive lesson</p>
+
+<button onclick="openLesson(${i})">
+📖 Open Lesson
+</button>
+`;
+
+list.appendChild(d);
+
+});
+
+}
+
+
+/* =========================================
+   FEATURED
+========================================= */
+
+function renderFeatured(){
+
+const box=
+document.getElementById("featured");
+
+box.innerHTML="";
+
+chapters.slice(0,6).forEach((c,i)=>{
+
+const d=document.createElement("div");
+
+d.className="card";
+
+d.innerHTML=`
+
+<div class="icon">${c[2]}</div>
+<h3>${c[1]}</h3>
+<p>${c[0]} • Practice</p>
+
+<button onclick="openLesson(${i})">
+Start →
+</button>
+`;
+
+box.appendChild(d);
+
+});
+
+}
+
+
+/* =========================================
+   QUIZ
+========================================= */
+
+let currentLesson=0;
+let qIndex=0;
+let qCorrect=0;
+let alreadyAnswered=false;
+
+
+function lessonQuestions(id){
+
+const lesson=chapters[id];
+
+if(lesson[1]==="100 Animals Names"){
+
+return animals.map(a=>({
+
+q:`Which one is an animal?`,
+
+options:[
+a,
+"Apple",
+"Table",
+"Blue"
+],
+
+answer:0,
+
+explain:
+`${a} is an animal.`
+
+}));
+
+}
+
+
+if(lesson[1]==="100 Fruits Names"){
+
+return fruits.map(f=>({
+
+q:`Which one is a fruit?`,
+
+options:[
+f,
+"Lion",
+"Chair",
+"School"
+],
+
+answer:0,
+
+explain:
+`${f} is a fruit.`
+
+}));
+
+}
+
+
+return [
+
+{
+q:"Choose the correct sentence.",
+options:[
+"I am happy.",
+"I is happy.",
+"I are happy.",
+"I be happy."
+],
+answer:0,
+explain:"I के साथ am आता है।"
+},
+
+{
+q:"2 + 3 = ?",
+options:["4","5","6","7"],
+answer:1,
+explain:"2 + 3 = 5."
+},
+
+{
+q:"Which is a living thing?",
+options:["Stone","Chair","Dog","Book"],
+answer:2,
+explain:"Dog एक living thing है।"
+},
+
+{
+q:"India की राजधानी क्या है?",
+options:["Mumbai","Delhi","Jaipur","Kolkata"],
+answer:1,
+explain:"भारत की राजधानी New Delhi है।"
+},
+
+{
+q:"Water का Hindi meaning क्या है?",
+options:["पानी","आग","हवा","मिट्टी"],
+answer:0,
+explain:"Water = पानी।"
+},
+
+{
+q:"Which device is used for typing?",
+options:["Keyboard","Speaker","Monitor","Printer"],
+answer:0,
+explain:"Keyboard से typing करते हैं।"
+}
+
+];
+
+}
+
+
+function openLesson(id){
+
+currentLesson=id;
+qIndex=0;
+qCorrect=0;
+
+show("quiz");
+
+document.getElementById("quizTitle")
+.textContent=chapters[id][1];
+
+renderQuestion();
+
+}
+
+
+function renderQuestion(){
+
+const qs=lessonQuestions(currentLesson);
+const q=qs[qIndex];
+
+alreadyAnswered=false;
+
+document.getElementById("qNumber")
+.textContent=
+`Question ${qIndex+1} / ${qs.length}`;
+
+document.getElementById("quizInfo")
+.textContent=
+`Score: ${qCorrect}`;
+
+document.getElementById("question")
+.textContent=q.q;
+
+const box=
+document.getElementById("options");
+
+box.innerHTML="";
+
+document.getElementById("explain")
+.style.display="none";
+
+document.getElementById("nextBtn")
+.disabled=true;
+
+q.options.forEach((x,i)=>{
+
+const b=document.createElement("button");
+
+b.className="option";
+
+b.textContent=
+String.fromCharCode(65+i)+". "+x;
+
+b.onclick=()=>answerQuestion(i);
+
+box.appendChild(b);
+
+});
+
+}
+
+
+function answerQuestion(i){
+
+if(alreadyAnswered)return;
+
+alreadyAnswered=true;
+
+const q=lessonQuestions(currentLesson)[qIndex];
+
+const buttons=
+document.querySelectorAll(".option");
+
+buttons.forEach((b,j)=>{
+
+b.disabled=true;
+
+if(j===q.answer)
+b.classList.add("correct");
+
+if(j===i && i!==q.answer)
+b.classList.add("wrong");
+
+});
+
+if(i===q.answer){
+
+qCorrect++;
+score++;
+
+speak(
+"Correct answer. Very good!"
+);
+
+}else{
+
+speak(
+"The correct answer is "+
+q.options[q.answer]
+);
+
+}
+
+saveProgress();
+
+document.getElementById("score")
+.textContent=score;
+
+const e=
+document.getElementById("explain");
+
+e.innerHTML=
+(i===q.answer?"✅ Correct! ":"❌ Incorrect! ")+
+q.explain;
+
+e.style.display="block";
+
+document.getElementById("nextBtn")
+.disabled=false;
+
+}
+
+
+function nextQuestion(){
+
+const qs=lessonQuestions(currentLesson);
+
+if(qIndex<qs.length-1){
+
+qIndex++;
+
+renderQuestion();
+
+return;
+
+}
+
+completed[currentLesson]=true;
+
+saveProgress();
+
+alert(
+`🎉 Lesson completed!\nScore: ${qCorrect}/${qs.length}`
+);
+
+show("lessons");
+
+}
+
+
+function saveProgress(){
+
+localStorage.setItem(
+"academy_score",
+score
+);
+
+localStorage.setItem(
+"academy_completed",
+JSON.stringify(completed)
+);
+
+document.getElementById("score")
+.textContent=score;
+
+document.getElementById("completed")
+.textContent=
+Object.keys(completed).length;
+
+}
+
+
+/* =========================================
+   REAL AI TEACHER
+========================================= */
+
+async function askTeacher(){
+
+const input=
+document.getElementById("teacherInput");
+
+const question=
+input.value.trim();
+
+if(!question)return;
+
+addMessage(
+escapeHTML(question),
+"userMsg"
+);
+
+input.value="";
+
+const typing=
+addMessage(
+"🤔 Teacher is thinking...",
+"teacherMsg typing"
+);
+
+
+/*
+If API key exists:
+send the question to OpenAI Responses API.
+*/
+
+if(AI_KEY){
+
+try{
+
+const response=
+await fetch(
+"https://api.openai.com/v1/responses",
+{
+method:"POST",
+
+headers:{
+"Content-Type":"application/json",
+"Authorization":
+"Bearer "+AI_KEY
+},
+
+body:JSON.stringify({
+
+model:"gpt-5.6",
+
+instructions:`
+
+You are Shamshe Ilahi Academy AI Teacher.
+
+You are a friendly professional teacher for students.
+
+IMPORTANT RULES:
+
+1. Understand Hindi.
+2. Understand English.
+3. Understand Hinglish.
+4. Understand Roman Hindi.
+5. Detect the student's language automatically.
+6. Reply in the same language where practical.
+7. Answer the actual question.
+8. For translation give exact translation.
+9. For maths calculate carefully.
+10. For science explain simply.
+11. For history and geography answer clearly.
+12. If the question is unclear, ask a short clarification.
+13. Never say that you are only a demo.
+14. Never give a fake answer.
+15. Explain difficult things in easy language.
+16. Keep answers suitable for students.
+17. For English learning, include an example when useful.
+
+The student can ask ANY normal educational question.
+
+`,
+
+input:question
+
+})
+}
+);
+
+if(!response.ok){
+
+throw new Error(
+"API error "+response.status
+);
+
+}
+
+const data=
+await response.json();
+
+let answer=
+data.output_text||"";
+
+
+if(!answer && data.output){
+
+answer=
+data.output
+.map(x=>
+x.content
+?.map(y=>y.text||"")
+.join(" ")
+||""
+)
+.join(" ");
+
+}
+
+
+if(!answer){
+
+answer=
+"मुझे अभी जवाब नहीं मिला। कृपया दोबारा पूछें।";
+
+}
+
+
+typing.className=
+"msg teacherMsg";
+
+typing.innerHTML=
+formatAnswer(answer);
+
+speak(answer);
+
+return;
+
+}catch(error){
+
+typing.className=
+"msg teacherMsg";
+
+typing.innerHTML=
+`
+⚠️ AI से connection नहीं हो पाया।
+<br><br>
+कृपया Admin → AI Teacher Settings में
+API key check करें।
+`;
+
+return;
+
+}
+
+}
+
+
+/*
+No API key:
+give useful basic answers instead of
+the previous "API not connected" loop.
+*/
+
+const local=
+localTeacher(question);
+
+typing.className=
+"msg teacherMsg";
+
+typing.innerHTML=
+formatAnswer(local);
+
+speak(local);
+
+}
+
+
+/* =========================================
+   LOCAL TEACHER FALLBACK
+========================================= */
+
+function localTeacher(q){
+
+const t=q.toLowerCase().trim();
+
+
+const dictionary={
+
+"aam":"Mango",
+"आम":"Mango",
+"apple":"सेब",
+"सेब":"Apple",
+"banana":"केला",
+"केला":"Banana",
+"orange":"संतरा",
+"संतरा":"Orange",
+"grapes":"अंगूर",
+"अंगूर":"Grapes",
+"water":"पानी",
+"पानी":"Water",
+"book":"किताब",
+"किताब":"Book",
+"dog":"कुत्ता",
+"कुत्ता":"Dog",
+"cat":"बिल्ली",
+"बिल्ली":"Cat",
+"lion":"शेर",
+"शेर":"Lion",
+"tiger":"बाघ",
+"बाघ":"Tiger",
+"elephant":"हाथी",
+"हाथी":"Elephant"
+
+};
+
+
+for(const word in dictionary){
+
+if(t.includes(word)){
+
+if(
+t.includes("english")||
+t.includes("इंग्लिश")||
+t.includes("translate")||
+t.includes("translation")||
+t.includes("hindi")||
+t.includes("हिंदी")||
+t.includes("meaning")||
+t.includes("मतलब")||
+t.includes("kehte")||
+t.includes("कहते")
+){
+
+const answer=dictionary[word];
+
+return`
+🌟 <b>${word}</b> का translation है:
+<br><br>
+<b>${answer}</b>
+<br><br>
+अगर English word है तो Hindi meaning और
+अगर Hindi word है तो English meaning दिया गया है।
+`;
+
+}
+
+}
+
+}
+
+
+if(
+t.includes("hello")||
+t.includes("hi")||
+t.includes("namaste")||
+t.includes("नमस्ते")
+){
+
+return`
+👋 नमस्ते!
+<br><br>
+मैं आपकी AI Teacher हूँ।
+आप अपना कोई भी सवाल पूछ सकते हैं।
+`;
+
+}
+
+
+if(t.includes("how are you")){
+
+return`
+😊 I am fine, thank you!
+<br><br>
+आप कह सकते हैं:
+<b>I am fine.</b>
+`;
+
+}
+
+
+if(t.includes("your name")){
+
+return`
+👩‍🏫 My name is Shamshe Ilahi AI Teacher.
+`;
+
+}
+
+
+if(
+t.includes("am is are")||
+t.includes("grammar")
+){
+
+return`
+📚 <b>Am / Is / Are</b>
+<br><br>
+I → <b>am</b><br>
+He / She / It → <b>is</b><br>
+You / We / They → <b>are</b>
+<br><br>
+Example:
+<b>She is happy.</b>
+`;
+
+}
+
+
+if(
+t.includes("2+2")||
+t.includes("2 + 2")
+){
+
+return`
+🧮 <b>2 + 2 = 4</b>
+`;
+
+}
+
+
+return`
+😊 सवाल मिल गया।
+
+अभी इस browser में Real AI key activate नहीं है।
+<br><br>
+Admin → AI Teacher Settings में अपनी API key डालने के बाद Teacher आपके सवाल को सीधे AI model तक भेजेगा और सामान्य educational सवालों के जवाब देगा।
+`;
+
+}
+
+
+/* =========================================
+   CHAT
+========================================= */
+
+function addMessage(text,type){
+
+const d=
+document.createElement("div");
+
+d.className="msg "+type;
+
+d.innerHTML=text;
+
+const chat=
+document.getElementById("chat");
+
+chat.appendChild(d);
+
+chat.scrollTop=
+chat.scrollHeight;
+
+return d;
+
+}
+
+
+function escapeHTML(text){
+
+return text
+.replace(/&/g,"&amp;")
+.replace(/</g,"&lt;")
+.replace(/>/g,"&gt;");
+
+}
+
+
+function formatAnswer(text){
+
+return escapeHTML(text)
+.replace(/\*\*(.*?)\*\*/g,"<b>$1</b>")
+.replace(/\n/g,"<br>");
+
+}
+
+
+/* =========================================
+   VOICE
+========================================= */
+
+function speak(text){
+
+if(!("speechSynthesis" in window))
+return;
+
+speechSynthesis.cancel();
+
+const clean=
+text.replace(/<[^>]*>/g," ");
+
+const u=
+new SpeechSynthesisUtterance(clean);
+
+u.lang=
+/[\u0900-\u097F]/.test(clean)
+?"hi-IN"
+:"en-US";
+
+u.rate=.9;
+u.pitch=1;
+
+speechSynthesis.speak(u);
+
+}
+
+
+/* =========================================
+   MIC
+========================================= */
+
+function startMic(){
+
+const Recognition=
+window.SpeechRecognition||
+window.webkitSpeechRecognition;
+
+if(!Recognition){
+
+alert(
+"Voice input इस browser में available नहीं है। Chrome में try करें।"
+);
+
+return;
+
+}
+
+const recognition=
+new Recognition();
+
+recognition.lang="hi-IN";
+recognition.interimResults=false;
+recognition.maxAlternatives=1;
+
+recognition.start();
+
+recognition.onresult=function(event){
+
+document.getElementById("teacherInput")
+.value=
+event.results[0][0].transcript;
+
+askTeacher();
+
+};
+
+}
+
+
+/* =========================================
+   ADMIN AI KEY
+========================================= */
+
+function loginAdmin(){
+
+const user=
+document.getElementById("adminUser").value;
+
+const pass=
+document.getElementById("adminPass").value;
+
+if(user==="admin" && pass==="1234"){
+
+document.getElementById("adminSettings")
+.style.display="block";
+
+document.getElementById("adminError")
+.textContent="";
+
+updateAdmin();
+
+}else{
+
+document.getElementById("adminError")
+.textContent=
+"❌ Username या password गलत है।";
+
+}
+
+}
+
+
+/*
+The key stays in memory only.
+Refresh करने पर फिर डालनी होगी.
+This avoids putting the secret into the
+public HTML source.
+*/
+
+function saveAIKey(){
+
+const key=
+document.getElementById("apiKey")
+.value.trim();
+
+if(!key){
+
+alert("API key डालें।");
+
+return;
+
+}
+
+AI_KEY=key;
+
+document.getElementById("apiKey")
+.value="";
+
+updateAIStatus();
+
+alert(
+"✅ AI Teacher activated for this browser session."
+);
+
+}
+
+
+function removeAIKey(){
+
+AI_KEY="";
+
+updateAIStatus();
+
+alert(
+"🔒 AI key removed."
+);
+
+}
+
+
+function updateAIStatus(){
+
+const box=
+document.getElementById("apiStatus");
+
+if(AI_KEY){
+
+box.className=
+"apiStatus statusOn";
+
+box.textContent=
+"🟢 Real AI Teacher ACTIVE";
+
+}else{
+
+box.className=
+"apiStatus statusOff";
+
+box.textContent=
+"🔴 Real AI Teacher inactive";
+
+}
+
+}
+
+
+/* =========================================
+   ADMIN STATS
+========================================= */
+
+function updateAdmin(){
+
+document.getElementById("adminScore")
+.textContent=score;
+
+document.getElementById("adminCompleted")
+.textContent=
+Object.keys(completed).length;
+
+updateAIStatus();
+
+}
+
+
+/* =========================================
+   AI STUDENT
+========================================= */
+
+const practice=[
+
+"Introduce yourself in English.",
+"What is your favorite fruit?",
+"Tell me about your school.",
+"Name three animals.",
+"Name three colors.",
+"What is your favorite subject?",
+"What do you do every morning?"
+
+];
+
+
+function newAIQuestion(){
+
+document.getElementById("aiQuestion")
+.textContent=
+practice[
+Math.floor(
+Math.random()*practice.length
+)
+];
+
+document.getElementById("aiAnswer").value="";
+
+document.getElementById("aiFeedback")
+.style.display="none";
+
+}
+
+
+function checkAI(){
+
+const answer=
+document.getElementById("aiAnswer")
+.value.trim();
+
+const feedback=
+document.getElementById("aiFeedback");
+
+if(!answer){
+
+feedback.innerHTML=
+"✍️ Please write an answer.";
+
+}else{
+
+score++;
+
+saveProgress();
+
+feedback.innerHTML=
+"🎉 Good job! Keep practicing English.";
+
+speak(
+"Good job. Keep practicing English."
+);
+
+}
+
+feedback.style.display="block";
+
+}
+
+
+/* =========================================
+   INIT
+========================================= */
+
+function init(){
+
+loadProfile();
+
+renderFeatured();
+
+renderLessons();
+
+newAIQuestion();
+
+document.getElementById("score")
+.textContent=score;
+
+document.getElementById("completed")
+.textContent=
+Object.keys(completed).length;
+
+}
+
+init();
+
+</script>
+
+</body>
+</html>
