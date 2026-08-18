@@ -1,0 +1,2202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>English Learning - AI Academy</title>
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+body{
+  font-family:Arial,Helvetica,sans-serif;
+  background:#f5f7ff;
+  color:#172033;
+  overflow-x:hidden;
+}
+
+button,input,textarea{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+  border:0;
+}
+
+.app{
+  max-width:900px;
+  margin:auto;
+  min-height:100vh;
+  padding-bottom:90px;
+}
+
+header{
+  height:75px;
+  background:#fff;
+  padding:10px 18px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  position:sticky;
+  top:0;
+  z-index:20;
+  box-shadow:0 2px 15px #0001;
+}
+
+.logo{
+  font-size:20px;
+  font-weight:900;
+  color:#4f46e5;
+}
+
+.logo small{
+  display:block;
+  color:#777;
+  font-size:10px;
+  margin-top:3px;
+}
+
+.profile-btn{
+  background:none;
+  padding:0;
+}
+
+.avatar{
+  width:44px;
+  height:44px;
+  border-radius:50%;
+  object-fit:cover;
+  border:3px solid white;
+  box-shadow:0 3px 12px #0002;
+  background:#e5e7eb;
+}
+
+.hero{
+  margin:16px;
+  padding:25px;
+  border-radius:25px;
+  color:white;
+  background:linear-gradient(135deg,#4f46e5,#7c3aed,#ec4899);
+  background-size:200% 200%;
+  animation:gradientMove 6s ease infinite;
+  box-shadow:0 18px 35px #4f46e533;
+  position:relative;
+  overflow:hidden;
+}
+
+@keyframes gradientMove{
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+
+.hero:after{
+  content:"✨";
+  position:absolute;
+  right:20px;
+  top:15px;
+  font-size:55px;
+  animation:float 2.5s infinite ease-in-out;
+}
+
+@keyframes float{
+  0%,100%{transform:translateY(0) rotate(-5deg)}
+  50%{transform:translateY(-12px) rotate(8deg)}
+}
+
+.hero h1{
+  font-size:32px;
+  margin:8px 0;
+}
+
+.hero p{
+  opacity:.92;
+  line-height:1.5;
+  max-width:650px;
+}
+
+.start{
+  background:white;
+  color:#4f46e5;
+  padding:13px 18px;
+  border-radius:13px;
+  font-weight:900;
+  margin-top:15px;
+}
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:8px;
+  margin:20px 16px;
+}
+
+.stat{
+  background:white;
+  padding:12px;
+  border-radius:13px;
+  text-align:center;
+  box-shadow:0 2px 8px #00000008;
+}
+
+.stat b{
+  display:block;
+  font-size:20px;
+  color:#4f46e5;
+}
+
+.stat small{
+  font-size:10px;
+  color:#777;
+}
+
+section{
+  padding:12px 16px 25px;
+}
+
+h2{
+  font-size:23px;
+  margin-bottom:14px;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:12px;
+}
+
+.card{
+  background:white;
+  border:1px solid #e5e7ef;
+  border-radius:19px;
+  padding:18px;
+  box-shadow:0 7px 25px #00000008;
+  transition:.2s;
+}
+
+.card:active{
+  transform:scale(.98);
+}
+
+.subject-icon{
+  font-size:34px;
+}
+
+.card h3{
+  margin:9px 0 6px;
+}
+
+.card p{
+  color:#777;
+  font-size:13px;
+  line-height:1.4;
+}
+
+.card button{
+  margin-top:12px;
+  width:100%;
+  padding:10px;
+  border-radius:10px;
+  background:#eef2ff;
+  color:#4f46e5;
+  font-weight:800;
+}
+
+.progress{
+  height:7px;
+  background:#eee;
+  border-radius:20px;
+  overflow:hidden;
+  margin-top:12px;
+}
+
+.progress div{
+  height:100%;
+  width:0%;
+  background:linear-gradient(90deg,#4f46e5,#ec4899);
+  transition:.3s;
+}
+
+.screen{
+  display:none;
+}
+
+.screen.active{
+  display:block;
+}
+
+.lesson-head{
+  background:white;
+  padding:18px 16px;
+  position:sticky;
+  top:75px;
+  z-index:10;
+  border-bottom:1px solid #eee;
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.back{
+  background:#eef2ff;
+  color:#4f46e5;
+  width:40px;
+  height:40px;
+  border-radius:12px;
+  font-size:20px;
+}
+
+.lesson-title{
+  flex:1;
+}
+
+.lesson-title h2{
+  margin:0;
+  font-size:20px;
+}
+
+.question-card{
+  margin:18px 16px;
+  background:white;
+  padding:20px;
+  border-radius:20px;
+  box-shadow:0 7px 25px #00000008;
+}
+
+.question-number{
+  color:#4f46e5;
+  font-size:13px;
+  font-weight:bold;
+  margin-bottom:10px;
+}
+
+.question{
+  font-size:21px;
+  font-weight:800;
+  line-height:1.4;
+  margin-bottom:18px;
+}
+
+.option{
+  width:100%;
+  text-align:left;
+  padding:15px;
+  margin:7px 0;
+  border:2px solid #e5e7ef;
+  background:#fff;
+  border-radius:13px;
+  color:#172033;
+}
+
+.option.correct{
+  background:#dcfce7;
+  border-color:#22c55e;
+}
+
+.option.wrong{
+  background:#fee2e2;
+  border-color:#ef4444;
+}
+
+.next-btn{
+  width:100%;
+  padding:14px;
+  background:#4f46e5;
+  color:white;
+  border-radius:13px;
+  font-weight:900;
+  margin-top:12px;
+}
+
+.next-btn:disabled{
+  opacity:.5;
+}
+
+.explanation{
+  margin-top:15px;
+  padding:12px;
+  background:#f5f3ff;
+  border-radius:12px;
+  color:#4c1d95;
+  display:none;
+  line-height:1.5;
+}
+
+.lesson-complete{
+  text-align:center;
+}
+
+.lesson-complete .big{
+  font-size:60px;
+}
+
+.profile{
+  padding:25px 16px;
+}
+
+.profile-box{
+  background:white;
+  border-radius:22px;
+  padding:25px;
+  text-align:center;
+  box-shadow:0 7px 25px #00000008;
+}
+
+.profile-photo{
+  width:110px;
+  height:110px;
+  border-radius:50%;
+  object-fit:cover;
+  border:5px solid #eef2ff;
+  background:#eee;
+}
+
+.upload-btn{
+  display:inline-block;
+  margin-top:15px;
+  padding:12px 18px;
+  background:#4f46e5;
+  color:white;
+  border-radius:12px;
+  font-weight:bold;
+}
+
+#photoInput{
+  display:none;
+}
+
+.name-input{
+  width:100%;
+  padding:13px;
+  border:1px solid #ddd;
+  border-radius:12px;
+  margin-top:15px;
+  outline:none;
+}
+
+.save-btn{
+  width:100%;
+  padding:13px;
+  background:#16a34a;
+  color:white;
+  border-radius:12px;
+  margin-top:10px;
+  font-weight:bold;
+}
+
+/* AI STUDENT */
+
+.ai-student{
+  margin:16px;
+  border-radius:25px;
+  padding:20px;
+  color:white;
+  background:linear-gradient(135deg,#06b6d4,#2563eb,#7c3aed);
+  box-shadow:0 12px 30px #2563eb44;
+  position:relative;
+  overflow:hidden;
+}
+
+.ai-student:before{
+  content:"";
+  position:absolute;
+  width:120px;
+  height:120px;
+  border-radius:50%;
+  background:#ffffff22;
+  right:-30px;
+  top:-30px;
+}
+
+.ai-character{
+  display:flex;
+  align-items:center;
+  gap:14px;
+}
+
+.anime-face{
+  width:72px;
+  height:72px;
+  border-radius:50%;
+  background:linear-gradient(135deg,#fde68a,#f9a8d4);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:44px;
+  border:4px solid white;
+  box-shadow:0 7px 20px #0003;
+  animation:animeFloat 3s infinite;
+}
+
+@keyframes animeFloat{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-7px)}
+}
+
+.ai-student h2{
+  margin:0;
+}
+
+.ai-student p{
+  margin-top:5px;
+  opacity:.9;
+}
+
+.ai-buttons{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin-top:16px;
+}
+
+.ai-btn{
+  background:white;
+  color:#2563eb;
+  padding:13px;
+  border-radius:13px;
+  font-weight:900;
+}
+
+/* AI TEACHER */
+
+.teacher{
+  margin:16px;
+  background:white;
+  border-radius:22px;
+  overflow:hidden;
+  box-shadow:0 7px 25px #00000010;
+}
+
+.teacher-head{
+  padding:18px;
+  color:white;
+  background:linear-gradient(135deg,#f97316,#ec4899,#7c3aed);
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.teacher-avatar{
+  width:58px;
+  height:58px;
+  background:#fff;
+  border-radius:50%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:34px;
+}
+
+.teacher-chat{
+  height:390px;
+  padding:15px;
+  overflow-y:auto;
+  background:#f8fafc;
+}
+
+.message{
+  max-width:82%;
+  padding:12px 14px;
+  border-radius:16px;
+  margin-bottom:10px;
+  line-height:1.45;
+  font-size:14px;
+}
+
+.teacher-msg{
+  background:white;
+  border:1px solid #e5e7eb;
+  border-bottom-left-radius:4px;
+}
+
+.student-msg{
+  background:#4f46e5;
+  color:white;
+  margin-left:auto;
+  border-bottom-right-radius:4px;
+}
+
+.teacher-input{
+  padding:12px;
+  display:flex;
+  gap:8px;
+  border-top:1px solid #eee;
+}
+
+.teacher-input input{
+  flex:1;
+  padding:13px;
+  border:1px solid #ddd;
+  border-radius:12px;
+  outline:none;
+}
+
+.send{
+  width:50px;
+  border-radius:12px;
+  color:white;
+  background:#4f46e5;
+}
+
+/* ADMIN */
+
+.admin-login,
+.admin-panel{
+  margin:18px 16px;
+  background:white;
+  padding:22px;
+  border-radius:20px;
+  box-shadow:0 7px 25px #0000000d;
+}
+
+.admin-input{
+  width:100%;
+  padding:13px;
+  border:1px solid #ddd;
+  border-radius:12px;
+  margin:7px 0;
+}
+
+.admin-btn{
+  width:100%;
+  padding:13px;
+  border-radius:12px;
+  background:#4f46e5;
+  color:white;
+  font-weight:bold;
+  margin-top:8px;
+}
+
+.admin-stat{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:10px;
+  margin-top:15px;
+}
+
+.admin-box{
+  background:#f5f3ff;
+  padding:15px;
+  border-radius:13px;
+}
+
+.bottom-nav{
+  position:fixed;
+  bottom:0;
+  left:50%;
+  transform:translateX(-50%);
+  width:100%;
+  max-width:900px;
+  height:72px;
+  background:white;
+  border-top:1px solid #eee;
+  display:flex;
+  justify-content:space-around;
+  align-items:center;
+  z-index:30;
+}
+
+.nav-btn{
+  background:none;
+  color:#777;
+  font-size:12px;
+  text-align:center;
+}
+
+.nav-btn span{
+  display:block;
+  font-size:23px;
+  margin-bottom:3px;
+}
+
+.nav-btn.active{
+  color:#4f46e5;
+  font-weight:bold;
+}
+
+@media(max-width:500px){
+  .hero h1{
+    font-size:27px;
+  }
+
+  .question{
+    font-size:19px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<header>
+
+  <div class="logo">
+    English Learning
+    <small>Learn • Practice • Improve</small>
+  </div>
+
+  <button class="profile-btn" onclick="showScreen('profile')">
+
+    <img id="headerAvatar"
+    class="avatar"
+    src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Crect width='100' height='100' fill='%23e5e7eb'/%3E%3Ctext x='50' y='60' font-size='45' text-anchor='middle'%3E👤%3C/text%3E%3C/svg%3E">
+
+  </button>
+
+</header>
+
+
+<!-- HOME -->
+
+<div id="homeScreen" class="screen active">
+
+  <div class="hero">
+
+    <div>👋 Hello <span id="heroName">Student</span></div>
+
+    <h1>Learn English Easily!</h1>
+
+    <p>
+      रोज थोड़ा सीखो, आसान सवाल हल करो और अपना English level improve करो।
+    </p>
+
+    <button class="start" onclick="showScreen('lessons')">
+      🚀 Start Learning
+    </button>
+
+  </div>
+
+
+  <div class="stats">
+
+    <div class="stat">
+      <b id="statLessons">6</b>
+      <small>Lessons</small>
+    </div>
+
+    <div class="stat">
+      <b id="statScore">0</b>
+      <small>Score</small>
+    </div>
+
+    <div class="stat">
+      <b id="statDone">0</b>
+      <small>Completed</small>
+    </div>
+
+  </div>
+
+
+  <!-- AI STUDENT -->
+
+  <div class="ai-student">
+
+    <div class="ai-character">
+
+      <div class="anime-face">👦</div>
+
+      <div>
+        <h2>🤖 AI Student</h2>
+        <p>मेरे साथ English practice करो!</p>
+      </div>
+
+    </div>
+
+    <div class="ai-buttons">
+
+      <button class="ai-btn"
+      onclick="startAIPractice()">
+        🎮 Practice
+      </button>
+
+      <button class="ai-btn"
+      onclick="showScreen('teacher')">
+        👩‍🏫 AI Teacher
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <section>
+
+    <h2>📚 Popular Lessons</h2>
+
+    <div class="grid">
+
+      <div class="card">
+        <div class="subject-icon">🔤</div>
+        <h3>Basic Words</h3>
+        <p>शुरुआती बच्चों के लिए आसान English words.</p>
+        <div class="progress"><div id="p1"></div></div>
+        <button onclick="openLesson(0)">Open Lesson</button>
+      </div>
+
+      <div class="card">
+        <div class="subject-icon">🗣️</div>
+        <h3>Daily English</h3>
+        <p>रोज इस्तेमाल होने वाले आसान sentences.</p>
+        <div class="progress"><div id="p2"></div></div>
+        <button onclick="openLesson(1)">Open Lesson</button>
+      </div>
+
+      <div class="card">
+        <div class="subject-icon">✏️</div>
+        <h3>Grammar</h3>
+        <p>Basic grammar आसान तरीके से सीखें.</p>
+        <div class="progress"><div id="p3"></div></div>
+        <button onclick="openLesson(2)">Open Lesson</button>
+      </div>
+
+      <div class="card">
+        <div class="subject-icon">📝</div>
+        <h3>Vocabulary</h3>
+        <p>नए English words और meanings सीखें.</p>
+        <div class="progress"><div id="p4"></div></div>
+        <button onclick="openLesson(3)">Open Lesson</button>
+      </div>
+
+      <div class="card">
+        <div class="subject-icon">💬</div>
+        <h3>Conversation</h3>
+        <p>Daily conversation के आसान questions.</p>
+        <div class="progress"><div id="p5"></div></div>
+        <button onclick="openLesson(4)">Open Lesson</button>
+      </div>
+
+      <div class="card">
+        <div class="subject-icon">🎯</div>
+        <h3>Practice Test</h3>
+        <p>अपना English knowledge test करें.</p>
+        <div class="progress"><div id="p6"></div></div>
+        <button onclick="openLesson(5)">Open Lesson</button>
+      </div>
+
+    </div>
+
+  </section>
+
+</div>
+
+
+<!-- LESSONS -->
+
+<div id="lessonsScreen" class="screen">
+
+  <section>
+
+    <h2>📚 All Lessons</h2>
+
+    <div class="grid">
+
+      <div class="card">
+        <div class="subject-icon">🔤</div>
+        <h3>Basic Words</h3>
+        <p>10 आसान सवाल</p>
+        <button onclick="openLesson(0)">Start</button>
+      </div>
+
+      <div class="card">
+        <div class="subject-icon">🗣️</div>
+        <h3>Daily English</h3>
+        <p>10 आसान सवाल</p>
+        <button onclick="openLesson(1)">Start</button>
+      </div>
+
+      <div class="card">
+        <div class="subject-icon">✏️</div>
+        <h3>Grammar</h3>
+        <p>10 आसान सवाल</p>
+        <button onclick="openLesson(2)">Start</button>
+      </div>
+
+      <div class="card">
+        <div class="subject-icon">📝</div>
+        <h3>Vocabulary</h3>
+        <p>10 आसान सवाल</p>
+        <button onclick="openLesson(3)">Start</button>
+      </div>
+
+      <div class="card">
+        <div class="subject-icon">💬</div>
+        <h3>Conversation</h3>
+        <p>10 आसान सवाल</p>
+        <button onclick="openLesson(4)">Start</button>
+      </div>
+
+      <div class="card">
+        <div class="subject-icon">🎯</div>
+        <h3>Practice Test</h3>
+        <p>10 आसान सवाल</p>
+        <button onclick="openLesson(5)">Start</button>
+      </div>
+
+    </div>
+
+  </section>
+
+</div>
+
+
+<!-- LESSON -->
+
+<div id="lessonScreen" class="screen">
+
+  <div class="lesson-head">
+
+    <button class="back" onclick="showScreen('lessons')">
+      ←
+    </button>
+
+    <div class="lesson-title">
+
+      <h2 id="lessonName">Lesson</h2>
+
+      <small id="lessonProgressText">
+        Question 1/10
+      </small>
+
+    </div>
+
+  </div>
+
+
+  <div class="question-card" id="questionCard">
+
+    <div class="question-number" id="questionNumber">
+      Question 1
+    </div>
+
+    <div class="question" id="questionText">
+      Loading...
+    </div>
+
+    <div id="options"></div>
+
+    <div class="explanation" id="explanation"></div>
+
+    <button class="next-btn"
+    id="nextButton"
+    onclick="nextQuestion()"
+    disabled>
+      Next Question →
+    </button>
+
+  </div>
+
+</div>
+
+
+<!-- AI TEACHER -->
+
+<div id="teacherScreen" class="screen">
+
+  <section>
+
+    <h2>👩‍🏫 AI English Teacher</h2>
+
+    <div class="teacher">
+
+      <div class="teacher-head">
+
+        <div class="teacher-avatar">
+          👩‍🏫
+        </div>
+
+        <div>
+          <b>AI Teacher</b>
+          <small style="display:block;opacity:.85;">
+            Your friendly English teacher
+          </small>
+        </div>
+
+      </div>
+
+
+      <div class="teacher-chat" id="teacherChat">
+
+        <div class="message teacher-msg">
+          👋 Hello! मैं आपकी AI English Teacher हूँ।<br><br>
+          आप मुझसे English सीख सकते हो।<br><br>
+          Try asking: <b>What is your name?</b>
+        </div>
+
+      </div>
+
+
+      <div class="teacher-input">
+
+        <input
+        id="teacherInput"
+        placeholder="Ask your English question..."
+        onkeydown="if(event.key==='Enter')sendTeacherMessage()">
+
+        <button class="send"
+        onclick="sendTeacherMessage()">
+          ➤
+        </button>
+
+      </div>
+
+    </div>
+
+  </section>
+
+</div>
+
+
+<!-- AI STUDENT -->
+
+<div id="aiStudentScreen" class="screen">
+
+  <section>
+
+    <h2>🤖 AI Student Practice</h2>
+
+    <div class="ai-student">
+
+      <div class="ai-character">
+
+        <div class="anime-face">
+          👦
+        </div>
+
+        <div>
+          <h2>Hi! I'm Alex 👋</h2>
+          <p>Let's practice English together!</p>
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="question-card">
+
+      <div class="question-number">
+        AI Practice
+      </div>
+
+      <div class="question"
+      id="aiQuestion">
+        What is your name?
+      </div>
+
+      <input
+      id="aiAnswer"
+      class="name-input"
+      placeholder="Type your answer in English">
+
+      <button
+      class="next-btn"
+      onclick="checkAIAnswer()">
+        Check Answer ✓
+      </button>
+
+      <div
+      id="aiFeedback"
+      class="explanation">
+      </div>
+
+      <button
+      class="next-btn"
+      style="background:#ec4899;"
+      onclick="newAIQuestion()">
+        🎲 New Question
+      </button>
+
+    </div>
+
+  </section>
+
+</div>
+
+
+<!-- PROFILE -->
+
+<div id="profileScreen" class="screen">
+
+  <div class="profile">
+
+    <h2>👤 My Profile</h2>
+
+    <div class="profile-box">
+
+      <img id="profilePhoto"
+      class="profile-photo"
+      src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='150'%3E%3Crect width='150' height='150' fill='%23e5e7eb'/%3E%3Ctext x='75' y='90' font-size='60' text-anchor='middle'%3E👤%3C/text%3E%3C/svg%3E">
+
+      <br>
+
+      <label for="photoInput"
+      class="upload-btn">
+        📷 Upload Photo
+      </label>
+
+      <input
+      type="file"
+      id="photoInput"
+      accept="image/*"
+      onchange="uploadPhoto(event)">
+
+      <input
+      id="studentName"
+      class="name-input"
+      type="text"
+      placeholder="Enter your name">
+
+      <button
+      class="save-btn"
+      onclick="saveProfile()">
+        💾 Save Profile
+      </button>
+
+      <p
+      id="profileMessage"
+      style="margin-top:12px;color:#16a34a;font-size:13px;">
+      </p>
+
+    </div>
+
+
+    <div class="card" style="margin-top:15px;">
+
+      <h3>🏆 My Progress</h3>
+
+      <p style="margin-top:8px;">
+        Total Score:
+        <b id="profileScore">0</b>
+      </p>
+
+      <p style="margin-top:8px;">
+        Completed Lessons:
+        <b id="profileDone">0</b>
+      </p>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- ADMIN LOGIN -->
+
+<div id="adminScreen" class="screen">
+
+  <section>
+
+    <h2>🔐 Admin</h2>
+
+    <div id="adminLoginBox" class="admin-login">
+
+      <h3>Admin Login</h3>
+
+      <p style="margin:8px 0;color:#777;font-size:13px;">
+        केवल website administrator के लिए।
+      </p>
+
+      <input
+      id="adminUser"
+      class="admin-input"
+      placeholder="Admin ID">
+
+      <input
+      id="adminPass"
+      class="admin-input"
+      type="password"
+      placeholder="Password">
+
+      <button
+      class="admin-btn"
+      onclick="adminLogin()">
+        🔑 Login
+      </button>
+
+      <p
+      id="adminError"
+      style="color:#ef4444;margin-top:10px;font-size:13px;">
+      </p>
+
+    </div>
+
+
+    <div
+    id="adminPanel"
+    class="admin-panel"
+    style="display:none;">
+
+      <h3>👑 Admin Dashboard</h3>
+
+      <div class="admin-stat">
+
+        <div class="admin-box">
+          <b>Students</b>
+          <h2 id="adminStudents">1</h2>
+        </div>
+
+        <div class="admin-box">
+          <b>Total Score</b>
+          <h2 id="adminTotalScore">0</h2>
+        </div>
+
+      </div>
+
+      <div class="card" style="margin-top:15px;">
+
+        <h3>📊 Website Information</h3>
+
+        <p style="margin-top:10px;">
+          Total Lessons:
+          <b>6</b>
+        </p>
+
+        <p style="margin-top:8px;">
+          AI Teacher:
+          <b>Active</b>
+        </p>
+
+        <p style="margin-top:8px;">
+          AI Student:
+          <b>Active</b>
+        </p>
+
+      </div>
+
+      <button
+      class="admin-btn"
+      style="background:#ef4444;"
+      onclick="adminLogout()">
+        Logout
+      </button>
+
+    </div>
+
+  </section>
+
+</div>
+
+
+<!-- NAVIGATION -->
+
+<div class="bottom-nav">
+
+  <button
+  class="nav-btn active"
+  id="navHome"
+  onclick="showScreen('home')">
+    <span>🏠</span>
+    Home
+  </button>
+
+  <button
+  class="nav-btn"
+  id="navLessons"
+  onclick="showScreen('lessons')">
+    <span>📚</span>
+    Lessons
+  </button>
+
+  <button
+  class="nav-btn"
+  id="navTeacher"
+  onclick="showScreen('teacher')">
+    <span>👩‍🏫</span>
+    AI Teacher
+  </button>
+
+  <button
+  class="nav-btn"
+  id="navProfile"
+  onclick="showScreen('profile')">
+    <span>👤</span>
+    Profile
+  </button>
+
+  <button
+  class="nav-btn"
+  id="navAdmin"
+  onclick="showScreen('admin')">
+    <span>🔐</span>
+    Admin
+  </button>
+
+</div>
+
+</div>
+
+
+<script>
+
+/* ================================
+   LESSON DATA
+================================ */
+
+const lessons=[
+
+{
+title:"Basic Words",
+questions:[
+{q:"What is the meaning of Apple?",options:["सेब","आम","केला","संतरा"],answer:0,explain:"Apple का मतलब सेब होता है।"},
+{q:"What is the meaning of Book?",options:["किताब","कुर्सी","मेज","पेन"],answer:0,explain:"Book का मतलब किताब होता है।"},
+{q:"What is the meaning of Water?",options:["दूध","पानी","चाय","जूस"],answer:1,explain:"Water का मतलब पानी होता है।"},
+{q:"What is the meaning of School?",options:["घर","बाजार","स्कूल","अस्पताल"],answer:2,explain:"School का मतलब स्कूल होता है।"},
+{q:"What is the meaning of Dog?",options:["बिल्ली","कुत्ता","घोड़ा","शेर"],answer:1,explain:"Dog का मतलब कुत्ता होता है।"},
+{q:"What is the meaning of Sun?",options:["चाँद","तारा","सूरज","बादल"],answer:2,explain:"Sun का मतलब सूरज होता है।"},
+{q:"What is the meaning of Chair?",options:["कुर्सी","दरवाजा","खिड़की","पंखा"],answer:0,explain:"Chair का मतलब कुर्सी होता है।"},
+{q:"What is the meaning of Mother?",options:["भाई","बहन","पिता","माँ"],answer:3,explain:"Mother का मतलब माँ होता है।"},
+{q:"What is the meaning of House?",options:["घर","स्कूल","दुकान","पार्क"],answer:0,explain:"House का मतलब घर होता है।"},
+{q:"What is the meaning of Friend?",options:["दुश्मन","दोस्त","शिक्षक","डॉक्टर"],answer:1,explain:"Friend का मतलब दोस्त होता है।"}
+]
+},
+
+{
+title:"Daily English",
+questions:[
+{q:"How are you?",options:["I am fine.","I am a book.","I am water.","I am school."],answer:0,explain:"How are you? का जवाब I am fine है।"},
+{q:"What is your name?",options:["I am fine.","My name is Rahul.","I am hungry.","Good night."],answer:1,explain:"नाम पूछने पर My name is... कहते हैं।"},
+{q:"Good morning का मतलब?",options:["शुभ रात्रि","शुभ दोपहर","सुप्रभात","धन्यवाद"],answer:2,explain:"Good morning = सुप्रभात।"},
+{q:"Thank you का जवाब?",options:["You are welcome.","Good night.","I am hungry.","See you."],answer:0,explain:"Thank you के जवाब में You are welcome कहते हैं।"},
+{q:"Where do you live?",options:["I live in India.","I am ten.","I like mango.","Good morning."],answer:0,explain:"Where do you live? → I live in..."},
+{q:"What do you like?",options:["I like mangoes.","I am fine.","My name is Ali.","Good night."],answer:0,explain:"पसंद बताने के लिए I like... कहते हैं।"},
+{q:"See you later का मतलब?",options:["फिर मिलेंगे","धन्यवाद","माफ कीजिए","सुप्रभात"],answer:0,explain:"See you later = फिर मिलेंगे।"},
+{q:"I am hungry का मतलब?",options:["मैं खुश हूँ","मुझे भूख लगी है","मैं स्कूल जा रहा हूँ","मैं सो रहा हूँ"],answer:1,explain:"I am hungry = मुझे भूख लगी है।"},
+{q:"Please का मतलब?",options:["कृपया","धन्यवाद","माफ कीजिए","अलविदा"],answer:0,explain:"Please = कृपया।"},
+{q:"Sorry का मतलब?",options:["धन्यवाद","माफ कीजिए","स्वागत है","नमस्ते"],answer:1,explain:"Sorry = माफ कीजिए।"}
+]
+},
+
+{
+title:"Grammar",
+questions:[
+{q:"I ___ a student.",options:["am","is","are","be"],answer:0,explain:"I के साथ am आता है।"},
+{q:"He ___ my friend.",options:["am","are","is","be"],answer:2,explain:"He के साथ is आता है।"},
+{q:"They ___ happy.",options:["is","am","are","be"],answer:2,explain:"They के साथ are आता है।"},
+{q:"She ___ a teacher.",options:["are","is","am","be"],answer:1,explain:"She के साथ is आता है।"},
+{q:"We ___ students.",options:["is","am","are","be"],answer:2,explain:"We के साथ are आता है।"},
+{q:"This ___ my book.",options:["are","am","is","be"],answer:2,explain:"This के साथ is आता है।"},
+{q:"You ___ my friend.",options:["is","am","are","be"],answer:2,explain:"You के साथ are आता है।"},
+{q:"I ___ happy.",options:["am","is","are","be"],answer:0,explain:"I am happy सही है।"},
+{q:"He ___ playing.",options:["are","am","is","be"],answer:2,explain:"He is playing सही है।"},
+{q:"We ___ ready.",options:["is","am","are","be"],answer:2,explain:"We are ready सही है।"}
+]
+},
+
+{
+title:"Vocabulary",
+questions:[
+{q:"Big का opposite?",options:["Small","Tall","Fast","Hot"],answer:0,explain:"Big का opposite Small है।"},
+{q:"Hot का opposite?",options:["Cold","Big","Long","Fast"],answer:0,explain:"Hot का opposite Cold है।"},
+{q:"Happy का opposite?",options:["Good","Sad","Fast","Small"],answer:1,explain:"Happy का opposite Sad है।"},
+{q:"Fast का opposite?",options:["Slow","Big","Hot","Tall"],answer:0,explain:"Fast का opposite Slow है।"},
+{q:"Day का opposite?",options:["Morning","Night","Light","Sun"],answer:1,explain:"Day का opposite Night है।"},
+{q:"Good का opposite?",options:["Bad","Small","Cold","Slow"],answer:0,explain:"Good का opposite Bad है।"},
+{q:"Up का opposite?",options:["Down","Left","Right","High"],answer:0,explain:"Up का opposite Down है।"},
+{q:"Old का opposite?",options:["New","Big","Long","Fast"],answer:0,explain:"Old का opposite New है।"},
+{q:"Near का opposite?",options:["Far","Small","Hot","Young"],answer:0,explain:"Near का opposite Far है।"},
+{q:"Easy का opposite?",options:["Hard","Good","Fast","Short"],answer:0,explain:"Easy का opposite Hard है।"}
+]
+},
+
+{
+title:"Conversation",
+questions:[
+{q:"What do you say when you meet someone?",options:["Hello","Good night","Sorry","Thanks"],answer:0,explain:"किसी से मिलने पर Hello कह सकते हैं।"},
+{q:"What do you say before sleeping?",options:["Good morning","Good night","Hello","Thank you"],answer:1,explain:"सोने से पहले Good night कहते हैं।"},
+{q:"How do you ask someone's name?",options:["What is your name?","Where are you?","How old?","What time?"],answer:0,explain:"नाम पूछने के लिए What is your name? कहते हैं।"},
+{q:"How do you ask for help?",options:["Can you help me?","Good night","I am fine","Thank you"],answer:0,explain:"मदद माँगने के लिए Can you help me? कह सकते हैं।"},
+{q:"What do you say after receiving something?",options:["Thank you","Good night","Sorry","Hello"],answer:0,explain:"कुछ मिलने पर Thank you कहते हैं।"},
+{q:"How do you say goodbye?",options:["Bye","Hello","Thanks","Please"],answer:0,explain:"Goodbye के लिए Bye कहा जाता है।"},
+{q:"Someone says Thank you. You say:",options:["You're welcome.","Good morning.","Sorry.","Bye."],answer:0,explain:"Thank you → You're welcome."},
+{q:"Someone says Sorry. You can say:",options:["That's okay.","Good night.","My name is...","Hello."],answer:0,explain:"Sorry के जवाब में That's okay कह सकते हैं।"},
+{q:"How do you ask someone's age?",options:["How old are you?","What is your name?","Where do you live?","Are you fine?"],answer:0,explain:"उम्र पूछने के लिए How old are you? कहते हैं।"},
+{q:"How do you ask where someone lives?",options:["Where do you live?","What is your name?","How are you?","Goodbye."],answer:0,explain:"कहाँ रहते हैं पूछने के लिए Where do you live? कहते हैं।"}
+]
+},
+
+{
+title:"Practice Test",
+questions:[
+{q:"Choose the correct sentence.",options:["I am happy.","I is happy.","I are happy.","I be happy."],answer:0,explain:"I am happy सही sentence है।"},
+{q:"She ___ my sister.",options:["are","am","is","be"],answer:2,explain:"She is my sister सही है।"},
+{q:"Apple का मतलब?",options:["सेब","पानी","घर","किताब"],answer:0,explain:"Apple = सेब।"},
+{q:"Opposite of Hot?",options:["Cold","Big","Fast","Long"],answer:0,explain:"Hot का opposite Cold है।"},
+{q:"What is your name? का सही जवाब?",options:["My name is Ali.","I am fine.","Good night.","Thank you."],answer:0,explain:"नाम के जवाब में My name is... कहते हैं।"},
+{q:"They ___ students.",options:["is","am","are","be"],answer:2,explain:"They are students सही है।"},
+{q:"Thank you के जवाब में?",options:["You're welcome.","Sorry.","Bye.","Hello."],answer:0,explain:"Thank you → You're welcome."},
+{q:"Big का opposite?",options:["Small","Hot","Fast","Good"],answer:0,explain:"Big → Small."},
+{q:"Good morning का मतलब?",options:["सुप्रभात","शुभ रात्रि","धन्यवाद","माफ कीजिए"],answer:0,explain:"Good morning = सुप्रभात।"},
+{q:"I ___ a student.",options:["am","is","are","be"],answer:0,explain:"I am a student सही है।"}
+]
+}
+
+];
+
+
+/* ================================
+   VARIABLES
+================================ */
+
+let currentLesson=0;
+let currentQuestion=0;
+let currentScore=0;
+let selectedAnswer=false;
+
+let progressData=
+JSON.parse(localStorage.getItem("englishProgress")||"[]");
+
+let totalScore=
+Number(localStorage.getItem("englishScore")||0);
+
+let studentName=
+localStorage.getItem("studentName")||"Student";
+
+let savedPhoto=
+localStorage.getItem("studentPhoto")||"";
+
+
+/* ================================
+   SCREEN
+================================ */
+
+function showScreen(screen){
+
+  document.querySelectorAll(".screen").forEach(s=>{
+    s.classList.remove("active");
+  });
+
+  if(screen==="home")
+    document.getElementById("homeScreen").classList.add("active");
+
+  if(screen==="lessons")
+    document.getElementById("lessonsScreen").classList.add("active");
+
+  if(screen==="teacher")
+    document.getElementById("teacherScreen").classList.add("active");
+
+  if(screen==="aiStudent")
+    document.getElementById("aiStudentScreen").classList.add("active");
+
+  if(screen==="profile"){
+    document.getElementById("profileScreen").classList.add("active");
+    loadProfile();
+  }
+
+  if(screen==="admin"){
+    document.getElementById("adminScreen").classList.add("active");
+    updateAdmin();
+  }
+
+  updateNavigation(screen);
+  updateStats();
+
+  window.scrollTo(0,0);
+}
+
+
+function updateNavigation(screen){
+
+  document.querySelectorAll(".nav-btn")
+  .forEach(b=>b.classList.remove("active"));
+
+  if(screen==="home")
+    document.getElementById("navHome").classList.add("active");
+
+  if(screen==="lessons")
+    document.getElementById("navLessons").classList.add("active");
+
+  if(screen==="teacher")
+    document.getElementById("navTeacher").classList.add("active");
+
+  if(screen==="profile")
+    document.getElementById("navProfile").classList.add("active");
+
+  if(screen==="admin")
+    document.getElementById("navAdmin").classList.add("active");
+}
+
+
+/* ================================
+   LESSON
+================================ */
+
+function openLesson(index){
+
+  currentLesson=index;
+  currentQuestion=0;
+  currentScore=0;
+  selectedAnswer=false;
+
+  document.querySelectorAll(".screen")
+  .forEach(s=>s.classList.remove("active"));
+
+  document.getElementById("lessonScreen")
+  .classList.add("active");
+
+  document.getElementById("lessonName")
+  .textContent=lessons[index].title;
+
+  renderQuestion();
+
+  window.scrollTo(0,0);
+}
+
+
+function renderQuestion(){
+
+  const lesson=lessons[currentLesson];
+
+  const q=lesson.questions[currentQuestion];
+
+  document.getElementById("questionNumber")
+  .textContent=
+  "Question "+(currentQuestion+1);
+
+  document.getElementById("lessonProgressText")
+  .textContent=
+  "Question "+
+  (currentQuestion+1)+
+  "/"+
+  lesson.questions.length;
+
+  document.getElementById("questionText")
+  .textContent=q.q;
+
+  const box=document.getElementById("options");
+
+  box.innerHTML="";
+
+  document.getElementById("explanation")
+  .style.display="none";
+
+  const next=document.getElementById("nextButton");
+
+  next.disabled=true;
+
+  next.textContent=
+  currentQuestion===lesson.questions.length-1
+  ?"Finish Lesson ✓"
+  :"Next Question →";
+
+  selectedAnswer=false;
+
+  q.options.forEach((option,index)=>{
+
+    const btn=document.createElement("button");
+
+    btn.className="option";
+
+    btn.textContent=
+    String.fromCharCode(65+index)+
+    ". "+
+    option;
+
+    btn.onclick=()=>{
+      selectAnswer(index);
+    };
+
+    box.appendChild(btn);
+
+  });
+}
+
+
+function selectAnswer(index){
+
+  if(selectedAnswer)return;
+
+  selectedAnswer=true;
+
+  const q=
+  lessons[currentLesson].questions[currentQuestion];
+
+  const buttons=
+  document.querySelectorAll(".option");
+
+  buttons.forEach((button,i)=>{
+
+    button.disabled=true;
+
+    if(i===q.answer)
+      button.classList.add("correct");
+
+    if(i===index && index!==q.answer)
+      button.classList.add("wrong");
+
+  });
+
+  if(index===q.answer){
+
+    currentScore++;
+    totalScore++;
+
+    localStorage.setItem(
+      "englishScore",
+      totalScore
+    );
+
+  }
+
+  const explanation=
+  document.getElementById("explanation");
+
+  explanation.innerHTML=
+  (index===q.answer
+  ?"✅ Correct! "
+  :"❌ Not quite. ")+
+  q.explain;
+
+  explanation.style.display="block";
+
+  document.getElementById("nextButton")
+  .disabled=false;
+
+  updateStats();
+}
+
+
+function nextQuestion(){
+
+  const lesson=lessons[currentLesson];
+
+  if(currentQuestion<
+     lesson.questions.length-1){
+
+    currentQuestion++;
+    renderQuestion();
+
+  }else{
+
+    finishLesson();
+
+  }
+}
+
+
+function finishLesson(){
+
+  progressData[currentLesson]=100;
+
+  localStorage.setItem(
+    "englishProgress",
+    JSON.stringify(progressData)
+  );
+
+  document.getElementById("questionCard").innerHTML=`
+
+    <div class="lesson-complete">
+
+      <div class="big">🎉</div>
+
+      <h2>Lesson Completed!</h2>
+
+      <p style="margin-top:10px;color:#666;">
+        ${lessons[currentLesson].title}
+      </p>
+
+      <div style="
+      font-size:32px;
+      font-weight:900;
+      color:#4f46e5;
+      margin:20px 0;">
+        ${currentScore}/10
+      </div>
+
+      <p>
+        ${
+          currentScore>=8
+          ?"Excellent! 🌟"
+          :currentScore>=5
+          ?"Good job! 👍"
+          :"Keep practicing! 💪"
+        }
+      </p>
+
+      <button
+      class="next-btn"
+      onclick="openLesson(${currentLesson})">
+        🔄 Try Again
+      </button>
+
+      <button
+      class="next-btn"
+      style="background:#eef2ff;color:#4f46e5;"
+      onclick="showScreen('lessons')">
+        📚 All Lessons
+      </button>
+
+    </div>
+
+  `;
+
+  updateStats();
+}
+
+
+/* ================================
+   AI STUDENT
+================================ */
+
+const aiQuestions=[
+"How are you?",
+"What is your name?",
+"Where do you live?",
+"What is your favorite color?",
+"What food do you like?",
+"What is your favorite animal?",
+"How old are you?",
+"What do you do every day?",
+"Do you like English?",
+"What is your favorite game?"
+];
+
+let aiIndex=0;
+
+
+function startAIPractice(){
+
+  aiIndex=
+  Math.floor(Math.random()*aiQuestions.length);
+
+  document.getElementById("aiQuestion")
+  .textContent=aiQuestions[aiIndex];
+
+  document.getElementById("aiAnswer").value="";
+
+  document.getElementById("aiFeedback")
+  .style.display="none";
+
+  showScreen("aiStudent");
+}
+
+
+function newAIQuestion(){
+
+  aiIndex=
+  Math.floor(Math.random()*aiQuestions.length);
+
+  document.getElementById("aiQuestion")
+  .textContent=aiQuestions[aiIndex];
+
+  document.getElementById("aiAnswer").value="";
+
+  document.getElementById("aiFeedback")
+  .style.display="none";
+}
+
+
+function checkAIAnswer(){
+
+  const answer=
+  document.getElementById("aiAnswer")
+  .value.trim();
+
+  const feedback=
+  document.getElementById("aiFeedback");
+
+  if(answer===""){
+
+    feedback.innerHTML=
+    "✍️ पहले English में answer लिखो।";
+
+    feedback.style.display="block";
+
+    return;
+  }
+
+  const lower=answer.toLowerCase();
+
+  let good=false;
+
+  if(aiIndex===0)
+    good=lower.includes("fine")||
+         lower.includes("good")||
+         lower.includes("well");
+
+  if(aiIndex===1)
+    good=lower.includes("my name")||
+         lower.length>2;
+
+  if(aiIndex===2)
+    good=lower.includes("india")||
+         lower.includes("i live");
+
+  if(aiIndex===3)
+    good=lower.length>2;
+
+  if(aiIndex===4)
+    good=lower.length>2;
+
+  if(aiIndex===5)
+    good=lower.length>2;
+
+  if(aiIndex===6)
+    good=/\d+/.test(lower)||
+         lower.includes("years");
+
+  if(aiIndex>=7)
+    good=lower.length>2;
+
+  if(good){
+
+    totalScore++;
+
+    localStorage.setItem(
+      "englishScore",
+      totalScore
+    );
+
+    feedback.innerHTML=
+    "🌟 Great answer! Your English is improving!";
+
+  }else{
+
+    feedback.innerHTML=
+    "💡 Good try! थोड़ा और simple English में लिखो।";
+
+  }
+
+  feedback.style.display="block";
+
+  updateStats();
+}
+
+
+/* ================================
+   AI TEACHER
+================================ */
+
+function addTeacherMessage(text,type){
+
+  const chat=
+  document.getElementById("teacherChat");
+
+  const div=document.createElement("div");
+
+  div.className=
+  "message "+
+  (type==="student"
+  ?"student-msg"
+  :"teacher-msg");
+
+  div.innerHTML=text;
+
+  chat.appendChild(div);
+
+  chat.scrollTop=chat.scrollHeight;
+}
+
+
+function sendTeacherMessage(){
+
+  const input=
+  document.getElementById("teacherInput");
+
+  const text=input.value.trim();
+
+  if(!text)return;
+
+  addTeacherMessage(
+    text.replace(/</g,"&lt;"),
+    "student"
+  );
+
+  input.value="";
+
+  setTimeout(()=>{
+
+    const reply=
+    getTeacherReply(text);
+
+    addTeacherMessage(
+      "👩‍🏫 "+reply,
+      "teacher"
+    );
+
+  },500);
+}
+
+
+function getTeacherReply(text){
+
+  const t=text.toLowerCase();
+
+  if(
+    t.includes("hello")||
+    t.includes("hi")
+  ){
+
+    return "Hello! 👋 How are you today?";
+
+  }
+
+  if(
+    t.includes("your name")||
+    t.includes("name")
+  ){
+
+    return "My name is AI Teacher. 😊 What is your name?";
+
+  }
+
+  if(
+    t.includes("how are you")
+  ){
+
+    return "I am fine, thank you! 🌟 You can say: I am fine.";
+
+  }
+
+  if(
+    t.includes("apple")
+  ){
+
+    return "Apple means 'सेब' 🍎. Example: I eat an apple.";
+
+  }
+
+  if(
+    t.includes("book")
+  ){
+
+    return "Book means 'किताब' 📚. Example: This is my book.";
+
+  }
+
+  if(
+    t.includes("water")
+  ){
+
+    return "Water means 'पानी' 💧. Example: I drink water.";
+
+  }
+
+  if(
+    t.includes("am is are")
+    ||
+    t.includes("grammar")
+  ){
+
+    return "Easy rule याद रखो: I am, He is, She is, It is, You are, We are, They are. ⭐";
+
+  }
+
+  if(t.includes("i am")){
+
+    return "Very good! 👍 'I am' के बाद feeling या identity लिख सकते हैं. Example: I am happy.";
+
+  }
+
+  if(t.includes("thank")){
+
+    return "Thank you का जवाब होता है: You're welcome. 😊";
+
+  }
+
+  if(t.includes("sorry")){
+
+    return "Sorry के जवाब में आप कह सकते हो: That's okay. 👍";
+
+  }
+
+  if(t.includes("help")){
+
+    return "Of course! मैं English सीखने में आपकी मदद करूँगी। कोई भी आसान सवाल पूछो।";
+
+  }
+
+  if(
+    t.includes("meaning")||
+    t.includes("मतलब")
+  ){
+
+    return "आप जिस English word का meaning पूछना चाहते हैं, वह word लिखो। मैं Hindi में आसान meaning बताऊँगी।";
+
+  }
+
+  if(
+    t.includes("sentence")
+  ){
+
+    return "Simple sentence बनाने का तरीका: Subject + Verb + Object. Example: I eat mango.";
+
+  }
+
+  return "बहुत अच्छा सवाल! 😊 इसे आसान तरीके से सीखते हैं। आप कोई English word, sentence या grammar question भेजो।";
+}
+
+
+/* ================================
+   PROFILE
+================================ */
+
+function uploadPhoto(event){
+
+  const file=event.target.files[0];
+
+  if(!file)return;
+
+  if(!file.type.startsWith("image/")){
+
+    alert("Please select an image.");
+
+    return;
+  }
+
+  const reader=new FileReader();
+
+  reader.onload=function(e){
+
+    const photo=e.target.result;
+
+    localStorage.setItem(
+      "studentPhoto",
+      photo
+    );
+
+    savedPhoto=photo;
+
+    document.getElementById("profilePhoto")
+    .src=photo;
+
+    document.getElementById("headerAvatar")
+    .src=photo;
+
+    document.getElementById("profileMessage")
+    .textContent=
+    "✅ Photo uploaded successfully!";
+
+  };
+
+  reader.readAsDataURL(file);
+}
+
+
+function saveProfile(){
+
+  const name=
+  document.getElementById("studentName")
+  .value.trim();
+
+  if(name===""){
+
+    alert("Please enter your name.");
+
+    return;
+  }
+
+  studentName=name;
+
+  localStorage.setItem(
+    "studentName",
+    name
+  );
+
+  document.getElementById("heroName")
+  .textContent=name;
+
+  document.getElementById("profileMessage")
+  .textContent=
+  "✅ Profile saved successfully!";
+}
+
+
+function loadProfile(){
+
+  document.getElementById("studentName")
+  .value=studentName;
+
+  document.getElementById("heroName")
+  .textContent=studentName;
+
+  if(savedPhoto){
+
+    document.getElementById("profilePhoto")
+    .src=savedPhoto;
+
+    document.getElementById("headerAvatar")
+    .src=savedPhoto;
+
+  }
+
+  document.getElementById("profileScore")
+  .textContent=totalScore;
+
+  document.getElementById("profileDone")
+  .textContent=
+  progressData.filter(
+    p=>Number(p)>=100
+  ).length;
+}
+
+
+/* ================================
+   STATS
+================================ */
+
+function updateStats(){
+
+  document.getElementById("statLessons")
+  .textContent=lessons.length;
+
+  document.getElementById("statScore")
+  .textContent=totalScore;
+
+  document.getElementById("statDone")
+  .textContent=
+  progressData.filter(
+    p=>Number(p)>=100
+  ).length;
+
+  for(let i=0;i<lessons.length;i++){
+
+    const bar=
+    document.getElementById("p"+(i+1));
+
+    if(bar){
+
+      bar.style.width=
+      Number(progressData[i]||0)+"%";
+
+    }
+  }
+
+  const ps=
+  document.getElementById("profileScore");
+
+  const pd=
+  document.getElementById("profileDone");
+
+  if(ps)ps.textContent=totalScore;
+
+  if(pd){
+
+    pd.textContent=
+    progressData.filter(
+      p=>Number(p)>=100
+    ).length;
+
+  }
+
+}
+
+
+/* ================================
+   ADMIN
+================================ */
+
+/*
+ Demo Admin:
+ ID: admin
+ Password: 1234
+*/
+
+function adminLogin(){
+
+  const user=
+  document.getElementById("adminUser").value;
+
+  const pass=
+  document.getElementById("adminPass").value;
+
+  if(user==="admin" && pass==="1234"){
+
+    localStorage.setItem(
+      "adminLoggedIn",
+      "yes"
+    );
+
+    document.getElementById("adminLoginBox")
+    .style.display="none";
+
+    document.getElementById("adminPanel")
+    .style.display="block";
+
+    updateAdmin();
+
+  }else{
+
+    document.getElementById("adminError")
+    .textContent=
+    "❌ Wrong Admin ID or Password.";
+
+  }
+}
+
+
+function adminLogout(){
+
+  localStorage.removeItem(
+    "adminLoggedIn"
+  );
+
+  document.getElementById("adminLoginBox")
+  .style.display="block";
+
+  document.getElementById("adminPanel")
+  .style.display="none";
+
+  document.getElementById("adminUser").value="";
+  document.getElementById("adminPass").value="";
+}
+
+
+function updateAdmin(){
+
+  const logged=
+  localStorage.getItem(
+    "adminLoggedIn"
+  );
+
+  if(logged==="yes"){
+
+    document.getElementById("adminLoginBox")
+    .style.display="none";
+
+    document.getElementById("adminPanel")
+    .style.display="block";
+
+    document.getElementById("adminTotalScore")
+    .textContent=totalScore;
+
+  }
+}
+
+
+/* ================================
+   START
+================================ */
+
+function initialize(){
+
+  document.getElementById("heroName")
+  .textContent=studentName;
+
+  if(savedPhoto){
+
+    document.getElementById("headerAvatar")
+    .src=savedPhoto;
+
+    document.getElementById("profilePhoto")
+    .src=savedPhoto;
+
+  }
+
+  updateStats();
+
+}
+
+initialize();
+
+</script>
+
+</body>
+</html>
