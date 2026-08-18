@@ -464,7 +464,213 @@ h2{
 
 /* AI TEACHER */
 
-.teacher{
+.teacher{function getTeacherReply(text){
+
+  const t = text
+    .toLowerCase()
+    .replace(/[?!.]/g,"")
+    .trim();
+
+  // English word meanings
+  const words = {
+    "apple":"सेब 🍎",
+    "book":"किताब 📖",
+    "water":"पानी 💧",
+    "house":"घर 🏠",
+    "school":"स्कूल 🏫",
+    "dog":"कुत्ता 🐶",
+    "cat":"बिल्ली 🐱",
+    "sun":"सूरज ☀️",
+    "moon":"चाँद 🌙",
+    "mother":"माँ 👩",
+    "father":"पिता 👨",
+    "brother":"भाई",
+    "sister":"बहन",
+    "friend":"दोस्त 🤝",
+    "teacher":"शिक्षक 👩‍🏫",
+    "student":"विद्यार्थी 👨‍🎓",
+    "water":"पानी 💧",
+    "food":"खाना 🍱",
+    "milk":"दूध 🥛",
+    "book":"किताब 📚",
+    "pen":"कलम 🖊️",
+    "chair":"कुर्सी 🪑",
+    "table":"मेज",
+    "car":"गाड़ी 🚗",
+    "bird":"पक्षी 🐦",
+    "tree":"पेड़ 🌳",
+    "flower":"फूल 🌸",
+    "red":"लाल",
+    "blue":"नीला",
+    "green":"हरा",
+    "black":"काला",
+    "white":"सफेद",
+    "happy":"खुश",
+    "sad":"दुखी",
+    "big":"बड़ा",
+    "small":"छोटा",
+    "good":"अच्छा",
+    "bad":"बुरा",
+    "hot":"गर्म",
+    "cold":"ठंडा",
+    "fast":"तेज़",
+    "slow":"धीमा"
+  };
+
+  // Meaning questions
+  for(const word in words){
+
+    if(
+      t.includes(word) &&
+      (
+        t.includes("hindi") ||
+        t.includes("meaning") ||
+        t.includes("मतलब") ||
+        t.includes("क्या कहते") ||
+        t.includes("kya kahta") ||
+        t.includes("kya kehte") ||
+        t.includes("ka matlab")
+      )
+    ){
+
+      return `<b>${word}</b> को हिंदी में <b>${words[word]}</b> कहते हैं। 😊<br><br>
+      Example: <b>I eat an ${word}.</b><br>
+      मतलब: मैं एक ${words[word]} खाता हूँ।`;
+    }
+  }
+
+  // Direct word search
+  if(words[t]){
+    return `<b>${t}</b> का हिंदी मतलब <b>${words[t]}</b> है। 😊`;
+  }
+
+  // Greetings
+  if(
+    t.includes("hello") ||
+    t.includes("hi") ||
+    t.includes("namaste")
+  ){
+    return "नमस्ते! 👋 मैं आपकी AI English Teacher हूँ। English का कोई भी आसान सवाल पूछो।";
+  }
+
+  // How are you
+  if(t.includes("how are you")){
+    return "I am fine, thank you! 😊<br><br>
+    इसका मतलब है: <b>मैं ठीक हूँ, धन्यवाद।</b>";
+  }
+
+  // Name
+  if(
+    t.includes("what is your name") ||
+    t.includes("your name")
+  ){
+    return "My name is AI Teacher. 👩‍🏫<br>
+    आप कह सकते हो: <b>My name is Arshlan.</b>";
+  }
+
+  // Grammar
+  if(
+    t.includes("am is are") ||
+    t.includes("grammar")
+  ){
+    return `
+    <b>Am / Is / Are का आसान नियम:</b><br><br>
+    I → <b>am</b><br>
+    He / She / It → <b>is</b><br>
+    You / We / They → <b>are</b><br><br>
+    Example: <b>I am happy.</b> 😊
+    `;
+  }
+
+  // Sentence correction
+  if(
+    t.includes("i am going school") ||
+    t.includes("i am going to school")
+  ){
+    return `
+    सही sentence है:<br><br>
+    <b>I am going to school.</b> 🏫<br><br>
+    मतलब: <b>मैं स्कूल जा रहा हूँ।</b>
+    `;
+  }
+
+  // Thank you
+  if(t.includes("thank you") || t.includes("thank")){
+    return `
+    <b>Thank you</b> का मतलब है <b>धन्यवाद।</b> 🙏<br><br>
+    इसका जवाब: <b>You're welcome.</b>
+    `;
+  }
+
+  // Sorry
+  if(t.includes("sorry")){
+    return `
+    <b>Sorry</b> का मतलब है <b>माफ कीजिए।</b><br><br>
+    जवाब दे सकते हैं: <b>That's okay.</b> 👍
+    `;
+  }
+
+  // Opposites
+  const opposites = {
+    "big":"small",
+    "small":"big",
+    "hot":"cold",
+    "cold":"hot",
+    "happy":"sad",
+    "sad":"happy",
+    "good":"bad",
+    "bad":"good",
+    "fast":"slow",
+    "slow":"fast",
+    "day":"night",
+    "night":"day",
+    "up":"down",
+    "down":"up",
+    "old":"new",
+    "new":"old"
+  };
+
+  for(const word in opposites){
+
+    if(
+      t.includes(word) &&
+      (
+        t.includes("opposite") ||
+        t.includes("ulta") ||
+        t.includes("vilom")
+      )
+    ){
+      return `<b>${word}</b> का opposite <b>${opposites[word]}</b> है। ⭐`;
+    }
+  }
+
+  // Help
+  if(
+    t.includes("help") ||
+    t.includes("madad") ||
+    t.includes("मदद")
+  ){
+    return `
+    बिल्कुल! 😊 मैं आपकी मदद करूँगी।<br><br>
+    आप पूछ सकते हो:<br>
+    • किसी English word का Hindi meaning<br>
+    • Grammar<br>
+    • Sentence correction<br>
+    • Opposite words<br>
+    • English conversation
+    `;
+  }
+
+  // Default
+  return `
+    😊 अच्छा सवाल!<br><br>
+    मैं English सीखने में आपकी मदद कर सकती हूँ।<br>
+    अपना सवाल थोड़ा आसान तरीके से लिखो, जैसे:<br><br>
+    <b>Apple Hindi mein kya kehte hain?</b><br>
+    <b>What is the meaning of book?</b><br>
+    <b>Correct my sentence: I am going school.</b>
+  `;
+  }
   margin:16px;
   background:white;
   border-radius:22px;
