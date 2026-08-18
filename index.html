@@ -1,0 +1,2892 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="theme-color" content="#4f46e5">
+
+<title>Arshlan Ke Bhanja</title>
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+body{
+  font-family:Arial,Helvetica,sans-serif;
+  background:#f5f7ff;
+  color:#172033;
+}
+
+button,input,textarea,select{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+  border:0;
+}
+
+.app{
+  max-width:900px;
+  margin:auto;
+  min-height:100vh;
+  padding-bottom:90px;
+}
+
+/* HEADER */
+
+header{
+  height:70px;
+  background:white;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:10px 18px;
+  position:sticky;
+  top:0;
+  z-index:20;
+  box-shadow:0 2px 15px #0001;
+}
+
+.logo{
+  font-size:20px;
+  font-weight:900;
+  color:#4f46e5;
+}
+
+.logo small{
+  display:block;
+  color:#777;
+  font-size:10px;
+  margin-top:2px;
+}
+
+.avatar{
+  width:44px;
+  height:44px;
+  border-radius:50%;
+  object-fit:cover;
+  border:3px solid white;
+  box-shadow:0 3px 12px #0002;
+}
+
+/* HERO */
+
+.hero{
+  margin:16px;
+  padding:25px;
+  border-radius:25px;
+  color:white;
+  background:
+  linear-gradient(135deg,#4f46e5,#7c3aed);
+  box-shadow:0 18px 35px #4f46e533;
+}
+
+.hero small{
+  opacity:.8;
+}
+
+.hero h1{
+  font-size:32px;
+  margin:8px 0;
+}
+
+.hero p{
+  opacity:.9;
+  line-height:1.5;
+}
+
+.start{
+  background:white;
+  color:#4f46e5;
+  padding:13px 18px;
+  border-radius:13px;
+  font-weight:900;
+  margin-top:15px;
+}
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:8px;
+  margin-top:20px;
+}
+
+.stat{
+  background:#ffffff22;
+  padding:12px;
+  border-radius:13px;
+}
+
+.stat b{
+  display:block;
+  font-size:18px;
+}
+
+.stat small{
+  font-size:10px;
+}
+
+/* SECTIONS */
+
+section{
+  padding:12px 16px 25px;
+}
+
+h2{
+  font-size:23px;
+  margin-bottom:14px;
+}
+
+.screen{
+  display:none;
+}
+
+.screen.active{
+  display:block;
+}
+
+/* SUBJECTS */
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:12px;
+}
+
+.card{
+  background:white;
+  border:1px solid #e5e7ef;
+  border-radius:19px;
+  padding:18px;
+  box-shadow:0 7px 25px #00000008;
+}
+
+.subject-icon{
+  font-size:34px;
+}
+
+.card h3{
+  margin:9px 0 5px;
+}
+
+.card p{
+  color:#687386;
+  font-size:13px;
+  line-height:1.5;
+}
+
+.primary{
+  background:#4f46e5;
+  color:white;
+  padding:12px 17px;
+  border-radius:11px;
+  font-weight:800;
+}
+
+.secondary{
+  background:#eef0ff;
+  color:#4f46e5;
+  padding:12px 17px;
+  border-radius:11px;
+  font-weight:800;
+}
+
+/* LESSON */
+
+.lesson{
+  margin:10px 0;
+  padding:17px;
+  border:1px solid #e1e5ee;
+  border-radius:15px;
+  background:#fff;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+}
+
+.lesson small{
+  color:#687386;
+  line-height:1.5;
+}
+
+/* QUIZ */
+
+.quiz-card{
+  background:white;
+  border-radius:22px;
+  padding:22px;
+  box-shadow:0 8px 30px #0001;
+}
+
+.question{
+  font-size:28px;
+  font-weight:900;
+  margin:18px 0;
+}
+
+.answer{
+  display:block;
+  width:100%;
+  padding:18px;
+  margin:12px 0;
+  border-radius:16px;
+  background:#f1f5ff;
+  border:2px solid #dbe3ff;
+  color:#172033;
+  font-size:22px;
+  font-weight:900;
+  text-align:center;
+  transition:.2s;
+}
+
+.answer:active{
+  transform:scale(.97);
+}
+
+.answer.correct{
+  background:#dcfce7;
+  border-color:#22c55e;
+  color:#15803d;
+}
+
+.answer.wrong{
+  background:#fee2e2;
+  border-color:#ef4444;
+  color:#b91c1c;
+}
+
+#quizResult{
+  text-align:center;
+  font-size:20px;
+  font-weight:900;
+  min-height:35px;
+  margin:12px 0;
+}
+
+/* ASK */
+
+textarea{
+  resize:vertical;
+}
+
+.big-input{
+  width:100%;
+  padding:14px;
+  border:1px solid #d6dbe6;
+  border-radius:12px;
+  margin:7px 0;
+  outline:none;
+}
+
+.big-input:focus{
+  border-color:#4f46e5;
+}
+
+/* MODAL */
+
+.modal{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:#0009;
+  z-index:100;
+  align-items:center;
+  justify-content:center;
+  padding:18px;
+}
+
+.modal-box{
+  width:min(500px,100%);
+  max-height:90vh;
+  overflow:auto;
+  background:white;
+  border-radius:23px;
+  padding:25px;
+}
+
+.close{
+  float:right;
+  width:36px;
+  height:36px;
+  border-radius:50%;
+  background:#f0f1f5;
+  font-size:22px;
+}
+
+.modal-box h2{
+  margin-bottom:12px;
+}
+
+.error{
+  color:#dc2626;
+  font-weight:bold;
+  margin-top:10px;
+}
+
+.success{
+  color:#15803d;
+  font-weight:bold;
+  margin-top:10px;
+}
+
+/* ADMIN */
+
+#adminPanel{
+  display:none;
+  padding:20px;
+}
+
+.admin-card{
+  background:white;
+  border-radius:18px;
+  padding:20px;
+  margin-bottom:15px;
+  box-shadow:0 5px 20px #0001;
+}
+
+.admin-card input,
+.admin-card textarea,
+.admin-card select{
+  width:100%;
+  padding:12px;
+  margin:7px 0;
+  border:1px solid #d6dbe6;
+  border-radius:10px;
+}
+
+.admin-title{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+/* BOTTOM NAV */
+
+.bottom{
+  position:fixed;
+  bottom:0;
+  left:50%;
+  transform:translateX(-50%);
+  width:min(900px,100%);
+  background:white;
+  border-top:1px solid #ddd;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  padding:8px 5px;
+  z-index:50;
+}
+
+.bottom button{
+  background:none;
+  color:#687386;
+  font-size:11px;
+  font-weight:800;
+}
+
+.bottom button b{
+  display:block;
+  font-size:22px;
+  margin-bottom:3px;
+}
+
+.bottom button.active{
+  color:#4f46e5;
+}
+
+.hidden{
+  display:none!important;
+}
+
+.row{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+hr{
+  border:0;
+  border-top:1px solid #eee;
+  margin:20px 0;
+}
+
+@media(min-width:700px){
+
+.grid{
+  grid-template-columns:repeat(4,1fr);
+}
+
+.hero{
+  padding:32px;
+}
+
+}
+</style>
+</head>
+
+
+<body>
+
+<div class="app">
+
+<!-- HEADER -->
+
+<header>
+
+<div class="logo">
+📚 Arshlan Ke Bhanja
+<small>Learn • Play • Grow</small>
+</div>
+
+<button onclick="openLogin()">
+
+<img
+id="topAvatar"
+class="avatar"
+src="https://placehold.co/100x100?text=👦"
+>
+
+</button>
+
+</header>
+
+
+<!-- STUDENT AREA -->
+
+<main id="studentArea">
+
+
+<!-- HOME -->
+
+<section
+id="home"
+class="screen active"
+>
+
+<div class="hero">
+
+<small id="welcomeText">
+WELCOME 👋
+</small>
+
+<h1 id="heroName">
+Ready to Learn?
+</h1>
+
+<p>
+Learn English, Maths, Hindi, Science,
+GK and many more subjects.
+</p>
+
+<button
+class="start"
+onclick="showScreen('learn')"
+>
+🚀 Start Learning
+</button>
+
+
+<div class="stats">
+
+<div class="stat">
+
+<b id="stars">
+0 ⭐
+</b>
+
+<small>
+Stars
+</small>
+
+</div>
+
+
+<div class="stat">
+
+<b id="progress">
+0%
+</b>
+
+<small>
+Progress
+</small>
+
+</div>
+
+
+<div class="stat">
+
+<b id="streak">
+🔥 1
+</b>
+
+<small>
+Day Streak
+</small>
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h2>
+🎯 What do you want to do?
+</h2>
+
+<div class="grid">
+
+<button
+class="card"
+onclick="showScreen('learn')"
+>
+
+<div class="subject-icon">
+📚
+</div>
+
+<h3>
+Learn
+</h3>
+
+<p>
+Subjects & lessons
+</p>
+
+</button>
+
+
+<button
+class="card"
+onclick="showScreen('quiz')"
+>
+
+<div class="subject-icon">
+🎮
+</div>
+
+<h3>
+Play Quiz
+</h3>
+
+<p>
+Play and earn stars
+</p>
+
+</button>
+
+
+<button
+class="card"
+onclick="showScreen('ask')"
+>
+
+<div class="subject-icon">
+💬
+</div>
+
+<h3>
+Ask Teacher
+</h3>
+
+<p>
+Ask your question
+</p>
+
+</button>
+
+
+<button
+class="card"
+onclick="showScreen('profile')"
+>
+
+<div class="subject-icon">
+👤
+</div>
+
+<h3>
+My Profile
+</h3>
+
+<p>
+Name & photo
+</p>
+
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- LEARN -->
+
+<section
+id="learn"
+class="screen"
+>
+
+<h2>
+📚 All Subjects
+</h2>
+
+<div
+id="subjects"
+class="grid"
+>
+</div>
+
+<div
+id="lessons"
+style="margin-top:20px"
+>
+</div>
+
+</section>
+
+
+<!-- QUIZ -->
+
+<section
+id="quiz"
+class="screen"
+>
+
+<h2>
+🎮 Play Quiz
+</h2>
+
+<div class="quiz-card">
+
+<small id="questionNumber">
+Question 1 of 5
+</small>
+
+<div
+id="question"
+class="question"
+>
+</div>
+
+<div id="answers">
+</div>
+
+<div
+id="quizResult"
+>
+</div>
+
+<button
+id="nextButton"
+class="primary hidden"
+style="width:100%;font-size:18px"
+onclick="nextQuestion()"
+>
+Next Question →
+</button>
+
+</div>
+
+</section>
+
+
+<!-- ASK TEACHER -->
+
+<section
+id="ask"
+class="screen"
+>
+
+<h2>
+💬 Ask Teacher
+</h2>
+
+<div class="card">
+
+<p>
+अपना सवाल लिखो:
+</p>
+
+<textarea
+id="questionText"
+class="big-input"
+rows="6"
+placeholder="Example: Why is the sky blue?"
+></textarea>
+
+<button
+class="primary"
+onclick="sendQuestion()"
+>
+📨 Send Question
+</button>
+
+<p id="questionMessage"></p>
+
+</div>
+
+</section>
+
+
+<!-- PROFILE -->
+
+<section
+id="profile"
+class="screen"
+>
+
+<h2>
+👤 My Profile
+</h2>
+
+<div class="card">
+
+<input
+id="profileName"
+class="big-input"
+placeholder="Student Name"
+>
+
+<input
+id="profileClass"
+class="big-input"
+placeholder="Class"
+>
+
+<input
+id="profilePhoto"
+class="big-input"
+placeholder="Photo URL"
+>
+
+<button
+class="primary"
+onclick="saveProfile()"
+>
+💾 Save Profile
+</button>
+
+</div>
+
+</section>
+
+</main>
+
+
+<!-- ADMIN PANEL -->
+
+<div id="adminPanel">
+
+<div class="admin-card">
+
+<div class="admin-title">
+
+<h2>
+⚙️ Admin Dashboard
+</h2>
+
+<button
+class="secondary"
+onclick="logout()"
+>
+Logout
+</button>
+
+</div>
+
+<p>
+Real Firebase Admin account active.
+</p>
+
+</div>
+
+
+<div class="admin-card">
+
+<h3>
+📚 Add Subject
+</h3>
+
+<input
+id="adminSubjectName"
+placeholder="Subject name"
+>
+
+<input
+id="adminSubjectIcon"
+placeholder="Emoji e.g. 📚"
+>
+
+<input
+id="adminSubjectDescription"
+placeholder="Description"
+>
+
+<button
+class="primary"
+onclick="addSubjectOnline()"
+>
+Add Subject
+</button>
+
+</div>
+
+
+<div class="admin-card">
+
+<h3>
+📖 Add Lesson
+</h3>
+
+<input
+id="adminLessonSubject"
+placeholder="Subject name"
+>
+
+<input
+id="adminLessonTitle"
+placeholder="Lesson title"
+>
+
+<textarea
+id="adminLessonText"
+rows="5"
+placeholder="Lesson content"
+></textarea>
+
+<button
+class="primary"
+onclick="addLessonOnline()"
+>
+Add Lesson
+</button>
+
+</div>
+
+
+<div class="admin-card">
+
+<h3>
+💬 Student Questions
+</h3>
+
+<div id="adminQuestions">
+Login as Admin to load questions.
+</div>
+
+</div>
+
+
+<p id="adminMessage"></p>
+
+</div>
+
+
+<!-- LOGIN MODAL -->
+
+<div
+id="loginModal"
+class="modal"
+>
+
+<div class="modal-box">
+
+<button
+class="close"
+onclick="closeLogin()"
+>
+×
+</button>
+
+<h2>
+🔐 Login
+</h2>
+
+<p>
+Student या Admin account से login करें।
+</p>
+
+<input
+id="loginEmail"
+class="big-input"
+type="email"
+placeholder="Email"
+>
+
+<input
+id="loginPassword"
+class="big-input"
+type="password"
+placeholder="Password"
+>
+
+<div class="row">
+
+<button
+class="primary"
+onclick="loginUser()"
+>
+Login
+</button>
+
+<button
+class="secondary"
+onclick="createAccount()"
+>
+Create Account
+</button>
+
+</div>
+
+<p id="loginMessage"></p>
+
+</div>
+
+</div>
+
+
+<!-- BOTTOM NAV -->
+
+<nav class="bottom">
+
+<button
+id="navHome"
+class="active"
+onclick="showScreen('home')"
+>
+
+<b>
+🏠
+</b>
+
+Home
+
+</button>
+
+
+<button
+id="navLearn"
+onclick="showScreen('learn')"
+>
+
+<b>
+📚
+</b>
+
+Learn
+
+</button>
+
+
+<button
+id="navQuiz"
+onclick="showScreen('quiz')"
+>
+
+<b>
+🎮
+</b>
+
+Quiz
+
+</button>
+
+
+<button
+id="navAsk"
+onclick="showScreen('ask')"
+>
+
+<b>
+💬
+</b>
+
+Ask
+
+</button>
+
+</nav>
+
+</div>
+
+
+<script type="module">
+
+/* =====================================================
+   FIREBASE
+   IMPORTANT:
+   नीचे अपनी Firebase Web App की REAL CONFIG डालें.
+===================================================== */
+
+import {
+initializeApp
+}
+from
+"https://www.gstatic.com/firebasejs/12.16.0/firebase-app.js";
+
+
+import {
+getAuth,
+signInWithEmailAndPassword,
+createUserWithEmailAndPassword,
+onAuthStateChanged,
+signOut
+}
+from
+"https://www.gstatic.com/firebasejs/12.16.0/firebase-auth.js";
+
+
+import {
+getFirestore,
+collection,
+addDoc,
+getDocs,
+query,
+orderBy
+}
+from
+"https://www.gstatic.com/firebasejs/12.16.0/firebase-firestore.js";
+
+
+/* =====================================================
+   PASTE YOUR FIREBASE CONFIG HERE
+===================================================== */
+
+const firebaseConfig = {
+
+apiKey:
+"PASTE_REAL_API_KEY_HERE",
+
+authDomain:
+"PASTE_REAL_AUTH_DOMAIN_HERE",
+
+projectId:
+"PASTE_REAL_PROJECT_ID_HERE",
+
+storageBucket:
+"PASTE_REAL_STORAGE_BUCKET_HERE",
+
+messagingSenderId:
+"PASTE_REAL_MESSAGING_SENDER_ID_HERE",
+
+appId:
+"PASTE_REAL_APP_ID_HERE"
+
+};
+
+
+/* =====================================================
+   YOUR REAL ADMIN EMAIL
+   Example:
+   const ADMIN_EMAIL="yourname@gmail.com";
+===================================================== */
+
+const ADMIN_EMAIL =
+"YOUR_ADMIN_EMAIL@gmail.com";
+
+
+/* =====================================================
+   FIREBASE START
+===================================================== */
+
+const firebaseReady =
+!firebaseConfig.apiKey.startsWith("PASTE_");
+
+
+let app=null;
+let auth=null;
+let db=null;
+
+
+if(firebaseReady){
+
+try{
+
+app=
+initializeApp(firebaseConfig);
+
+auth=
+getAuth(app);
+
+db=
+getFirestore(app);
+
+onAuthStateChanged(
+auth,
+async user=>{
+
+if(user){
+
+console.log(
+"Logged in:",
+user.email
+);
+
+if(
+user.email.toLowerCase()
+===
+ADMIN_EMAIL.toLowerCase()
+){
+
+openAdmin();
+
+}
+
+}
+
+});
+
+}catch(error){
+
+console.error(error);
+
+}
+
+}
+
+
+/* =====================================================
+   LOCAL DATA
+===================================================== */
+
+let data = {
+
+student:{
+name:"My Student",
+className:"Class 4",
+photo:
+"https://placehold.co/100x100?text=👦"
+},
+
+stars:0,
+
+progress:0,
+
+streak:1,
+
+subjects:[
+
+{
+name:"English",
+icon:"🇬🇧",
+description:
+"Grammar, reading and speaking",
+
+lessons:[
+
+{
+title:"Grammar Basics",
+text:
+"Learn is, am and are."
+},
+
+{
+title:"Speaking Practice",
+text:
+"My name is ___. I am a student."
+},
+
+{
+title:"Daily English",
+text:
+"Good morning. How are you?"
+}
+
+]
+
+},
+
+
+{
+name:"Hindi",
+icon:"🇮🇳",
+description:
+"हिंदी भाषा और व्याकरण",
+
+lessons:[
+
+{
+title:"वर्णमाला",
+text:
+"स्वर और व्यंजन सीखें।"
+},
+
+{
+title:"व्याकरण",
+text:
+"संज्ञा, सर्वनाम और क्रिया सीखें।"
+}
+
+]
+
+},
+
+
+{
+name:"Mathematics",
+icon:"➗",
+description:
+"Numbers and problem solving",
+
+lessons:[
+
+{
+title:"Addition",
+text:
+"Practice addition."
+},
+
+{
+title:"Subtraction",
+text:
+"Practice subtraction."
+},
+
+{
+title:"Multiplication",
+text:
+"Learn multiplication tables."
+}
+
+]
+
+},
+
+
+{
+name:"Science / EVS",
+icon:"🔬",
+description:
+"Science and environment",
+
+lessons:[
+
+{
+title:"Plants",
+text:
+"Plants need air, water and sunlight."
+},
+
+{
+title:"Animals",
+text:
+"Learn about different animals."
+}
+
+]
+
+},
+
+
+{
+name:"Social Studies",
+icon:"🌍",
+description:
+"India, people and places",
+
+lessons:[
+
+{
+title:"Our India",
+text:
+"Learn about India."
+},
+
+{
+title:"Maps",
+text:
+"Learn basic maps."
+}
+
+]
+
+},
+
+
+{
+name:"Computer",
+icon:"💻",
+description:
+"Computer basics",
+
+lessons:[
+
+{
+title:"Computer Basics",
+text:
+"Learn computer parts."
+},
+
+{
+title:"Internet Safety",
+text:
+"Learn safe internet habits."
+}
+
+]
+
+},
+
+
+{
+name:"General Knowledge",
+icon:"🧠",
+description:
+"Interesting facts",
+
+lessons:[
+
+{
+title:"India GK",
+text:
+"Interesting facts about India."
+}
+
+]
+
+},
+
+
+{
+name:"Reasoning",
+icon:"🧩",
+description:
+"Thinking and problem solving",
+
+lessons:[
+
+{
+title:"Patterns",
+text:
+"Find the correct pattern."
+}
+
+]
+
+},
+
+
+{
+name:"Art & Craft",
+icon:"🎨",
+description:
+"Creativity and imagination",
+
+lessons:[
+
+{
+title:"Drawing",
+text:
+"Learn simple drawing."
+}
+
+]
+
+},
+
+
+{
+name:"Spoken English",
+icon:"🗣️",
+description:
+"Speak English confidently",
+
+lessons:[
+
+{
+title:"Introduction",
+text:
+"Hello! My name is ___."
+},
+
+{
+title:"Conversation",
+text:
+"Practice simple conversations."
+}
+
+]
+
+}
+
+]
+
+};
+
+
+/* =====================================================
+   LOCAL STORAGE
+===================================================== */
+
+try{
+
+const saved =
+localStorage.getItem(
+"ARSHLAN_BHANJA_DATA"
+);
+
+if(saved){
+
+data =
+JSON.parse(saved);
+
+}
+
+}catch(e){}
+
+
+function saveLocal(){
+
+localStorage.setItem(
+"ARSHLAN_BHANJA_DATA",
+JSON.stringify(data)
+);
+
+}
+
+
+/* =====================================================
+   SCREEN
+===================================================== */
+
+window.showScreen=function(screen){
+
+document
+.querySelectorAll(".screen")
+.forEach(
+x=>x.classList.remove("active")
+);
+
+document
+.getElementById(screen)
+.classList.add("active");
+
+
+document
+.querySelectorAll(".bottom button")
+.forEach(
+x=>x.classList.remove("active")
+);
+
+
+const navMap={
+
+home:"navHome",
+learn:"navLearn",
+quiz:"navQuiz",
+ask:"navAsk"
+
+};
+
+
+if(navMap[screen]){
+
+document
+.getElementById(
+navMap[screen]
+)
+.classList.add("active");
+
+}
+
+window.scrollTo(0,0);
+
+};
+
+
+/* =====================================================
+   RENDER SUBJECTS
+===================================================== */
+
+function renderSubjects(){
+
+const box=
+document.getElementById(
+"subjects"
+);
+
+box.innerHTML="";
+
+
+data.subjects.forEach(
+(subject,index)=>{
+
+const card=
+document.createElement("div");
+
+card.className="card";
+
+
+card.innerHTML=`
+
+<div class="subject-icon">
+${subject.icon}
+</div>
+
+<h3>
+${escapeHtml(subject.name)}
+</h3>
+
+<p>
+${escapeHtml(subject.description)}
+</p>
+
+<p>
+${subject.lessons.length} lessons
+</p>
+
+<br>
+
+<button class="primary">
+Learn →
+</button>
+
+`;
+
+
+card
+.querySelector("button")
+.onclick=
+()=>openSubject(index);
+
+
+box.appendChild(card);
+
+});
+
+}
+
+
+/* =====================================================
+   OPEN SUBJECT
+===================================================== */
+
+function openSubject(index){
+
+const subject=
+data.subjects[index];
+
+const box=
+document.getElementById(
+"lessons"
+);
+
+box.innerHTML=`
+
+<div class="card">
+
+<h2>
+${subject.icon}
+${escapeHtml(subject.name)}
+</h2>
+
+<p>
+${escapeHtml(subject.description)}
+</p>
+
+<br>
+
+</div>
+
+`;
+
+
+subject.lessons.forEach(
+(lesson,index)=>{
+
+const item=
+document.createElement("div");
+
+item.className="lesson";
+
+
+item.innerHTML=`
+
+<div>
+
+<b>
+${index+1}.
+${escapeHtml(lesson.title)}
+</b>
+
+<br>
+
+<small>
+${escapeHtml(lesson.text)}
+</small>
+
+</div>
+
+<button
+class="primary"
+>
+Done
+</button>
+
+`;
+
+
+item
+.querySelector("button")
+.onclick=
+()=>completeLesson();
+
+
+box.appendChild(item);
+
+});
+
+}
+
+
+/* =====================================================
+   COMPLETE LESSON
+===================================================== */
+
+function completeLesson(){
+
+data.progress+=5;
+
+if(data.progress>100)
+data.progress=100;
+
+data.stars+=5;
+
+saveLocal();
+
+updateStats();
+
+speak(
+"Great job! Lesson completed!"
+);
+
+alert(
+"🎉 Great Job!\n+5 Stars ⭐"
+);
+
+}
+
+
+/* =====================================================
+   STATS
+===================================================== */
+
+function updateStats(){
+
+document
+.getElementById("stars")
+.innerText=
+data.stars+" ⭐";
+
+
+document
+.getElementById("progress")
+.innerText=
+data.progress+"%";
+
+
+document
+.getElementById("streak")
+.innerText=
+"🔥 "+data.streak;
+
+}
+
+
+/* =====================================================
+   PROFILE
+===================================================== */
+
+function loadProfile(){
+
+document
+.getElementById("profileName")
+.value=
+data.student.name;
+
+
+document
+.getElementById("profileClass")
+.value=
+data.student.className;
+
+
+document
+.getElementById("profilePhoto")
+.value=
+data.student.photo;
+
+}
+
+
+window.saveProfile=function(){
+
+data.student.name=
+document
+.getElementById("profileName")
+.value
+.trim()
+||
+"My Student";
+
+
+data.student.className=
+document
+.getElementById("profileClass")
+.value
+.trim()
+||
+"Class 4";
+
+
+data.student.photo=
+document
+.getElementById("profilePhoto")
+.value
+.trim()
+||
+"https://placehold.co/100x100?text=👦";
+
+
+saveLocal();
+
+renderMain();
+
+alert(
+"✅ Profile saved!"
+);
+
+};
+
+
+/* =====================================================
+   LOGIN MODAL
+===================================================== */
+
+window.openLogin=function(){
+
+document
+.getElementById("loginModal")
+.style.display="flex";
+
+};
+
+
+window.closeLogin=function(){
+
+document
+.getElementById("loginModal")
+.style.display="none";
+
+};
+
+
+/* =====================================================
+   CREATE REAL ACCOUNT
+===================================================== */
+
+window.createAccount=
+async function(){
+
+if(!firebaseReady){
+
+showLoginError(
+"Firebase config अभी नहीं डाली गई है."
+);
+
+return;
+
+}
+
+
+const email=
+document
+.getElementById("loginEmail")
+.value
+.trim();
+
+
+const password=
+document
+.getElementById("loginPassword")
+.value;
+
+
+if(!email || !password){
+
+showLoginError(
+"Email और password डालें."
+);
+
+return;
+
+}
+
+
+try{
+
+await createUserWithEmailAndPassword(
+auth,
+email,
+password
+);
+
+
+document
+.getElementById("loginMessage")
+.className="success";
+
+
+document
+.getElementById("loginMessage")
+.innerText=
+"✅ Account created successfully!";
+
+
+}catch(error){
+
+showLoginError(
+firebaseError(error)
+);
+
+}
+
+};
+
+
+/* =====================================================
+   REAL LOGIN
+===================================================== */
+
+window.loginUser=
+async function(){
+
+if(!firebaseReady){
+
+showLoginError(
+"Firebase config अभी नहीं डाली गई है."
+);
+
+return;
+
+}
+
+
+const email=
+document
+.getElementById("loginEmail")
+.value
+.trim();
+
+
+const password=
+document
+.getElementById("loginPassword")
+.value;
+
+
+if(!email || !password){
+
+showLoginError(
+"Email और password डालें."
+);
+
+return;
+
+}
+
+
+try{
+
+const result=
+await signInWithEmailAndPassword(
+auth,
+email,
+password
+);
+
+
+closeLogin();
+
+
+if(
+result.user.email.toLowerCase()
+===
+ADMIN_EMAIL.toLowerCase()
+){
+
+openAdmin();
+
+}else{
+
+showScreen("home");
+
+}
+
+}catch(error){
+
+showLoginError(
+firebaseError(error)
+);
+
+}
+
+};
+
+
+/* =====================================================
+   ADMIN
+===================================================== */
+
+function openAdmin(){
+
+document
+.getElementById("studentArea")
+.style.display="none";
+
+
+document
+.getElementById("adminPanel")
+.style.display="block";
+
+
+document
+.getElementById("loginModal")
+.style.display="none";
+
+
+loadQuestions();
+
+}
+
+
+window.logout=
+async function(){
+
+if(auth){
+
+await signOut(auth);
+
+}
+
+
+document
+.getElementById("adminPanel")
+.style.display="none";
+
+
+document
+.getElementById("studentArea")
+.style.display="block";
+
+
+showScreen("home");
+
+};
+
+
+/* =====================================================
+   ADD SUBJECT ONLINE
+===================================================== */
+
+window.addSubjectOnline=
+async function(){
+
+if(!isAdmin()){
+
+alert(
+"Admin account required."
+);
+
+return;
+
+}
+
+
+const name=
+document
+.getElementById(
+"adminSubjectName"
+)
+.value
+.trim();
+
+
+const icon=
+document
+.getElementById(
+"adminSubjectIcon"
+)
+.value
+.trim()
+||
+"📚";
+
+
+const description=
+document
+.getElementById(
+"adminSubjectDescription"
+)
+.value
+.trim()
+||
+"New subject";
+
+
+if(!name){
+
+alert(
+"Subject name डालें."
+);
+
+return;
+
+}
+
+
+try{
+
+await addDoc(
+collection(db,"subjects"),
+{
+
+name:name,
+
+icon:icon,
+
+description:description,
+
+createdAt:
+Date.now()
+
+}
+);
+
+
+data.subjects.push({
+
+name:name,
+
+icon:icon,
+
+description:description,
+
+lessons:[]
+
+});
+
+
+saveLocal();
+
+renderSubjects();
+
+
+document
+.getElementById(
+"adminMessage"
+)
+.innerText=
+"✅ Subject online save हो गया.";
+
+
+}catch(error){
+
+document
+.getElementById(
+"adminMessage"
+)
+.innerText=
+error.message;
+
+}
+
+};
+
+
+/* =====================================================
+   ADD LESSON ONLINE
+===================================================== */
+
+window.addLessonOnline=
+async function(){
+
+if(!isAdmin()){
+
+alert(
+"Admin account required."
+);
+
+return;
+
+}
+
+
+const subject=
+document
+.getElementById(
+"adminLessonSubject"
+)
+.value
+.trim();
+
+
+const title=
+document
+.getElementById(
+"adminLessonTitle"
+)
+.value
+.trim();
+
+
+const text=
+document
+.getElementById(
+"adminLessonText"
+)
+.value
+.trim();
+
+
+if(!subject || !title){
+
+alert(
+"Subject और lesson title डालें."
+);
+
+return;
+
+}
+
+
+try{
+
+await addDoc(
+collection(db,"lessons"),
+{
+
+subject:subject,
+
+title:title,
+
+text:text,
+
+createdAt:
+Date.now()
+
+}
+);
+
+
+let found=
+data.subjects.find(
+x=>
+x.name.toLowerCase()
+===
+subject.toLowerCase()
+);
+
+
+if(found){
+
+found.lessons.push({
+
+title:title,
+
+text:text
+
+});
+
+}else{
+
+data.subjects.push({
+
+name:subject,
+
+icon:"📚",
+
+description:"",
+
+lessons:[
+
+{
+title:title,
+text:text
+}
+
+]
+
+});
+
+}
+
+
+saveLocal();
+
+renderSubjects();
+
+
+document
+.getElementById(
+"adminMessage"
+)
+.innerText=
+"✅ Lesson online save हो गया.";
+
+
+}catch(error){
+
+document
+.getElementById(
+"adminMessage"
+)
+.innerText=
+error.message;
+
+}
+
+};
+
+
+/* =====================================================
+   ASK TEACHER
+===================================================== */
+
+window.sendQuestion=
+async function(){
+
+const text=
+document
+.getElementById(
+"questionText"
+)
+.value
+.trim();
+
+
+if(!text){
+
+alert(
+"पहले अपना सवाल लिखें."
+);
+
+return;
+
+}
+
+
+if(!auth || !auth.currentUser){
+
+openLogin();
+
+return;
+
+}
+
+
+try{
+
+await addDoc(
+collection(db,"questions"),
+{
+
+uid:
+auth.currentUser.uid,
+
+email:
+auth.currentUser.email,
+
+question:text,
+
+createdAt:
+Date.now()
+
+}
+);
+
+
+document
+.getElementById(
+"questionMessage"
+)
+.className="success";
+
+
+document
+.getElementById(
+"questionMessage"
+)
+.innerText=
+"✅ आपका सवाल Teacher को भेज दिया गया.";
+
+
+document
+.getElementById(
+"questionText"
+)
+.value="";
+
+
+speak(
+"Your question has been sent."
+);
+
+
+}catch(error){
+
+document
+.getElementById(
+"questionMessage"
+)
+.className="error";
+
+
+document
+.getElementById(
+"questionMessage"
+)
+.innerText=
+error.message;
+
+}
+
+};
+
+
+/* =====================================================
+   ADMIN QUESTIONS
+===================================================== */
+
+async function loadQuestions(){
+
+if(!db || !isAdmin())
+return;
+
+
+const box=
+document.getElementById(
+"adminQuestions"
+);
+
+box.innerHTML=
+"Loading questions...";
+
+
+try{
+
+const snap=
+await getDocs(
+collection(db,"questions")
+);
+
+
+if(snap.empty){
+
+box.innerHTML=
+"No questions yet.";
+
+return;
+
+}
+
+
+box.innerHTML="";
+
+
+snap.forEach(doc=>{
+
+const q=doc.data();
+
+const div=
+document.createElement("div");
+
+div.className="lesson";
+
+
+div.innerHTML=`
+
+<div>
+
+<b>
+${escapeHtml(q.question)}
+</b>
+
+<br>
+
+<small>
+${escapeHtml(q.email || "")}
+</small>
+
+</div>
+
+`;
+
+
+box.appendChild(div);
+
+});
+
+}catch(error){
+
+box.innerHTML=
+error.message;
+
+}
+
+}
+
+
+/* =====================================================
+   QUIZ
+===================================================== */
+
+const questions=[
+
+[
+"She ___ happy.",
+["is","am","are"],
+"is"
+],
+
+[
+"I ___ a student.",
+["am","is","are"],
+"am"
+],
+
+[
+"They ___ friends.",
+["are","is","am"],
+"are"
+],
+
+[
+"He ___ my brother.",
+["is","am","are"],
+"is"
+],
+
+[
+"We ___ ready.",
+["are","is","am"],
+"are"
+]
+
+];
+
+
+let questionIndex=0;
+
+let score=0;
+
+
+function loadQuiz(){
+
+const item=
+questions[questionIndex];
+
+
+document
+.getElementById(
+"questionNumber"
+)
+.innerText=
+"Question "+
+(questionIndex+1)+
+" of "+
+questions.length;
+
+
+document
+.getElementById(
+"question"
+)
+.innerText=
+item[0];
+
+
+document
+.getElementById(
+"answers"
+)
+.innerHTML="";
+
+
+document
+.getElementById(
+"quizResult"
+)
+.innerText="";
+
+
+document
+.getElementById(
+"nextButton"
+)
+.classList.add("hidden");
+
+
+item[1].forEach(
+answer=>{
+
+const button=
+document.createElement(
+"button"
+);
+
+button.className=
+"answer";
+
+button.innerText=
+answer;
+
+
+button.onclick=
+function(){
+
+/* सभी answers lock */
+
+document
+.querySelectorAll(".answer")
+.forEach(
+b=>b.disabled=true
+);
+
+
+if(answer===item[2]){
+
+button.classList.add(
+"correct"
+);
+
+
+score++;
+
+data.stars+=10;
+
+saveLocal();
+
+updateStats();
+
+
+document
+.getElementById(
+"quizResult"
+)
+.innerText=
+"✅ Correct! सही है! ⭐";
+
+
+speak(
+"Correct! सही है!"
+);
+
+
+}else{
+
+button.classList.add(
+"wrong"
+);
+
+
+/* सही answer green */
+
+document
+.querySelectorAll(
+".answer"
+)
+.forEach(
+b=>{
+
+if(
+b.innerText===item[2]
+){
+
+b.classList.add(
+"correct"
+);
+
+}
+
+});
+
+
+document
+.getElementById(
+"quizResult"
+)
+.innerText=
+"❌ Wrong! सही answer है: "+
+item[2];
+
+
+speak(
+"Wrong. सही answer है "+
+item[2]
+);
+
+}
+
+
+document
+.getElementById(
+"nextButton"
+)
+.classList.remove(
+"hidden"
+);
+
+};
+
+
+document
+.getElementById(
+"answers"
+)
+.appendChild(
+button
+);
+
+});
+
+}
+
+
+/* =====================================================
+   NEXT QUESTION
+===================================================== */
+
+window.nextQuestion=
+function(){
+
+questionIndex++;
+
+
+if(
+questionIndex>=questions.length
+){
+
+speak(
+"Excellent! Quiz complete!"
+);
+
+
+alert(
+"🎉 Quiz Complete!\n\n"+
+"Score: "+
+score+
+"/"+
+questions.length
+);
+
+
+questionIndex=0;
+
+score=0;
+
+}
+
+
+loadQuiz();
+
+};
+
+
+/* =====================================================
+   VOICE
+===================================================== */
+
+function speak(text){
+
+if(
+"speechSynthesis"
+in window
+){
+
+window
+.speechSynthesis
+.cancel();
+
+
+const voice=
+new SpeechSynthesisUtterance(
+text
+);
+
+
+voice.lang="en-IN";
+
+voice.rate=.85;
+
+voice.pitch=1;
+
+
+window
+.speechSynthesis
+.speak(
+voice
+);
+
+}
+
+}
+
+
+/* =====================================================
+   ADMIN CHECK
+===================================================== */
+
+function isAdmin(){
+
+return (
+
+auth &&
+auth.currentUser &&
+auth.currentUser.email
+.toLowerCase()
+===
+ADMIN_EMAIL
+.toLowerCase()
+
+);
+
+}
+
+
+/* =====================================================
+   ERROR
+===================================================== */
+
+function showLoginError(text){
+
+const box=
+document
+.getElementById(
+"loginMessage"
+);
+
+box.className="error";
+
+box.innerText=text;
+
+}
+
+
+function firebaseError(error){
+
+if(
+error.code===
+"auth/invalid-credential"
+){
+
+return "Email या password गलत है.";
+
+}
+
+if(
+error.code===
+"auth/email-already-in-use"
+){
+
+return "यह email पहले से registered है.";
+
+}
+
+if(
+error.code===
+"auth/weak-password"
+){
+
+return "Password कम से कम 6 characters का रखें.";
+
+}
+
+if(
+error.code===
+"auth/invalid-api-key"
+){
+
+return "Firebase API Key गलत है.";
+
+}
+
+return error.message;
+
+}
+
+
+/* =====================================================
+   ESCAPE HTML
+===================================================== */
+
+function escapeHtml(text){
+
+return String(text)
+.replace(
+/[&<>"']/g,
+function(m){
+
+return {
+
+"&":"&amp;",
+"<":"&lt;",
+">":"&gt;",
+'"':"&quot;",
+"'":"&#039;"
+
+}[m];
+
+}
+);
+
+}
+
+
+/* =====================================================
+   INITIAL RENDER
+===================================================== */
+
+function renderMain(){
+
+document
+.getElementById("heroName")
+.innerText=
+"Ready to learn, "+
+data.student.name+
+"!";
+
+
+document
+.getElementById("topAvatar")
+.src=
+data.student.photo;
+
+
+updateStats();
+
+renderSubjects();
+
+loadProfile();
+
+}
+
+
+renderMain();
+
+loadQuiz();
+
+</script>
+
+</body>
+</html>
