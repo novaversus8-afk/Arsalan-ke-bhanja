@@ -1,0 +1,1220 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mumbai Parks</title>
+
+<link rel="stylesheet"
+href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0;font-family:Arial,sans-serif}
+
+body{
+background:#07120d;
+color:#fff;
+}
+
+.app{
+max-width:520px;
+margin:auto;
+min-height:100vh;
+background:
+radial-gradient(circle at 10% 0,#15944755,transparent 30%),
+linear-gradient(#06170e,#09251a);
+padding-bottom:80px;
+}
+
+header{
+height:70px;
+padding:10px 15px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+background:#06140eee;
+backdrop-filter:blur(15px);
+position:sticky;
+top:0;
+z-index:1000;
+border-bottom:1px solid #ffffff15;
+}
+
+.logo{
+display:flex;
+align-items:center;
+gap:10px;
+}
+
+.logoIcon{
+width:45px;
+height:45px;
+border-radius:15px;
+display:grid;
+place-items:center;
+font-size:25px;
+background:linear-gradient(135deg,#36e27d,#087d4a);
+}
+
+.logo h2{font-size:18px}
+.logo small{
+display:block;
+font-size:8px;
+color:#7dffa9;
+letter-spacing:1.5px;
+margin-top:3px;
+}
+
+.headerBtn{
+width:42px;
+height:42px;
+border-radius:50%;
+background:#ffffff12;
+color:#fff;
+font-size:19px;
+border:1px solid #ffffff18;
+}
+
+.page{display:none}
+.page.active{display:block}
+
+.hero{
+margin:15px;
+padding:23px;
+height:260px;
+border-radius:28px;
+position:relative;
+overflow:hidden;
+background:
+linear-gradient(135deg,#0d8c4e,#075a9a);
+box-shadow:0 18px 40px #0007;
+}
+
+.hero h1{
+font-size:31px;
+line-height:1.08;
+max-width:290px;
+}
+
+.hero p{
+margin-top:10px;
+max-width:285px;
+line-height:1.5;
+color:#ffffffbd;
+font-size:13px;
+}
+
+.heroTree{
+position:absolute;
+right:-5px;
+bottom:-25px;
+font-size:125px;
+filter:drop-shadow(0 12px 10px #0008);
+}
+
+.hero button{
+margin-top:18px;
+padding:14px 19px;
+border-radius:25px;
+background:#d8ff3e;
+color:#10251a;
+font-weight:bold;
+border:0;
+}
+
+.search{
+margin:15px;
+height:52px;
+display:flex;
+align-items:center;
+padding:0 15px;
+border-radius:17px;
+background:#ffffff0e;
+border:1px solid #ffffff18;
+}
+
+.search input{
+width:100%;
+background:none;
+border:0;
+outline:0;
+color:white;
+padding-left:10px;
+font-size:15px;
+}
+
+.search input::placeholder{color:#ffffff65}
+
+.map{
+height:360px;
+margin:15px;
+border-radius:25px;
+overflow:hidden;
+border:1px solid #ffffff22;
+box-shadow:0 15px 35px #0007;
+}
+
+.section{
+padding:7px 15px 18px;
+}
+
+.title{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:13px;
+}
+
+.title h2{font-size:20px}
+.title span{
+font-size:11px;
+color:#7dffa9;
+}
+
+.cards{
+display:grid;
+gap:11px;
+}
+
+.card{
+padding:16px;
+border-radius:22px;
+background:#ffffff0c;
+border:1px solid #ffffff16;
+display:flex;
+gap:13px;
+align-items:center;
+}
+
+.cardIcon{
+width:58px;
+height:58px;
+border-radius:18px;
+display:grid;
+place-items:center;
+font-size:32px;
+background:linear-gradient(135deg,#24bd67,#087c52);
+}
+
+.cardInfo{flex:1}
+.cardInfo h3{font-size:15px}
+.cardInfo p{
+margin-top:5px;
+font-size:11px;
+color:#ffffff70;
+}
+
+.card button{
+margin-top:9px;
+padding:8px 12px;
+border-radius:15px;
+background:#d8ff3e;
+color:#132318;
+font-size:10px;
+font-weight:bold;
+}
+
+.addBox{
+margin:15px;
+padding:20px;
+border-radius:25px;
+background:linear-gradient(145deg,#123c29,#087f55);
+}
+
+.addBox h2{font-size:22px}
+
+.addBox p{
+margin-top:7px;
+font-size:12px;
+color:#ffffff95;
+line-height:1.5;
+}
+
+.input{
+width:100%;
+margin-top:10px;
+padding:13px;
+border-radius:14px;
+border:1px solid #ffffff20;
+background:#00000022;
+color:white;
+outline:none;
+}
+
+.input::placeholder{color:#ffffff60}
+
+.addBtn{
+width:100%;
+margin-top:12px;
+padding:14px;
+border-radius:15px;
+background:#d8ff3e;
+color:#102318;
+font-weight:bold;
+}
+
+.details{
+position:fixed;
+inset:0;
+z-index:2000;
+display:none;
+background:#000b;
+align-items:flex-end;
+}
+
+.details.show{display:flex}
+
+.detailBox{
+width:100%;
+max-width:520px;
+margin:auto;
+max-height:90vh;
+overflow:auto;
+padding:22px;
+border-radius:28px 28px 0 0;
+background:linear-gradient(#103e29,#06170e);
+}
+
+.close{
+float:right;
+width:40px;
+height:40px;
+border-radius:50%;
+background:#ffffff13;
+color:white;
+font-size:18px;
+border:0;
+}
+
+.detailEmoji{
+font-size:75px;
+text-align:center;
+padding:20px;
+}
+
+.detailBox h1{
+font-size:27px;
+}
+
+.detailBox p{
+margin-top:9px;
+color:#ffffff9a;
+line-height:1.6;
+font-size:13px;
+}
+
+.info{
+margin-top:15px;
+display:grid;
+gap:9px;
+}
+
+.info div{
+padding:13px;
+border-radius:15px;
+background:#ffffff0c;
+}
+
+.direction{
+width:100%;
+margin-top:15px;
+padding:15px;
+border-radius:17px;
+background:#d8ff3e;
+color:#112319;
+font-weight:bold;
+}
+
+.bottom{
+position:fixed;
+bottom:0;
+left:50%;
+transform:translateX(-50%);
+width:100%;
+max-width:520px;
+height:75px;
+display:grid;
+grid-template-columns:repeat(3,1fr);
+background:#06140ff5;
+backdrop-filter:blur(15px);
+border-top:1px solid #ffffff18;
+z-index:1500;
+}
+
+.nav{
+background:none;
+border:0;
+color:#ffffff65;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+gap:4px;
+font-size:10px;
+}
+
+.nav span{font-size:22px}
+.nav.active{color:#d8ff3e}
+
+.toast{
+position:fixed;
+bottom:90px;
+left:50%;
+transform:translateX(-50%);
+background:white;
+color:#102218;
+padding:13px 20px;
+border-radius:25px;
+font-weight:bold;
+z-index:3000;
+display:none;
+white-space:nowrap;
+}
+
+.toast.show{display:block}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<header>
+<div class="logo">
+<div class="logoIcon">🌳</div>
+<div>
+<h2>Mumbai Parks</h2>
+<small>EXPLORE • DISCOVER • ENJOY</small>
+</div>
+</div>
+
+<button class="headerBtn"
+onclick="findMe()">📍</button>
+</header>
+
+
+<!-- HOME -->
+
+<main id="home" class="page active">
+
+<div class="hero">
+
+<h1>Mumbai के Parks खोजो 🌳</h1>
+
+<p>
+अपने आसपास के parks खोजें, location देखें और सीधे directions प्राप्त करें।
+</p>
+
+<button onclick="findMe()">
+📍 Find Parks Near Me
+</button>
+
+<div class="heroTree">🌳</div>
+
+</div>
+
+
+<div class="search">
+🔎
+<input
+id="homeSearch"
+placeholder="Park का नाम खोजें..."
+oninput="searchParks()">
+</div>
+
+
+<div id="map" class="map"></div>
+
+
+<section class="section">
+
+<div class="title">
+<h2>🌿 Parks</h2>
+<span id="parkCount">0 Parks</span>
+</div>
+
+<div id="parkCards" class="cards"></div>
+
+</section>
+
+</main>
+
+
+<!-- ADD PARK -->
+
+<main id="add" class="page">
+
+<section class="section">
+
+<div class="title">
+<h2>➕ Add New Park</h2>
+<span>Admin</span>
+</div>
+
+<div class="addBox">
+
+<h2>🌳 Park Details</h2>
+
+<p>
+नया park जोड़ने के लिए नीचे जानकारी भरें।
+Location के लिए map पर किसी जगह को tap करके coordinates भी ले सकते हैं।
+</p>
+
+<input
+id="pName"
+class="input"
+placeholder="Park का नाम">
+
+<input
+id="pAddress"
+class="input"
+placeholder="पूरा Address">
+
+<input
+id="pLat"
+class="input"
+placeholder="Latitude जैसे 19.0760"
+inputmode="decimal">
+
+<input
+id="pLng"
+class="input"
+placeholder="Longitude जैसे 72.8777"
+inputmode="decimal">
+
+<input
+id="pTime"
+class="input"
+placeholder="Opening Time जैसे 6 AM - 10 PM">
+
+<input
+id="pFee"
+class="input"
+placeholder="Entry Fee जैसे Free">
+
+<input
+id="pFacilities"
+class="input"
+placeholder="Facilities जैसे Walking, Garden, Playground">
+
+<button
+class="addBtn"
+onclick="addPark()">
+🌳 Add Park
+</button>
+
+<button
+class="addBtn"
+style="margin-top:8px;background:#ffffff15;color:white"
+onclick="useMyLocation()">
+📍 Use My Current Location
+</button>
+
+</div>
+
+</section>
+
+</main>
+
+
+<!-- BOTTOM -->
+
+<nav class="bottom">
+
+<button
+class="nav active"
+data-page="home"
+onclick="openPage('home')">
+<span>🗺️</span>
+Map
+</button>
+
+<button
+class="nav"
+data-page="add"
+onclick="openPage('add')">
+<span>➕</span>
+Add Park
+</button>
+
+<button
+class="nav"
+onclick="findMe()">
+<span>📍</span>
+My Location
+</button>
+
+</nav>
+
+</div>
+
+
+<!-- DETAILS -->
+
+<div id="details" class="details">
+
+<div class="detailBox">
+
+<button
+class="close"
+onclick="closeDetails()">✕</button>
+
+<div
+id="detailEmoji"
+class="detailEmoji">
+🌳
+</div>
+
+<h1 id="detailName">Park</h1>
+
+<p id="detailAddress"></p>
+
+<div class="info">
+
+<div>
+🕐 <b>Timing</b>
+<br>
+<span id="detailTime"></span>
+</div>
+
+<div>
+💰 <b>Entry</b>
+<br>
+<span id="detailFee"></span>
+</div>
+
+<div>
+🏃 <b>Facilities</b>
+<br>
+<span id="detailFacilities"></span>
+</div>
+
+</div>
+
+<button
+id="directionBtn"
+class="direction">
+🚗 Get Directions
+</button>
+
+</div>
+
+</div>
+
+
+<div id="toast" class="toast"></div>
+
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<script>
+
+/* =========================
+   DEFAULT PARK DATA
+========================= */
+
+let parks = JSON.parse(
+localStorage.getItem("mumbaiParks") || "null"
+);
+
+if(!parks){
+
+parks=[
+
+{
+id:1,
+name:"Sanjay Gandhi National Park",
+address:"Borivali East, Mumbai",
+lat:19.2147,
+lng:72.9106,
+time:"7:30 AM - 6:30 PM",
+fee:"Paid",
+facilities:"Nature, Walking, Forest, Safari"
+},
+
+{
+id:2,
+name:"Hanging Gardens",
+address:"Malabar Hill, Mumbai",
+lat:18.9568,
+lng:72.8057,
+time:"5:00 AM - 9:00 PM",
+fee:"Free",
+facilities:"Garden, Walking, View Point"
+},
+
+{
+id:3,
+name:"Shivaji Park",
+address:"Dadar West, Mumbai",
+lat:19.0271,
+lng:72.8397,
+time:"Open Daily",
+fee:"Free",
+facilities:"Sports, Walking, Open Ground"
+},
+
+{
+id:4,
+name:"Priyadarshini Park",
+address:"Nepean Sea Road, Mumbai",
+lat:18.9667,
+lng:72.8016,
+time:"5:00 AM - 10:00 PM",
+fee:"Free",
+facilities:"Sea View, Walking, Jogging"
+},
+
+{
+id:5,
+name:"Five Gardens",
+address:"Matunga, Mumbai",
+lat:19.0247,
+lng:72.8517,
+time:"5:00 AM - 10:00 PM",
+fee:"Free",
+facilities:"Garden, Walking, Relaxing"
+}
+
+];
+
+localStorage.setItem(
+"mumbaiParks",
+JSON.stringify(parks)
+);
+
+}
+
+
+/* =========================
+   MAP
+========================= */
+
+let map;
+
+let markers=[];
+
+
+function initMap(){
+
+map=L.map("map").setView(
+[19.0760,72.8777],
+11
+);
+
+
+L.tileLayer(
+"https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+{
+maxZoom:19,
+attribution:
+'© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+referrerPolicy:
+"strict-origin-when-cross-origin"
+}
+).addTo(map);
+
+
+renderParks();
+
+}
+
+
+function renderParks(){
+
+if(!map)return;
+
+
+markers.forEach(
+m=>map.removeLayer(m)
+);
+
+markers=[];
+
+
+parks.forEach(
+park=>{
+
+let marker=
+L.marker([
+park.lat,
+park.lng
+]).addTo(map);
+
+
+marker.bindPopup(
+`<b>${park.name}</b><br>
+${park.address}<br>
+<button onclick="openDetails(${park.id})"
+style="margin-top:7px;padding:7px;border:0;border-radius:8px">
+View Details
+</button>`
+);
+
+
+markers.push(marker);
+
+});
+
+
+renderCards();
+
+}
+
+
+/* =========================
+   CARDS
+========================= */
+
+function renderCards(list=parks){
+
+let box=
+document.getElementById("parkCards");
+
+box.innerHTML="";
+
+
+document.getElementById("parkCount")
+.textContent=
+list.length+" Parks";
+
+
+if(!list.length){
+
+box.innerHTML=
+`<div style="text-align:center;padding:35px;color:#ffffff70">
+🌳 कोई park नहीं मिला
+</div>`;
+
+return;
+
+}
+
+
+list.forEach(park=>{
+
+let card=
+document.createElement("div");
+
+card.className="card";
+
+
+card.innerHTML=`
+
+<div class="cardIcon">🌳</div>
+
+<div class="cardInfo">
+
+<h3>${park.name}</h3>
+
+<p>📍 ${park.address}</p>
+
+<button onclick="openDetails(${park.id})">
+View Park
+</button>
+
+</div>
+
+`;
+
+
+box.appendChild(card);
+
+});
+
+}
+
+
+/* =========================
+   DETAILS
+========================= */
+
+function openDetails(id){
+
+let park=
+parks.find(p=>p.id===id);
+
+if(!park)return;
+
+
+document.getElementById("detailName")
+.textContent=park.name;
+
+document.getElementById("detailAddress")
+.textContent="📍 "+park.address;
+
+document.getElementById("detailTime")
+.textContent=park.time;
+
+document.getElementById("detailFee")
+.textContent=park.fee;
+
+document.getElementById("detailFacilities")
+.textContent=park.facilities;
+
+
+document.getElementById("directionBtn")
+.onclick=function(){
+
+window.open(
+"https://www.google.com/maps/dir/?api=1&destination="+
+park.lat+","+park.lng,
+"_blank"
+);
+
+};
+
+
+document.getElementById("details")
+.classList.add("show");
+
+}
+
+
+function closeDetails(){
+
+document
+.getElementById("details")
+.classList.remove("show");
+
+}
+
+
+/* =========================
+   SEARCH
+========================= */
+
+function searchParks(){
+
+let value=
+document.getElementById("homeSearch")
+.value.toLowerCase()
+.trim();
+
+
+let result=
+parks.filter(p=>
+
+p.name.toLowerCase().includes(value) ||
+p.address.toLowerCase().includes(value)
+
+);
+
+
+renderCards(result);
+
+
+if(result.length){
+
+map.setView(
+[result[0].lat,result[0].lng],
+13
+);
+
+}
+
+}
+
+
+/* =========================
+   ADD PARK
+========================= */
+
+function addPark(){
+
+let name=
+document.getElementById("pName").value.trim();
+
+let address=
+document.getElementById("pAddress").value.trim();
+
+let lat=
+parseFloat(
+document.getElementById("pLat").value
+);
+
+let lng=
+parseFloat(
+document.getElementById("pLng").value
+);
+
+let time=
+document.getElementById("pTime").value.trim()
+||"Not specified";
+
+let fee=
+document.getElementById("pFee").value.trim()
+||"Free";
+
+let facilities=
+document.getElementById("pFacilities").value.trim()
+||"Not specified";
+
+
+if(
+!name ||
+!address ||
+isNaN(lat) ||
+isNaN(lng)
+){
+
+showToast(
+"⚠️ Name, Address और Location जरूरी हैं"
+);
+
+return;
+
+}
+
+
+let park={
+
+id:Date.now(),
+
+name:name,
+
+address:address,
+
+lat:lat,
+
+lng:lng,
+
+time:time,
+
+fee:fee,
+
+facilities:facilities
+
+};
+
+
+parks.push(park);
+
+
+localStorage.setItem(
+"mumbaiParks",
+JSON.stringify(parks)
+);
+
+
+renderParks();
+
+
+map.setView(
+[lat,lng],
+15
+);
+
+
+[
+"pName",
+"pAddress",
+"pLat",
+"pLng",
+"pTime",
+"pFee",
+"pFacilities"
+]
+.forEach(id=>{
+
+document.getElementById(id).value="";
+
+});
+
+
+showToast(
+"🌳 Park Successfully Added!"
+);
+
+
+setTimeout(
+()=>openPage("home"),
+700
+);
+
+}
+
+
+/* =========================
+   MY LOCATION
+========================= */
+
+function findMe(){
+
+if(!navigator.geolocation){
+
+showToast(
+"Location support नहीं है"
+);
+
+return;
+
+}
+
+
+navigator.geolocation.getCurrentPosition(
+
+function(position){
+
+let lat=
+position.coords.latitude;
+
+let lng=
+position.coords.longitude;
+
+
+map.setView(
+[lat,lng],
+15
+);
+
+
+L.marker([lat,lng])
+.addTo(map)
+.bindPopup(
+"📍 You are here"
+)
+.openPopup();
+
+
+showToast(
+"📍 Location मिल गई"
+);
+
+},
+
+function(){
+
+showToast(
+"Location permission दें"
+);
+
+}
+
+);
+
+}
+
+
+function useMyLocation(){
+
+if(!navigator.geolocation){
+
+return;
+
+}
+
+
+navigator.geolocation.getCurrentPosition(
+
+function(position){
+
+document.getElementById("pLat")
+.value=
+position.coords.latitude.toFixed(6);
+
+document.getElementById("pLng")
+.value=
+position.coords.longitude.toFixed(6);
+
+showToast(
+"📍 Current location added"
+);
+
+}
+
+);
+
+}
+
+
+/* =========================
+   PAGE NAV
+========================= */
+
+function openPage(page){
+
+document
+.querySelectorAll(".page")
+.forEach(
+p=>p.classList.remove("active")
+);
+
+
+document
+.getElementById(page)
+.classList.add("active");
+
+
+document
+.querySelectorAll(".nav")
+.forEach(
+n=>n.classList.remove("active")
+);
+
+
+let nav=
+document.querySelector(
+`.nav[data-page="${page}"]`
+);
+
+if(nav)nav.classList.add("active");
+
+
+window.scrollTo({
+top:0,
+behavior:"smooth"
+});
+
+
+if(page==="home"){
+
+setTimeout(
+()=>map.invalidateSize(),
+100
+);
+
+}
+
+}
+
+
+/* =========================
+   TOAST
+========================= */
+
+function showToast(text){
+
+let toast=
+document.getElementById("toast");
+
+toast.textContent=text;
+
+toast.classList.add("show");
+
+
+setTimeout(
+()=>toast.classList.remove("show"),
+2300
+);
+
+}
+
+
+/* =========================
+   START
+========================= */
+
+window.addEventListener(
+"load",
+function(){
+
+initMap();
+
+}
+);
+
+</script>
+
+</body>
+</html>
