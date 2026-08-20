@@ -1,0 +1,2734 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>LearnJoy Kids</title>
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+  font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+  background:#06152c;
+  color:white;
+}
+
+button{
+  border:0;
+  font-family:inherit;
+  cursor:pointer;
+}
+
+.app{
+  width:100%;
+  max-width:520px;
+  min-height:100vh;
+  margin:auto;
+  background:
+    radial-gradient(circle at 0% 0%,#5b2bd9 0,transparent 28%),
+    radial-gradient(circle at 100% 18%,#ff5c38 0,transparent 24%),
+    linear-gradient(180deg,#07172f,#07528a 70%,#061b35);
+  position:relative;
+  overflow:hidden;
+}
+
+/* HEADER */
+
+.header{
+  height:70px;
+  padding:10px 16px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  position:sticky;
+  top:0;
+  z-index:50;
+  background:#06152de8;
+  backdrop-filter:blur(15px);
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.brandIcon{
+  width:46px;
+  height:46px;
+  border-radius:15px;
+  display:grid;
+  place-items:center;
+  font-size:25px;
+  background:linear-gradient(135deg,#ffd900,#ff5b2e,#ef147c);
+  box-shadow:0 6px 18px #0005;
+}
+
+.brandName{
+  font-size:20px;
+  font-weight:900;
+}
+
+.brandName small{
+  display:block;
+  font-size:9px;
+  opacity:.65;
+  letter-spacing:1.2px;
+}
+
+.headerButtons{
+  display:flex;
+  gap:8px;
+}
+
+.circleBtn{
+  width:42px;
+  height:42px;
+  border-radius:50%;
+  color:white;
+  background:#ffffff18;
+  font-size:20px;
+}
+
+/* PAGE */
+
+.page{
+  display:none;
+  padding-bottom:90px;
+}
+
+.page.active{
+  display:block;
+}
+
+/* HERO */
+
+.hero{
+  margin:14px;
+  min-height:225px;
+  padding:24px 20px;
+  border-radius:28px;
+  background:
+    linear-gradient(135deg,#ff7518,#ff267c 50%,#6244ff);
+  position:relative;
+  overflow:hidden;
+  box-shadow:0 14px 35px #0006;
+}
+
+.hero:after{
+  content:"🚀";
+  position:absolute;
+  right:-5px;
+  bottom:-20px;
+  font-size:125px;
+  opacity:.3;
+  transform:rotate(-10deg);
+}
+
+.hero h1{
+  font-size:31px;
+  line-height:1.1;
+  max-width:280px;
+  position:relative;
+  z-index:2;
+}
+
+.hero p{
+  max-width:290px;
+  margin-top:10px;
+  line-height:1.5;
+  color:#fffde9;
+  position:relative;
+  z-index:2;
+}
+
+.start{
+  margin-top:17px;
+  padding:13px 22px;
+  border-radius:30px;
+  background:white;
+  color:#ef2676;
+  font-weight:900;
+  position:relative;
+  z-index:3;
+}
+
+/* SEARCH */
+
+.search{
+  margin:14px;
+  height:52px;
+  display:flex;
+  align-items:center;
+  padding:0 15px;
+  border-radius:18px;
+  background:#ffffff13;
+  border:1px solid #ffffff28;
+}
+
+.search span{
+  font-size:20px;
+}
+
+.search input{
+  width:100%;
+  border:0;
+  outline:0;
+  background:transparent;
+  color:white;
+  padding:0 10px;
+  font-size:15px;
+}
+
+.search input::placeholder{
+  color:#ffffff8c;
+}
+
+/* SECTION */
+
+.section{
+  padding:5px 14px 18px;
+}
+
+.sectionTitle{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:13px;
+}
+
+.sectionTitle h2{
+  font-size:20px;
+}
+
+.see{
+  color:#8bdcff;
+  font-size:13px;
+  font-weight:bold;
+}
+
+/* CATEGORY */
+
+.categories{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:10px;
+}
+
+.category{
+  min-height:98px;
+  border-radius:20px;
+  color:white;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  box-shadow:0 8px 18px #0004;
+  transition:.15s;
+}
+
+.category:active{
+  transform:scale(.94);
+}
+
+.category span{
+  font-size:34px;
+  margin-bottom:6px;
+}
+
+.category b{
+  font-size:11px;
+}
+
+.pink{
+  background:linear-gradient(145deg,#ff4e94,#772cff);
+}
+
+.blue{
+  background:linear-gradient(145deg,#28b7ff,#1955c6);
+}
+
+.orange{
+  background:linear-gradient(145deg,#ffc21b,#ff4a25);
+}
+
+.green{
+  background:linear-gradient(145deg,#38df8e,#06866e);
+}
+
+.purple{
+  background:linear-gradient(145deg,#a14cff,#4721a4);
+}
+
+.yellow{
+  background:linear-gradient(145deg,#ffe12c,#ff8800);
+}
+
+.red{
+  background:linear-gradient(145deg,#ff5c60,#b51c65);
+}
+
+.cyan{
+  background:linear-gradient(145deg,#42e6ef,#1173d0);
+}
+
+/* CARDS */
+
+.cards{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:12px;
+}
+
+.card{
+  border-radius:20px;
+  overflow:hidden;
+  background:#ffffff12;
+  border:1px solid #ffffff18;
+  box-shadow:0 8px 20px #0004;
+  transition:.15s;
+}
+
+.card:active{
+  transform:scale(.97);
+}
+
+.art{
+  height:155px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  text-align:center;
+  position:relative;
+  padding:8px;
+}
+
+.artEmoji{
+  font-size:60px;
+  filter:drop-shadow(0 5px 5px #0006);
+}
+
+.art strong{
+  margin-top:5px;
+  font-size:13px;
+  text-shadow:0 2px 3px #0008;
+}
+
+.playSmall{
+  position:absolute;
+  right:9px;
+  bottom:9px;
+  width:38px;
+  height:38px;
+  border-radius:50%;
+  background:white;
+  color:#166fc5;
+  font-size:15px;
+}
+
+.info{
+  padding:10px;
+}
+
+.info b{
+  display:block;
+  font-size:13px;
+  line-height:1.3;
+}
+
+.info small{
+  display:block;
+  margin-top:5px;
+  color:#ffffff99;
+  font-size:11px;
+}
+
+/* TAGS */
+
+.tags{
+  display:flex;
+  gap:8px;
+  overflow-x:auto;
+  padding-bottom:5px;
+}
+
+.tags::-webkit-scrollbar{
+  display:none;
+}
+
+.tag{
+  white-space:nowrap;
+  padding:10px 15px;
+  border-radius:25px;
+  border:1px solid #ffffff65;
+  background:#ffffff10;
+  color:white;
+}
+
+.tag.active{
+  background:white;
+  color:#1265a5;
+}
+
+/* PROGRESS */
+
+.progress{
+  padding:17px;
+  border-radius:20px;
+  background:linear-gradient(135deg,#1765bc,#29a0dc);
+}
+
+.progressTop{
+  display:flex;
+  justify-content:space-between;
+  margin-bottom:10px;
+}
+
+.progressBar{
+  height:9px;
+  background:#ffffff35;
+  border-radius:20px;
+  overflow:hidden;
+}
+
+.progressFill{
+  height:100%;
+  width:64%;
+  background:#ffe000;
+  border-radius:20px;
+}
+
+/* PAGE TITLE */
+
+.pageTitle{
+  padding:20px 17px 10px;
+  font-size:29px;
+}
+
+/* QUIZ */
+
+.quiz{
+  background:linear-gradient(145deg,#7938e8,#146fd0);
+  border-radius:24px;
+  padding:20px;
+  box-shadow:0 10px 25px #0005;
+}
+
+.question{
+  font-size:22px;
+  line-height:1.4;
+  font-weight:900;
+  margin-bottom:17px;
+}
+
+.answers{
+  display:grid;
+  gap:10px;
+}
+
+.answer{
+  padding:14px;
+  border-radius:14px;
+  color:white;
+  text-align:left;
+  background:#ffffff18;
+  border:1px solid #ffffff40;
+}
+
+.answer.correct{
+  background:#11b978;
+}
+
+.answer.wrong{
+  background:#e63b57;
+}
+
+/* PROFILE */
+
+.profile{
+  margin:15px;
+  padding:25px;
+  text-align:center;
+  background:#ffffff12;
+  border-radius:25px;
+}
+
+.avatar{
+  width:95px;
+  height:95px;
+  margin:auto;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  font-size:48px;
+  background:linear-gradient(135deg,#ffd900,#ff5d6c);
+  background-size:cover;
+  background-position:center;
+}
+
+.upload{
+  display:inline-block;
+  margin-top:15px;
+  padding:10px 18px;
+  border-radius:20px;
+  background:#ffffff20;
+}
+
+.upload input{
+  display:none;
+}
+
+/* BOTTOM */
+
+.bottom{
+  position:fixed;
+  bottom:0;
+  left:50%;
+  transform:translateX(-50%);
+  width:100%;
+  max-width:520px;
+  height:76px;
+  z-index:80;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  background:#061a35f5;
+  border-top:1px solid #ffffff18;
+  backdrop-filter:blur(18px);
+}
+
+.nav{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:5px;
+  color:#ffffff80;
+  background:transparent;
+  font-size:11px;
+}
+
+.nav span{
+  font-size:23px;
+}
+
+.nav.active{
+  color:#ffe000;
+}
+
+/* MODAL */
+
+.modal{
+  position:fixed;
+  inset:0;
+  z-index:150;
+  display:none;
+  align-items:flex-end;
+  background:#000b;
+}
+
+.modal.show{
+  display:flex;
+}
+
+.modalBox{
+  width:100%;
+  max-width:520px;
+  margin:auto;
+  background:linear-gradient(180deg,#1266b1,#061a36);
+  border-radius:28px 28px 0 0;
+  padding:22px;
+  max-height:88vh;
+  overflow:auto;
+  animation:slideUp .25s ease;
+}
+
+@keyframes slideUp{
+  from{
+    transform:translateY(100%);
+  }
+  to{
+    transform:translateY(0);
+  }
+}
+
+.close{
+  float:right;
+  width:40px;
+  height:40px;
+  border-radius:50%;
+  background:#ffffff20;
+  color:white;
+  font-size:18px;
+}
+
+.lessonEmoji{
+  height:150px;
+  display:grid;
+  place-items:center;
+  font-size:100px;
+}
+
+.modalBox h2{
+  font-size:27px;
+  margin-bottom:10px;
+}
+
+.modalBox p{
+  color:#ffffffc5;
+  line-height:1.6;
+}
+
+.startLesson{
+  width:100%;
+  margin-top:20px;
+  padding:16px;
+  border-radius:18px;
+  background:#ffe000;
+  color:#122e50;
+  font-size:16px;
+  font-weight:900;
+}
+
+/* FULL PLAYER */
+
+.player{
+  position:fixed;
+  inset:0;
+  z-index:300;
+  display:none;
+  overflow-y:auto;
+  background:
+    radial-gradient(circle at 20% 0%,#7b37e8 0,transparent 35%),
+    linear-gradient(180deg,#071a37,#031225);
+}
+
+.player.show{
+  display:block;
+}
+
+.playerHeader{
+  height:70px;
+  padding:10px 15px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  background:#06162eea;
+  position:sticky;
+  top:0;
+  z-index:5;
+}
+
+.playerBack{
+  width:43px;
+  height:43px;
+  border-radius:50%;
+  color:white;
+  background:#ffffff20;
+  font-size:25px;
+}
+
+.playerTitle{
+  max-width:240px;
+  font-weight:900;
+  text-align:center;
+  font-size:17px;
+}
+
+.fakeVideo{
+  margin:15px;
+  height:310px;
+  border-radius:28px;
+  position:relative;
+  overflow:hidden;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:
+    linear-gradient(135deg,#ff5c8c,#6845ff,#19a9dc);
+  box-shadow:0 15px 35px #0007;
+}
+
+.videoEmoji{
+  font-size:125px;
+  animation:float 1.5s infinite alternate;
+}
+
+@keyframes float{
+  from{
+    transform:translateY(10px);
+  }
+  to{
+    transform:translateY(-15px);
+  }
+}
+
+.videoPlay{
+  position:absolute;
+  width:70px;
+  height:70px;
+  border-radius:50%;
+  background:white;
+  color:#2368d1;
+  font-size:25px;
+  display:grid;
+  place-items:center;
+  box-shadow:0 8px 20px #0006;
+}
+
+.playerContent{
+  padding:10px 20px 40px;
+}
+
+.badge{
+  display:inline-block;
+  padding:8px 13px;
+  border-radius:20px;
+  background:#ffe000;
+  color:#122e50;
+  font-size:11px;
+  font-weight:900;
+}
+
+.playerContent h1{
+  font-size:29px;
+  margin:15px 0 10px;
+}
+
+.playerContent p{
+  color:#ffffffc5;
+  line-height:1.7;
+  font-size:16px;
+}
+
+.voiceBtn{
+  margin-top:17px;
+  padding:12px 17px;
+  border-radius:20px;
+  background:#ffffff18;
+  color:white;
+  border:1px solid #ffffff30;
+}
+
+.playerProgress{
+  height:9px;
+  margin-top:20px;
+  border-radius:20px;
+  background:#ffffff20;
+  overflow:hidden;
+}
+
+.playerProgress div{
+  height:100%;
+  width:30%;
+  background:#ffe000;
+}
+
+.continue{
+  width:100%;
+  margin-top:20px;
+  padding:16px;
+  border-radius:18px;
+  background:#ffe000;
+  color:#122e50;
+  font-weight:900;
+  font-size:16px;
+}
+
+/* TOAST */
+
+.toast{
+  position:fixed;
+  left:50%;
+  bottom:95px;
+  transform:translateX(-50%) translateY(30px);
+  background:#ffffff;
+  color:#123052;
+  padding:13px 20px;
+  border-radius:30px;
+  font-weight:bold;
+  opacity:0;
+  pointer-events:none;
+  transition:.3s;
+  z-index:500;
+  white-space:nowrap;
+  box-shadow:0 8px 25px #0006;
+}
+
+.toast.show{
+  opacity:1;
+  transform:translateX(-50%) translateY(0);
+}
+
+/* SMALL SCREEN */
+
+@media(max-width:380px){
+
+  .categories{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .hero h1{
+    font-size:27px;
+  }
+
+  .fakeVideo{
+    height:260px;
+  }
+
+  .videoEmoji{
+    font-size:100px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<!-- HEADER -->
+
+<header class="header">
+
+<div class="brand">
+
+<div class="brandIcon">🧠</div>
+
+<div class="brandName">
+LearnJoy
+<small>KIDS LEARNING</small>
+</div>
+
+</div>
+
+<div class="headerButtons">
+
+<button class="circleBtn" onclick="focusSearch()">🔍</button>
+
+<button class="circleBtn" onclick="openPage('profile')">👤</button>
+
+</div>
+
+</header>
+
+
+<!-- HOME -->
+
+<main id="home" class="page active">
+
+<section class="hero">
+
+<h1>
+Learn, Play & Grow! 🚀
+</h1>
+
+<p>
+Fun learning videos, stories, rhymes, maths and activities specially made for kids.
+</p>
+
+<button class="start" onclick="openPage('new')">
+Start Learning →
+</button>
+
+</section>
+
+
+<div class="search">
+
+<span>🔎</span>
+
+<input
+id="searchInput"
+type="text"
+placeholder="Search lessons, stories, maths..."
+oninput="searchLessons(this.value)"
+>
+
+</div>
+
+
+<section class="section">
+
+<div class="sectionTitle">
+
+<h2>📚 Explore Learning</h2>
+
+<span class="see">See all</span>
+
+</div>
+
+
+<div class="categories">
+
+<button class="category pink"
+onclick="openPage('alphabet')">
+
+<span>🔤</span>
+
+<b>Alphabets</b>
+
+</button>
+
+
+<button class="category orange"
+onclick="openPage('math')">
+
+<span>🔢</span>
+
+<b>Mathematics</b>
+
+</button>
+
+
+<button class="category purple"
+onclick="openPage('story')">
+
+<span>📖</span>
+
+<b>Stories</b>
+
+</button>
+
+
+<button class="category green"
+onclick="openPage('rhymes')">
+
+<span>🎵</span>
+
+<b>Rhymes</b>
+
+</button>
+
+</div>
+
+</section>
+
+
+<section class="section">
+
+<div class="sectionTitle">
+
+<h2>🔥 Popular Today</h2>
+
+<span class="see"
+onclick="openPage('new')">
+View all
+</span>
+
+</div>
+
+
+<div class="cards">
+
+
+<div class="card searchable"
+data-title="Chintu Learns ABC"
+onclick="openLesson(
+'Chintu Learns ABC',
+'🐘',
+'Learn A, B and C with fun examples for kids.'
+)">
+
+<div class="art pink">
+
+<span class="artEmoji">🐘</span>
+
+<strong>ABC FUN</strong>
+
+<button class="playSmall">▶</button>
+
+</div>
+
+<div class="info">
+
+<b>Chintu Learns ABC</b>
+
+<small>Alphabets • 8 min</small>
+
+</div>
+
+</div>
+
+
+<div class="card searchable"
+data-title="Fun Counting Numbers"
+onclick="openLesson(
+'Fun Counting',
+'🔢',
+'Learn numbers from 1 to 20 with a fun counting activity.'
+)">
+
+<div class="art orange">
+
+<span class="artEmoji">🔢</span>
+
+<strong>COUNTING</strong>
+
+<button class="playSmall">▶</button>
+
+</div>
+
+<div class="info">
+
+<b>Fun Counting</b>
+
+<small>Numbers • 7 min</small>
+
+</div>
+
+</div>
+
+
+<div class="card searchable"
+data-title="Clever Rabbit Story"
+onclick="openLesson(
+'The Clever Rabbit',
+'🐰',
+'A clever rabbit teaches the lion an important lesson.'
+)">
+
+<div class="art green">
+
+<span class="artEmoji">🐰</span>
+
+<strong>STORY TIME</strong>
+
+<button class="playSmall">▶</button>
+
+</div>
+
+<div class="info">
+
+<b>Clever Rabbit</b>
+
+<small>Story • 10 min</small>
+
+</div>
+
+</div>
+
+
+<div class="card searchable"
+data-title="Wheels On The Bus"
+onclick="openLesson(
+'Wheels On The Bus',
+'🚌',
+'Sing and learn with a fun kids rhyme.'
+)">
+
+<div class="art blue">
+
+<span class="artEmoji">🚌</span>
+
+<strong>RHYME</strong>
+
+<button class="playSmall">▶</button>
+
+</div>
+
+<div class="info">
+
+<b>Wheels On The Bus</b>
+
+<small>Rhymes • 5 min</small>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<section class="section">
+
+<div class="progress">
+
+<div class="progressTop">
+
+<b>🌟 Learning Progress</b>
+
+<b id="progressPercent">0%</b>
+
+</div>
+
+<div class="progressBar">
+
+<div
+id="homeProgress"
+class="progressFill"
+style="width:0%">
+</div>
+
+</div>
+
+<p style="margin-top:9px;font-size:12px;color:#ffffffaa">
+Complete lessons to increase your progress.
+</p>
+
+</div>
+
+</section>
+
+</main>
+
+
+<!-- NEW -->
+
+<main id="new" class="page">
+
+<h1 class="pageTitle">
+✨ New Releases
+</h1>
+
+
+<section class="section">
+
+<div class="tags">
+
+<button class="tag active">All</button>
+
+<button class="tag">Numbers</button>
+
+<button class="tag">Alphabets</button>
+
+<button class="tag">Stories</button>
+
+<button class="tag">Rhymes</button>
+
+</div>
+
+</section>
+
+
+<section class="section">
+
+<h2 style="margin-bottom:14px">
+Today
+</h2>
+
+
+<div class="cards">
+
+
+<div class="card"
+onclick="openLesson(
+'Healthy Food',
+'🥦',
+'Learn which foods are healthy and which foods we should eat less.'
+)">
+
+<div class="art green">
+
+<span class="artEmoji">🥦</span>
+
+<strong>HEALTHY FOOD</strong>
+
+<button class="playSmall">▶</button>
+
+</div>
+
+<div class="info">
+
+<b>Healthy or Not Healthy?</b>
+
+<small>Health • 6 min</small>
+
+</div>
+
+</div>
+
+
+<div class="card"
+onclick="openLesson(
+'Safety Rules',
+'🦺',
+'Learn important safety rules for home, school and roads.'
+)">
+
+<div class="art yellow">
+
+<span class="artEmoji">🦺</span>
+
+<strong>SAFETY</strong>
+
+<button class="playSmall">▶</button>
+
+</div>
+
+<div class="info">
+
+<b>Learn Safety Rules</b>
+
+<small>Safety • 7 min</small>
+
+</div>
+
+</div>
+
+
+<div class="card"
+onclick="openLesson(
+'Air Transport',
+'✈️',
+'Learn about airplanes, airports and air transport.'
+)">
+
+<div class="art cyan">
+
+<span class="artEmoji">✈️</span>
+
+<strong>TRANSPORT</strong>
+
+<button class="playSmall">▶</button>
+
+</div>
+
+<div class="info">
+
+<b>Air Transport</b>
+
+<small>English • 8 min</small>
+
+</div>
+
+</div>
+
+
+<div class="card"
+onclick="openLesson(
+'Jantar Mantar',
+'🔭',
+'Discover stars, time and an amazing historical place.'
+)">
+
+<div class="art purple">
+
+<span class="artEmoji">🔭</span>
+
+<strong>DISCOVER INDIA</strong>
+
+<button class="playSmall">▶</button>
+
+</div>
+
+<div class="info">
+
+<b>The Secret of Jantar Mantar</b>
+
+<small>Knowledge • 9 min</small>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+</main>
+
+
+<!-- ALPHABET -->
+
+<main id="alphabet" class="page">
+
+<h1 class="pageTitle">
+🔤 Alphabets
+</h1>
+
+
+<section class="section">
+
+<div class="tags">
+
+<button class="tag active">
+ABC Easy Learn
+</button>
+
+<button class="tag">
+Phonics
+</button>
+
+<button class="tag">
+ABC Games
+</button>
+
+<button class="tag">
+Letters
+</button>
+
+</div>
+
+</section>
+
+
+<section class="section">
+
+<h2 style="margin-bottom:14px">
+⭐ Top in Alphabets
+</h2>
+
+
+<div class="cards">
+
+
+<div class="card"
+onclick="openLesson(
+'A for Apple',
+'🍎',
+'A says A. A for Apple. Say it with me!'
+)">
+
+<div class="art red">
+
+<span class="artEmoji">🍎</span>
+
+<strong>A FOR APPLE</strong>
+
+<button class="playSmall">▶</button>
+
+</div>
+
+<div class="info">
+<b>A for Apple</b>
+<small>Alphabet • Beginner</small>
+</div>
+
+</div>
+
+
+<div class="card"
+onclick="openLesson(
+'B for Ball',
+'⚽',
+'B says B. B for Ball. Let us learn B together!'
+)">
+
+<div class="art blue">
+
+<span class="artEmoji">⚽</span>
+
+<strong>B FOR BALL</strong>
+
+<button class="playSmall">▶</button>
+
+</div>
+
+<div class="info">
+<b>B for Ball</b>
+<small>Alphabet • Beginner</small>
+</div>
+
+</div>
+
+
+<div class="card"
+onclick="openLesson(
+'C for Cat',
+'🐱',
+'C says C. C for Cat. Meow!'
+)">
+
+<div class="art orange">
+
+<span class="artEmoji">🐱</span>
+
+<strong>C FOR CAT</strong>
+
+<button class="playSmall">▶</button>
+
+</div>
+
+<div class="info">
+<b>C for Cat</b>
+<small>Alphabet • Beginner</small>
+</div>
+
+</div>
+
+
+<div class="card"
+onclick="openLesson(
+'D for Dog',
+'🐶',
+'D says D. D for Dog. Woof!'
+)">
+
+<div class="art green">
+
+<span class="artEmoji">🐶</span>
+
+<strong>D FOR DOG</strong>
+
+<button class="playSmall">▶</button>
+
+</div>
+
+<div class="info">
+<b>D for Dog</b>
+<small>Alphabet • Beginner</small>
+</div>
+
+</div>
+
+
+<div class="card"
+onclick="openLesson(
+'E for Elephant',
+'🐘',
+'E says E. E for Elephant.'
+)">
+
+<div class="art purple">
+
+<span class="artEmoji">🐘</span>
+
+<strong>E FOR ELEPHANT</strong>
+
+<button class="playSmall">▶</button>
+
+</div>
+
+<div class="info">
+<b>E for Elephant</b>
+<small>Alphabet • Beginner</small>
+</div>
+
+</div>
+
+
+<div class="card"
+onclick="openLesson(
+'F for Fish',
+'🐟',
+'F says F. F for Fish.'
+)">
+
+<div class="art cyan">
+
+<span class="artEmoji">🐟</span>
+
+<strong>F FOR FISH</strong>
+
+<button class="playSmall">▶</button>
+
+</div>
+
+<div class="info">
+<b>F for Fish</b>
+<small>Alphabet • Beginner</small>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+</main>
+
+
+<!-- MATH -->
+
+<main id="math" class="page">
+
+<h1 class="pageTitle">
+🔢 Mathematics
+</h1>
+
+
+<section class="section">
+
+<div class="tags">
+
+<button class="tag active">
+Super Fun Maths
+</button>
+
+<button class="tag">
+Maths Masti
+</button>
+
+<button class="tag">
+Counting
+</button>
+
+</div>
+
+</section>
+
+
+<section class="section">
+
+<h2 style="margin-bottom:14px">
+⭐ Top in Mathematics
+</h2>
+
+
+<div class="cards">
+
+
+<div class="card"
+onclick="openLesson(
+'Numbers 1 to 10',
+'🔢',
+'Count from 1 to 10 using fun colourful objects.'
+)">
+
+<div class="art blue">
+
+<span class="artEmoji">🔢</span>
+
+<strong>1 2 3 4 5</strong>
+
+<button class="playSmall">▶</button>
+
+</div>
+
+<div class="info">
+<b>Numbers 1–10</b>
+<small>Maths • Easy</small>
+</div>
+
+</div>
+
+
+<div class="card"
+onclick="openLesson(
+'Fun Shapes',
+'🔺',
+'Learn circle, square, triangle and rectangle.'
+)">
+
+<div class="art purple">
+
+<span class="artEmoji">🔺</span>
+
+<strong>SHAPES</strong>
+
+<button class="playSmall">▶</button>
+
+</div>
+
+<div class="info">
+<b>Fun Shapes</b>
+<small>Maths • 8 min</small>
+</div>
+
+</div>
+
+
+<div class="card"
+onclick="openLesson(
+'Easy Addition',
+'➕',
+'Learn simple addition using colourful objects.'
+)">
+
+<div class="art green">
+
+<span class="artEmoji">➕</span>
+
+<strong>ADDITION</strong>
+
+<button class="playSmall">▶</button>
+
+</div>
+
+<div class="info">
+<b>Easy Addition</b>
+<small>Maths • Beginner</small>
+</div>
+
+</div>
+
+
+<div class="card"
+onclick="openLesson(
+'Easy Subtraction',
+'➖',
+'Learn subtraction with simple examples.'
+)">
+
+<div class="art orange">
+
+<span class="artEmoji">➖</span>
+
+<strong>SUBTRACTION</strong>
+
+<button class="playSmall">▶</button>
+
+</div>
+
+<div class="info">
+<b>Easy Subtraction</b>
+<small>Maths • Beginner</small>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<section class="section">
+
+<h2 style="margin-bottom:12px">
+🧠 Quick Quiz
+</h2>
+
+
+<div class="quiz">
+
+<div class="question">
+What is 2 + 3?
+</div>
+
+
+<div class="answers">
+
+<button class="answer"
+onclick="quizAnswer(this,false)">
+4
+</button>
+
+<button class="answer"
+onclick="quizAnswer(this,true)">
+5
+</button>
+
+<button class="answer"
+onclick="quizAnswer(this,false)">
+6
+</button>
+
+<button class="answer"
+onclick="quizAnswer(this,false)">
+7
+</button>
+
+</div>
+
+
+<p
+id="quizResult"
+style="margin-top:15px;font-weight:bold">
+</p>
+
+</div>
+
+</section>
+
+</main>
+
+
+<!-- STORY -->
+
+<main id="story" class="page">
+
+<h1 class="pageTitle">
+📖 Story Time
+</h1>
+
+
+<section class="section">
+
+<div class="tags">
+
+<button class="tag active">
+Suno Kahani
+</button>
+
+<button class="tag">
+Animal Friends
+</button>
+
+<button class="tag">
+Fun Kahani
+</button>
+
+<button class="tag">
+Life Lessons
+</button>
+
+</div>
+
+</section>
+
+
+<section class="section">
+
+<h2 style="margin-bottom:14px">
+⭐ Top in Story Time
+</h2>
+
+
+<div class="cards">
+
+
+<div class="card"
+onclick="openLesson(
+'The Clever Rabbit',
+'🐰',
+'A clever rabbit teaches the lion an important lesson.'
+)">
+
+<div class="art green">
+
+<span class="artEmoji">🐰</span>
+
+<strong>CLEVER RABBIT</strong>
+
+<button class="playSmall">▶</button>
+
+</div>
+
+<div class="info">
+<b>The Clever Rabbit</b>
+<small>Story • 10 min</small>
+</div>
+
+</div>
+
+
+<div class="card"
+onclick="openLesson(
+'The Helpful Bird',
+'🐦',
+'A little bird helps a child learn the value of kindness.'
+)">
+
+<div class="art blue">
+
+<span class="artEmoji">🐦</span>
+
+<strong>HELPFUL BIRD</strong>
+
+<button class="playSmall">▶</button>
+
+</div>
+
+<div class="info">
+<b>The Helpful Bird</b>
+<small>Story • 8 min</small>
+</div>
+
+</div>
+
+
+<div class="card"
+onclick="openLesson(
+'Friends Forever',
+'🤝',
+'A story about friendship, sharing and helping others.'
+)">
+
+<div class="art pink">
+
+<span class="artEmoji">🤝</span>
+
+<strong>FRIENDSHIP</strong>
+
+<button class="playSmall">▶</button>
+
+</div>
+
+<div class="info">
+<b>Friends Forever</b>
+<small>Life Lesson • 7 min</small>
+</div>
+
+</div>
+
+
+<div class="card"
+onclick="openLesson(
+'Healthy Bunti',
+'🍎',
+'Learn why healthy food helps our body grow strong.'
+)">
+
+<div class="art red">
+
+<span class="artEmoji">🍎</span>
+
+<strong>HEALTHY LIFE</strong>
+
+<button class="playSmall">▶</button>
+
+</div>
+
+<div class="info">
+<b>Healthy Bunti</b>
+<small>Health • 6 min</small>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+</main>
+
+
+<!-- RHYMES -->
+
+<main id="rhymes" class="page">
+
+<h1 class="pageTitle">
+🎵 Favourite Rhymes
+</h1>
+
+
+<section class="section">
+
+<div class="tags">
+
+<button class="tag active">
+Rhymes
+</button>
+
+<button class="tag">
+Play & Rhymes
+</button>
+
+<button class="tag">
+Happy Learning
+</button>
+
+</div>
+
+</section>
+
+
+<section class="section">
+
+<h2 style="margin-bottom:14px">
+📈 Top in Rhymes
+</h2>
+
+
+<div class="cards">
+
+
+<div class="card"
+onclick="openLesson(
+'Wheels On The Bus',
+'🚌',
+'A fun sing-along rhyme for kids.'
+)">
+
+<div class="art blue">
+
+<span class="artEmoji">🚌</span>
+
+<strong>WHEELS ON BUS</strong>
+
+<button class="playSmall">▶</button>
+
+</div>
+
+<div class="info">
+<b>Wheels On The Bus</b>
+<small>Rhyme • 5 min</small>
+</div>
+
+</div>
+
+
+<div class="card"
+onclick="openLesson(
+'Nanha Munna',
+'🐥',
+'A cheerful Hindi rhyme for little learners.'
+)">
+
+<div class="art yellow">
+
+<span class="artEmoji">🐥</span>
+
+<strong>NANHA MUNNA</strong>
+
+<button class="playSmall">▶</button>
+
+</div>
+
+<div class="info">
+<b>Nanha Munna</b>
+<small>Hindi Rhyme</small>
+</div>
+
+</div>
+
+
+<div class="card"
+onclick="openLesson(
+'Head Shoulders Knees',
+'🕺',
+'Learn body parts while moving and singing.'
+)">
+
+<div class="art cyan">
+
+<span class="artEmoji">🕺</span>
+
+<strong>BODY PARTS</strong>
+
+<button class="playSmall">▶</button>
+
+</div>
+
+<div class="info">
+<b>Head Shoulders Knees</b>
+<small>Rhyme • 5 min</small>
+</div>
+
+</div>
+
+
+<div class="card"
+onclick="openLesson(
+'Kala Kauwa',
+'🐦‍⬛',
+'A fun Hindi rhyme about a clever crow.'
+)">
+
+<div class="art orange">
+
+<span class="artEmoji">🐦‍⬛</span>
+
+<strong>KALA KAUWA</strong>
+
+<button class="playSmall">▶</button>
+
+</div>
+
+<div class="info">
+<b>Kala Kauwa</b>
+<small>Hindi Rhyme</small>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+</main>
+
+
+<!-- PROFILE -->
+
+<main id="profile" class="page">
+
+<h1 class="pageTitle">
+👤 My Profile
+</h1>
+
+
+<div class="profile">
+
+<div
+id="avatar"
+class="avatar">
+👦
+</div>
+
+
+<h2 style="margin-top:12px">
+Little Learner
+</h2>
+
+
+<p style="margin-top:7px;color:#ffffff99">
+Keep learning every day! 🌟
+</p>
+
+
+<label class="upload">
+
+📷 Add Photo
+
+<input
+type="file"
+accept="image/*"
+onchange="changePhoto(event)"
+>
+
+</label>
+
+
+<div style="margin-top:22px">
+
+<div class="progress">
+
+<div class="progressTop">
+
+<b>Learning Progress</b>
+
+<b id="profilePercent">0%</b>
+
+</div>
+
+<div class="progressBar">
+
+<div
+id="profileProgress"
+class="progressFill"
+style="width:0%">
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<button
+class="startLesson"
+onclick="openPage('home')">
+
+Continue Learning 🚀
+
+</button>
+
+</div>
+
+</main>
+
+
+<!-- BOTTOM NAV -->
+
+<nav class="bottom">
+
+<button
+class="nav active"
+data-page="home"
+onclick="openPage('home')">
+
+<span>🏠</span>
+Home
+
+</button>
+
+
+<button
+class="nav"
+data-page="new"
+onclick="openPage('new')">
+
+<span>✨</span>
+New
+
+</button>
+
+
+<button
+class="nav"
+data-page="math"
+onclick="openPage('math')">
+
+<span>🧠</span>
+Learn
+
+</button>
+
+
+<button
+class="nav"
+data-page="profile"
+onclick="openPage('profile')">
+
+<span>👤</span>
+Profile
+
+</button>
+
+</nav>
+
+</div>
+
+
+<!-- LESSON POPUP -->
+
+<div
+id="lessonModal"
+class="modal">
+
+<div class="modalBox">
+
+<button
+class="close"
+onclick="closeLesson()">
+✕
+</button>
+
+
+<div
+id="lessonEmoji"
+class="lessonEmoji">
+📚
+</div>
+
+
+<h2 id="lessonTitle">
+Lesson
+</h2>
+
+
+<p id="lessonDescription">
+Lesson description
+</p>
+
+
+<button
+class="startLesson"
+onclick="startLesson()">
+
+▶ Start Lesson
+
+</button>
+
+</div>
+
+</div>
+
+
+<!-- FULL LESSON PLAYER -->
+
+<div
+id="player"
+class="player">
+
+
+<div class="playerHeader">
+
+<button
+class="playerBack"
+onclick="closePlayer()">
+←
+</button>
+
+
+<div
+id="playerTitle"
+class="playerTitle">
+Lesson
+</div>
+
+
+<div>
+⋮
+</div>
+
+</div>
+
+
+<div class="fakeVideo">
+
+<div
+id="videoEmoji"
+class="videoEmoji">
+🎓
+</div>
+
+
+<button
+class="videoPlay"
+onclick="speakLesson()">
+▶
+</button>
+
+</div>
+
+
+<div class="playerContent">
+
+<div class="badge">
+⭐ LEARNING TIME
+</div>
+
+
+<h1 id="playerHeading">
+Let's Learn!
+</h1>
+
+
+<p id="playerDescription">
+Welcome little learner! आज हम मज़ेदार तरीके से सीखेंगे।
+ध्यान से देखो, सुनो और सवालों के जवाब दो।
+</p>
+
+
+<button
+class="voiceBtn"
+onclick="speakLesson()">
+
+🔊 सुनो / Listen
+
+</button>
+
+
+<div class="playerProgress">
+
+<div
+id="lessonProgressBar">
+</div>
+
+</div>
+
+
+<button
+class="continue"
+onclick="completeLesson()">
+
+🎉 Complete Lesson
+
+</button>
+
+</div>
+
+</div>
+
+
+<!-- TOAST -->
+
+<div
+id="toast"
+class="toast">
+Great Job! 🎉
+</div>
+
+
+<script>
+
+/* GLOBAL */
+
+let currentTitle = "";
+let currentEmoji = "";
+let currentDescription = "";
+
+
+/* PAGE OPEN */
+
+function openPage(page){
+
+  document.querySelectorAll(".page")
+  .forEach(function(p){
+
+    p.classList.remove("active");
+
+  });
+
+
+  const selected =
+    document.getElementById(page);
+
+
+  if(selected){
+
+    selected.classList.add("active");
+
+  }
+
+
+  document.querySelectorAll(".nav")
+  .forEach(function(nav){
+
+    nav.classList.remove("active");
+
+    if(nav.dataset.page === page){
+
+      nav.classList.add("active");
+
+    }
+
+  });
+
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+
+}
+
+
+/* LESSON POPUP */
+
+function openLesson(title,emoji,description){
+
+  currentTitle = title;
+  currentEmoji = emoji;
+  currentDescription = description;
+
+
+  document.getElementById("lessonTitle")
+    .textContent = title;
+
+
+  document.getElementById("lessonEmoji")
+    .textContent = emoji;
+
+
+  document.getElementById("lessonDescription")
+    .textContent = description;
+
+
+  document.getElementById("lessonModal")
+    .classList.add("show");
+
+}
+
+
+/* CLOSE POPUP */
+
+function closeLesson(){
+
+  document.getElementById("lessonModal")
+    .classList.remove("show");
+
+}
+
+
+/* START REAL LESSON */
+
+function startLesson(){
+
+  closeLesson();
+
+
+  document.getElementById("player")
+    .classList.add("show");
+
+
+  document.getElementById("playerTitle")
+    .textContent = currentTitle;
+
+
+  document.getElementById("playerHeading")
+    .textContent = currentEmoji + " " + currentTitle;
+
+
+  document.getElementById("playerDescription")
+    .textContent = currentDescription;
+
+
+  document.getElementById("videoEmoji")
+    .textContent = currentEmoji;
+
+
+  document.getElementById("lessonProgressBar")
+    .style.width = "30%";
+
+
+  window.scrollTo(0,0);
+
+}
+
+
+/* CLOSE PLAYER */
+
+function closePlayer(){
+
+  document.getElementById("player")
+    .classList.remove("show");
+
+}
+
+
+/* VOICE */
+
+function speakLesson(){
+
+  if(!("speechSynthesis" in window)){
+
+    showToast("Voice is not supported on this browser");
+
+    return;
+
+  }
+
+
+  speechSynthesis.cancel();
+
+
+  const text =
+    currentTitle + ". " +
+    currentDescription;
+
+
+  const speech =
+    new SpeechSynthesisUtterance(text);
+
+
+  speech.lang = "en-IN";
+  speech.rate = .85;
+  speech.pitch = 1.15;
+
+
+  speechSynthesis.speak(speech);
+
+}
+
+
+/* COMPLETE LESSON */
+
+function completeLesson(){
+
+  let completed =
+    Number(localStorage.getItem("completedLessons") || 0);
+
+
+  completed++;
+
+
+  if(completed > 10){
+    completed = 10;
+  }
+
+
+  localStorage.setItem(
+    "completedLessons",
+    completed
+  );
+
+
+  updateProgress();
+
+
+  closePlayer();
+
+
+  showToast(
+    "🎉 Lesson Completed!"
+  );
+
+}
+
+
+/* PROGRESS */
+
+function updateProgress(){
+
+  const completed =
+    Number(localStorage.getItem("completedLessons") || 0);
+
+
+  const percent =
+    completed * 10;
+
+
+  const home =
+    document.getElementById("homeProgress");
+
+
+  const profile =
+    document.getElementById("profileProgress");
+
+
+  const homePercent =
+    document.getElementById("progressPercent");
+
+
+  const profilePercent =
+    document.getElementById("profilePercent");
+
+
+  if(home){
+    home.style.width = percent + "%";
+  }
+
+
+  if(profile){
+    profile.style.width = percent + "%";
+  }
+
+
+  if(homePercent){
+    homePercent.textContent =
+      percent + "%";
+  }
+
+
+  if(profilePercent){
+    profilePercent.textContent =
+      percent + "%";
+  }
+
+}
+
+
+/* QUIZ */
+
+function quizAnswer(button,correct){
+
+  const answers =
+    document.querySelectorAll(".answer");
+
+
+  answers.forEach(function(a){
+
+    a.disabled = true;
+
+  });
+
+
+  if(correct){
+
+    button.classList.add("correct");
+
+
+    document.getElementById("quizResult")
+      .textContent =
+      "🎉 Correct! Excellent job!";
+
+
+    let score =
+      Number(localStorage.getItem("quizScore") || 0);
+
+
+    score++;
+
+
+    localStorage.setItem(
+      "quizScore",
+      score
+    );
+
+
+  }else{
+
+    button.classList.add("wrong");
+
+
+    document.getElementById("quizResult")
+      .textContent =
+      "😊 Good try! Keep learning!";
+
+  }
+
+}
+
+
+/* SEARCH */
+
+function focusSearch(){
+
+  openPage("home");
+
+
+  setTimeout(function(){
+
+    const input =
+      document.getElementById("searchInput");
+
+
+    input.focus();
+
+
+    window.scrollTo({
+      top:190,
+      behavior:"smooth"
+    });
+
+  },200);
+
+}
+
+
+function searchLessons(value){
+
+  value =
+    value.toLowerCase().trim();
+
+
+  const cards =
+    document.querySelectorAll(".searchable");
+
+
+  cards.forEach(function(card){
+
+    const title =
+      (card.dataset.title || "")
+      .toLowerCase();
+
+
+    if(!value || title.includes(value)){
+
+      card.style.display = "";
+
+    }else{
+
+      card.style.display = "none";
+
+    }
+
+  });
+
+}
+
+
+/* PHOTO */
+
+function changePhoto(event){
+
+  const file =
+    event.target.files[0];
+
+
+  if(!file){
+    return;
+  }
+
+
+  const reader =
+    new FileReader();
+
+
+  reader.onload =
+    function(e){
+
+      const image =
+        e.target.result;
+
+
+      const avatar =
+        document.getElementById("avatar");
+
+
+      avatar.style.backgroundImage =
+        "url('" + image + "')";
+
+
+      avatar.textContent = "";
+
+
+      localStorage.setItem(
+        "profilePhoto",
+        image
+      );
+
+    };
+
+
+  reader.readAsDataURL(file);
+
+}
+
+
+/* TOAST */
+
+function showToast(message){
+
+  const toast =
+    document.getElementById("toast");
+
+
+  toast.textContent =
+    message;
+
+
+  toast.classList.add("show");
+
+
+  setTimeout(function(){
+
+    toast.classList.remove("show");
+
+  },2200);
+
+}
+
+
+/* TAGS */
+
+document.querySelectorAll(".tag")
+.forEach(function(tag){
+
+  tag.addEventListener(
+    "click",
+    function(){
+
+      const parent =
+        this.parentElement;
+
+
+      parent.querySelectorAll(".tag")
+      .forEach(function(t){
+
+        t.classList.remove("active");
+
+      });
+
+
+      this.classList.add("active");
+
+    }
+  );
+
+});
+
+
+/* MODAL OUTSIDE CLICK */
+
+document.getElementById("lessonModal")
+.addEventListener(
+  "click",
+  function(event){
+
+    if(event.target === this){
+
+      closeLesson();
+
+    }
+
+  }
+);
+
+
+/* LOAD SAVED DATA */
+
+window.addEventListener(
+  "load",
+  function(){
+
+    const photo =
+      localStorage.getItem("profilePhoto");
+
+
+    if(photo){
+
+      const avatar =
+        document.getElementById("avatar");
+
+
+      avatar.style.backgroundImage =
+        "url('" + photo + "')";
+
+
+      avatar.textContent = "";
+
+    }
+
+
+    updateProgress();
+
+  }
+);
+
+</script>
+
+</body>
+</html>
