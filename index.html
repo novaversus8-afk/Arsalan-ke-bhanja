@@ -1,0 +1,2619 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>VibeLearn Academy</title>
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+  font-family:Inter,Arial,sans-serif;
+}
+
+body{
+  background:#06101f;
+  color:#fff;
+}
+
+button,input{
+  font-family:inherit;
+}
+
+button{
+  border:0;
+  cursor:pointer;
+}
+
+.app{
+  width:100%;
+  max-width:520px;
+  min-height:100vh;
+  margin:auto;
+  background:
+    radial-gradient(circle at 10% 0%,#5930c7 0,transparent 28%),
+    radial-gradient(circle at 100% 25%,#087cae 0,transparent 28%),
+    linear-gradient(180deg,#07162d,#063a62,#071525);
+  overflow:hidden;
+}
+
+/* HEADER */
+
+.header{
+  height:70px;
+  padding:10px 15px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  position:sticky;
+  top:0;
+  z-index:50;
+  background:#061327e8;
+  backdrop-filter:blur(18px);
+  border-bottom:1px solid #ffffff10;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.brandLogo{
+  width:44px;
+  height:44px;
+  border-radius:14px;
+  display:grid;
+  place-items:center;
+  font-size:23px;
+  background:linear-gradient(135deg,#ffe23b,#ff4e85,#6834e9);
+  box-shadow:0 0 25px #a03cff66;
+}
+
+.brand h2{
+  font-size:18px;
+}
+
+.brand small{
+  display:block;
+  font-size:8px;
+  color:#71e7ff;
+  letter-spacing:1.5px;
+  margin-top:3px;
+}
+
+.headerRight{
+  display:flex;
+  gap:7px;
+}
+
+.headerBtn{
+  width:41px;
+  height:41px;
+  border-radius:50%;
+  background:#ffffff12;
+  color:white;
+  font-size:18px;
+}
+
+/* PAGE */
+
+.page{
+  display:none;
+  padding-bottom:95px;
+}
+
+.page.active{
+  display:block;
+}
+
+/* HERO */
+
+.hero{
+  margin:14px;
+  padding:23px;
+  min-height:250px;
+  border-radius:29px;
+  position:relative;
+  overflow:hidden;
+  background:
+    linear-gradient(135deg,#ff4d88,#7032e1 55%,#0797c7);
+  box-shadow:0 17px 40px #0006;
+}
+
+.heroLabel{
+  font-size:10px;
+  color:#d5faff;
+  font-weight:bold;
+  letter-spacing:2px;
+}
+
+.hero h1{
+  margin-top:14px;
+  font-size:31px;
+  line-height:1.08;
+  max-width:290px;
+}
+
+.hero p{
+  margin-top:10px;
+  max-width:300px;
+  line-height:1.55;
+  color:#ffffffc7;
+  font-size:13px;
+}
+
+.heroGirl{
+  position:absolute;
+  right:8px;
+  bottom:-10px;
+  font-size:105px;
+  filter:drop-shadow(0 10px 10px #0007);
+}
+
+.heroBtn{
+  margin-top:18px;
+  padding:13px 19px;
+  border-radius:25px;
+  background:#ffe13d;
+  color:#18223c;
+  font-weight:900;
+}
+
+/* SEARCH */
+
+.search{
+  margin:14px;
+  height:52px;
+  display:flex;
+  align-items:center;
+  padding:0 15px;
+  border-radius:17px;
+  background:#ffffff10;
+  border:1px solid #ffffff20;
+}
+
+.search span{
+  font-size:20px;
+}
+
+.search input{
+  width:100%;
+  border:0;
+  outline:0;
+  background:transparent;
+  color:white;
+  padding:0 10px;
+}
+
+.search input::placeholder{
+  color:#ffffff70;
+}
+
+/* STATS */
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:9px;
+  margin:14px;
+}
+
+.stat{
+  padding:13px 7px;
+  border-radius:18px;
+  background:#ffffff0d;
+  border:1px solid #ffffff15;
+  text-align:center;
+}
+
+.stat b{
+  display:block;
+  font-size:19px;
+  color:#ffe23c;
+}
+
+.stat small{
+  display:block;
+  margin-top:4px;
+  font-size:9px;
+  color:#ffffff70;
+}
+
+/* SECTION */
+
+.section{
+  padding:6px 14px 20px;
+}
+
+.sectionTitle{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:13px;
+}
+
+.sectionTitle h2{
+  font-size:20px;
+}
+
+.sectionTitle span{
+  color:#72eaff;
+  font-size:11px;
+}
+
+/* CATEGORIES */
+
+.categories{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:9px;
+}
+
+.cat{
+  min-height:94px;
+  border-radius:20px;
+  color:white;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  box-shadow:0 9px 20px #0004;
+}
+
+.cat span{
+  font-size:32px;
+}
+
+.cat b{
+  margin-top:6px;
+  font-size:10px;
+}
+
+.c1{background:linear-gradient(145deg,#ff4e87,#702ce2)}
+.c2{background:linear-gradient(145deg,#2ebcff,#1c5fd0)}
+.c3{background:linear-gradient(145deg,#ffbe2d,#f0502e)}
+.c4{background:linear-gradient(145deg,#3cdf93,#08776e)}
+
+/* BOOKS */
+
+.bookGrid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:11px;
+}
+
+.book{
+  overflow:hidden;
+  border-radius:20px;
+  background:#ffffff0e;
+  border:1px solid #ffffff15;
+  box-shadow:0 9px 20px #0004;
+  transition:.15s;
+}
+
+.book:active{
+  transform:scale(.97);
+}
+
+.cover{
+  height:155px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  position:relative;
+  text-align:center;
+  padding:10px;
+}
+
+.coverIcon{
+  font-size:54px;
+  filter:drop-shadow(0 5px 5px #0006);
+}
+
+.coverTitle{
+  margin-top:6px;
+  font-size:12px;
+  font-weight:bold;
+}
+
+.bookInfo{
+  padding:10px;
+}
+
+.bookInfo b{
+  display:block;
+  font-size:13px;
+  line-height:1.3;
+}
+
+.bookInfo small{
+  display:block;
+  margin-top:5px;
+  color:#ffffff70;
+  font-size:10px;
+}
+
+.bookCount{
+  position:absolute;
+  top:8px;
+  left:8px;
+  padding:5px 8px;
+  border-radius:12px;
+  background:#00000030;
+  font-size:8px;
+}
+
+/* COLORS */
+
+.pink{background:linear-gradient(145deg,#ff4d90,#732de0)}
+.blue{background:linear-gradient(145deg,#24b8ff,#2057cf)}
+.orange{background:linear-gradient(145deg,#ffc52e,#f14b2d)}
+.green{background:linear-gradient(145deg,#3ddd91,#087b6c)}
+.purple{background:linear-gradient(145deg,#a04dff,#4820a7)}
+.cyan{background:linear-gradient(145deg,#38ddea,#1770cf)}
+.red{background:linear-gradient(145deg,#ff6262,#b81d68)}
+.gold{background:linear-gradient(145deg,#ffe12f,#ff821d)}
+
+/* LIBRARY */
+
+.libraryHead{
+  padding:22px 16px 12px;
+}
+
+.libraryHead h1{
+  font-size:29px;
+}
+
+.libraryHead p{
+  margin-top:7px;
+  color:#ffffff75;
+  font-size:12px;
+}
+
+.filters{
+  display:flex;
+  gap:8px;
+  overflow-x:auto;
+  padding:0 14px 15px;
+}
+
+.filters::-webkit-scrollbar{
+  display:none;
+}
+
+.filter{
+  white-space:nowrap;
+  padding:10px 15px;
+  border-radius:25px;
+  background:#ffffff0e;
+  border:1px solid #ffffff22;
+  color:white;
+  font-size:12px;
+}
+
+.filter.active{
+  background:#ffe13c;
+  color:#1d263b;
+}
+
+/* BOOK READER */
+
+.reader{
+  position:fixed;
+  inset:0;
+  z-index:300;
+  display:none;
+  overflow-y:auto;
+  background:
+    radial-gradient(circle at 10% 0,#6931db,transparent 35%),
+    #06101f;
+}
+
+.reader.show{
+  display:block;
+}
+
+.readerTop{
+  height:70px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:10px 15px;
+  position:sticky;
+  top:0;
+  z-index:5;
+  background:#061327e9;
+  backdrop-filter:blur(15px);
+}
+
+.readerBack{
+  width:42px;
+  height:42px;
+  border-radius:50%;
+  color:white;
+  background:#ffffff13;
+  font-size:23px;
+}
+
+.readerTitle{
+  max-width:245px;
+  text-align:center;
+  font-weight:bold;
+  font-size:16px;
+}
+
+.readerPage{
+  margin:15px;
+  padding:25px 21px;
+  min-height:450px;
+  border-radius:27px;
+  background:
+    linear-gradient(145deg,#fffef7,#edf4ff);
+  color:#17243b;
+  box-shadow:0 20px 40px #0008;
+}
+
+.readerIcon{
+  text-align:center;
+  font-size:80px;
+}
+
+.readerPage h1{
+  margin-top:14px;
+  font-size:27px;
+  text-align:center;
+}
+
+.readerPage h3{
+  margin-top:22px;
+  color:#2455ad;
+}
+
+.readerPage p{
+  margin-top:10px;
+  line-height:1.8;
+  font-size:15px;
+}
+
+.readerButton{
+  width:calc(100% - 30px);
+  margin:15px;
+  padding:16px;
+  border-radius:18px;
+  background:#ffe03a;
+  color:#19233b;
+  font-weight:900;
+}
+
+.voiceButton{
+  margin-top:18px;
+  padding:12px 16px;
+  border-radius:22px;
+  background:#e5efff;
+  color:#2353a0;
+  font-weight:bold;
+}
+
+/* HOMEWORK */
+
+.homeworkCard{
+  margin:14px;
+  padding:20px;
+  border-radius:25px;
+  background:linear-gradient(145deg,#172e78,#7030ca);
+  box-shadow:0 14px 30px #0005;
+}
+
+.hwTag{
+  font-size:10px;
+  color:#77eaff;
+  font-weight:bold;
+  letter-spacing:1px;
+}
+
+.hwQuestion{
+  margin-top:14px;
+  font-size:23px;
+  line-height:1.4;
+  font-weight:900;
+}
+
+.hwInput{
+  width:100%;
+  margin-top:18px;
+  padding:15px;
+  border-radius:15px;
+  outline:0;
+  border:1px solid #ffffff25;
+  background:#ffffff12;
+  color:white;
+  font-size:18px;
+}
+
+.hwInput::placeholder{
+  color:#ffffff55;
+}
+
+.action{
+  width:100%;
+  margin-top:11px;
+  padding:15px;
+  border-radius:17px;
+  background:#ffe13c;
+  color:#17233b;
+  font-weight:900;
+}
+
+.feedback{
+  margin-top:12px;
+  font-weight:bold;
+  line-height:1.5;
+}
+
+/* OPTIONS */
+
+.options{
+  display:grid;
+  gap:10px;
+  margin-top:17px;
+}
+
+.option{
+  width:100%;
+  padding:14px;
+  border-radius:15px;
+  background:#ffffff0e;
+  color:white;
+  border:1px solid #ffffff22;
+  text-align:left;
+}
+
+.option.correct{
+  background:#11bd79;
+}
+
+.option.wrong{
+  background:#e8415c;
+}
+
+/* PROFILE */
+
+.profile{
+  margin:15px;
+  padding:25px;
+  border-radius:28px;
+  background:#ffffff0e;
+  border:1px solid #ffffff17;
+  text-align:center;
+}
+
+.avatar{
+  width:105px;
+  height:105px;
+  margin:auto;
+  display:grid;
+  place-items:center;
+  border-radius:50%;
+  font-size:55px;
+  background:linear-gradient(135deg,#ffe13b,#ff4e8c);
+  background-size:cover;
+  background-position:center;
+  border:4px solid #ffffff25;
+}
+
+.upload{
+  display:inline-block;
+  margin-top:15px;
+  padding:10px 18px;
+  border-radius:22px;
+  background:#ffffff13;
+}
+
+.upload input{
+  display:none;
+}
+
+/* BOTTOM */
+
+.bottom{
+  position:fixed;
+  left:50%;
+  bottom:0;
+  transform:translateX(-50%);
+  width:100%;
+  max-width:520px;
+  height:77px;
+  z-index:100;
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  background:#061327f5;
+  border-top:1px solid #ffffff15;
+  backdrop-filter:blur(18px);
+}
+
+.nav{
+  background:transparent;
+  color:#ffffff60;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:4px;
+  font-size:9px;
+}
+
+.nav span{
+  font-size:22px;
+}
+
+.nav.active{
+  color:#ffe03a;
+}
+
+/* TOAST */
+
+.toast{
+  position:fixed;
+  left:50%;
+  bottom:95px;
+  transform:translate(-50%,30px);
+  z-index:600;
+  padding:13px 20px;
+  border-radius:30px;
+  background:white;
+  color:#17243d;
+  font-weight:bold;
+  opacity:0;
+  pointer-events:none;
+  transition:.3s;
+  white-space:nowrap;
+}
+
+.toast.show{
+  opacity:1;
+  transform:translate(-50%,0);
+}
+
+/* RESPONSIVE */
+
+@media(max-width:380px){
+
+.hero h1{
+  font-size:27px;
+}
+
+.categories{
+  grid-template-columns:repeat(2,1fr);
+}
+
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<!-- HEADER -->
+
+<header class="header">
+
+<div class="brand">
+
+<div class="brandLogo">
+🎓
+</div>
+
+<div>
+
+<h2>VibeLearn</h2>
+
+<small>SMART KIDS ACADEMY</small>
+
+</div>
+
+</div>
+
+
+<div class="headerRight">
+
+<button
+class="headerBtn"
+onclick="speakText('Welcome to VibeLearn Academy')">
+🔊
+</button>
+
+<button
+class="headerBtn"
+onclick="openPage('profile')">
+👤
+</button>
+
+</div>
+
+</header>
+
+
+<!-- HOME -->
+
+<main
+id="home"
+class="page active">
+
+<section class="hero">
+
+<div class="heroLabel">
+WELCOME BACK, LEARNER
+</div>
+
+<h1>
+आज की learning adventure शुरू करें 🚀
+</h1>
+
+<p>
+Books पढ़ो, homework करो, questions solve करो और अपनी knowledge बढ़ाओ।
+</p>
+
+<div class="heroGirl">
+👩‍🏫
+</div>
+
+<button
+class="heroBtn"
+onclick="openPage('library')">
+
+📚 Open 5,000 Books
+
+</button>
+
+</section>
+
+
+<!-- STATS -->
+
+<div class="stats">
+
+<div class="stat">
+<b id="stars">0</b>
+<small>STARS</small>
+</div>
+
+<div class="stat">
+<b id="booksRead">0</b>
+<small>BOOKS</small>
+</div>
+
+<div class="stat">
+<b id="score">0</b>
+<small>SCORE</small>
+</div>
+
+</div>
+
+
+<!-- SUBJECTS -->
+
+<section class="section">
+
+<div class="sectionTitle">
+
+<h2>📚 Learn Subjects</h2>
+
+<span>Explore</span>
+
+</div>
+
+
+<div class="categories">
+
+<button
+class="cat c1"
+onclick="openLibrary('Hindi')">
+<span>अ</span>
+<b>Hindi</b>
+</button>
+
+
+<button
+class="cat c2"
+onclick="openLibrary('English')">
+<span>🔤</span>
+<b>English</b>
+</button>
+
+
+<button
+class="cat c3"
+onclick="openLibrary('Maths')">
+<span>➕</span>
+<b>Maths</b>
+</button>
+
+
+<button
+class="cat c4"
+onclick="openLibrary('EVS')">
+<span>🌱</span>
+<b>EVS</b>
+</button>
+
+</div>
+
+</section>
+
+
+<!-- HOMEWORK -->
+
+<section class="section">
+
+<div class="sectionTitle">
+
+<h2>📝 Today's Homework</h2>
+
+<span>Required</span>
+
+</div>
+
+
+<div class="homeworkCard">
+
+<div class="hwTag">
+DAILY PRACTICE
+</div>
+
+<div class="hwQuestion">
+आज का छोटा homework पूरा करो और ⭐ stars कमाओ।
+</div>
+
+<button
+class="action"
+onclick="openPage('homework')">
+
+Start Homework →
+
+</button>
+
+</div>
+
+</section>
+
+
+<!-- POPULAR BOOKS -->
+
+<section class="section">
+
+<div class="sectionTitle">
+
+<h2>🔥 Popular Books</h2>
+
+<span onclick="openPage('library')">
+View all
+</span>
+
+</div>
+
+
+<div
+id="homeBooks"
+class="bookGrid">
+</div>
+
+</section>
+
+</main>
+
+
+<!-- LIBRARY -->
+
+<main
+id="library"
+class="page">
+
+<div class="libraryHead">
+
+<h1>📚 Digital Library</h1>
+
+<p>
+5,000 original learning books • Stories • Maths • English • Science
+</p>
+
+</div>
+
+
+<div class="search">
+
+<span>🔎</span>
+
+<input
+id="bookSearch"
+placeholder="Search 5,000 books..."
+oninput="filterBooks()">
+
+</div>
+
+
+<div class="filters">
+
+<button
+class="filter active"
+onclick="setFilter('All',this)">
+All
+</button>
+
+<button
+class="filter"
+onclick="setFilter('Hindi',this)">
+Hindi
+</button>
+
+<button
+class="filter"
+onclick="setFilter('English',this)">
+English
+</button>
+
+<button
+class="filter"
+onclick="setFilter('Maths',this)">
+Maths
+</button>
+
+<button
+class="filter"
+onclick="setFilter('EVS',this)">
+EVS
+</button>
+
+<button
+class="filter"
+onclick="setFilter('Story',this)">
+Stories
+</button>
+
+</div>
+
+
+<section class="section">
+
+<div
+id="bookGrid"
+class="bookGrid">
+</div>
+
+</section>
+
+</main>
+
+
+<!-- HOMEWORK -->
+
+<main
+id="homework"
+class="page">
+
+<div class="libraryHead">
+
+<h1>📝 Homework Room</h1>
+
+<p>
+Answer करो और teacher की voice feedback सुनो।
+</p>
+
+</div>
+
+
+<div class="homeworkCard">
+
+<div class="hwTag">
+MATHEMATICS
+</div>
+
+<div class="hwQuestion">
+12 + 8 = ?
+</div>
+
+
+<input
+id="mathAnswer"
+class="hwInput"
+inputmode="numeric"
+placeholder="अपना answer लिखें">
+
+
+<button
+class="action"
+onclick="checkMath()">
+
+🔍 Check Answer
+
+</button>
+
+
+<button
+class="voiceButton"
+onclick="speakText('Twelve plus eight equals twenty')">
+
+🔊 Question सुनें
+
+</button>
+
+
+<div
+id="mathFeedback"
+class="feedback">
+</div>
+
+</div>
+
+
+<div class="homeworkCard">
+
+<div class="hwTag">
+ENGLISH
+</div>
+
+<div class="hwQuestion">
+Which word means "सेब"?
+</div>
+
+
+<div class="options">
+
+<button
+class="option"
+onclick="answerOption(this,true,'Great! Apple means सेब.')">
+🍎 Apple
+</button>
+
+<button
+class="option"
+onclick="answerOption(this,false,'Good try. Try again.')">
+🍌 Banana
+</button>
+
+<button
+class="option"
+onclick="answerOption(this,false,'Try once more.')">
+🥭 Mango
+</button>
+
+</div>
+
+
+<div
+id="englishFeedback"
+class="feedback">
+</div>
+
+</div>
+
+
+<div class="homeworkCard">
+
+<div class="hwTag">
+EVS
+</div>
+
+<div class="hwQuestion">
+Which one is a plant?
+</div>
+
+
+<div class="options">
+
+<button
+class="option"
+onclick="answerOption(this,false,'A car is not a plant.')">
+🚗 Car
+</button>
+
+<button
+class="option"
+onclick="answerOption(this,true,'Excellent! A tree is a plant.')">
+🌳 Tree
+</button>
+
+<button
+class="option"
+onclick="answerOption(this,false,'Try again.')">
+✈️ Aeroplane
+</button>
+
+</div>
+
+
+<div
+id="evsFeedback"
+class="feedback">
+</div>
+
+</div>
+
+
+<div class="section">
+
+<button
+class="action"
+onclick="completeHomework()">
+
+🏆 Finish Homework
+
+</button>
+
+</div>
+
+</main>
+
+
+<!-- PROFILE -->
+
+<main
+id="profile"
+class="page">
+
+<div class="libraryHead">
+
+<h1>👤 My Profile</h1>
+
+<p>Your learning journey</p>
+
+</div>
+
+
+<div class="profile">
+
+<div
+id="avatar"
+class="avatar">
+🧒
+</div>
+
+
+<h2 style="margin-top:13px">
+Little Learner
+</h2>
+
+
+<p
+style="margin-top:6px;color:#ffffff70">
+Keep learning every day ⭐
+</p>
+
+
+<label class="upload">
+
+📷 Change Photo
+
+<input
+type="file"
+accept="image/*"
+onchange="changePhoto(event)">
+
+</label>
+
+
+<div class="stats">
+
+<div class="stat">
+<b id="profileStars">0</b>
+<small>STARS</small>
+</div>
+
+<div class="stat">
+<b id="profileBooks">0</b>
+<small>BOOKS</small>
+</div>
+
+<div class="stat">
+<b id="profileScore">0</b>
+<small>SCORE</small>
+</div>
+
+</div>
+
+
+<button
+class="action"
+onclick="openPage('library')">
+
+📚 Continue Reading
+
+</button>
+
+</div>
+
+</main>
+
+
+<!-- NAV -->
+
+<nav class="bottom">
+
+<button
+class="nav active"
+data-page="home"
+onclick="openPage('home')">
+
+<span>🏠</span>
+Home
+
+</button>
+
+
+<button
+class="nav"
+data-page="library"
+onclick="openPage('library')">
+
+<span>📚</span>
+Books
+
+</button>
+
+
+<button
+class="nav"
+data-page="homework"
+onclick="openPage('homework')">
+
+<span>📝</span>
+Homework
+
+</button>
+
+
+<button
+class="nav"
+onclick="speakText('You are doing a great job. Keep learning!')">
+
+<span>🔊</span>
+Teacher
+
+</button>
+
+
+<button
+class="nav"
+data-page="profile"
+onclick="openPage('profile')">
+
+<span>👤</span>
+Profile
+
+</button>
+
+</nav>
+
+</div>
+
+
+<!-- READER -->
+
+<div
+id="reader"
+class="reader">
+
+<header class="readerTop">
+
+<button
+class="readerBack"
+onclick="closeReader()">
+←
+</button>
+
+
+<div
+id="readerTitle"
+class="readerTitle">
+Book
+</div>
+
+
+<button
+class="readerBack"
+onclick="readBook()">
+🔊
+</button>
+
+</header>
+
+
+<div class="readerPage">
+
+<div
+id="readerIcon"
+class="readerIcon">
+📖
+</div>
+
+
+<h1
+id="readerHeading">
+Book
+</h1>
+
+
+<h3>
+🌟 What You Will Learn
+</h3>
+
+
+<p
+id="readerText">
+Lesson content
+</p>
+
+
+<button
+class="voiceButton"
+onclick="readBook()">
+
+🔊 Teacher पढ़कर सुनाएँ
+
+</button>
+
+
+<h3>
+🧠 Quick Question
+</h3>
+
+
+<p id="readerQuestion">
+Question
+</p>
+
+
+<div
+id="readerOptions"
+class="options">
+</div>
+
+
+<p
+id="readerFeedback"
+class="feedback">
+</p>
+
+</div>
+
+
+<button
+class="readerButton"
+onclick="finishBook()">
+
+⭐ Book Complete
+
+</button>
+
+</div>
+
+
+<!-- TOAST -->
+
+<div
+id="toast"
+class="toast">
+⭐ Great Job!
+</div>
+
+
+<script>
+
+/* ==================================================
+   5,000 BOOK LIBRARY
+================================================== */
+
+const icons=[
+"📖","🚀","🦁","🐼","🐰","🌈","🔬","🌱",
+"🔢","🍎","🪐","🦋","🐘","🎨","🎵","🌍",
+"🧠","🏰","🤖","🐯","🌳","⭐","🧩","🎓"
+];
+
+
+const subjects=[
+"Hindi",
+"English",
+"Maths",
+"EVS",
+"Story"
+];
+
+
+const topics={
+Hindi:[
+"स्वर और व्यंजन",
+"मात्राएँ",
+"शब्द ज्ञान",
+"वाक्य निर्माण",
+"कहानी पढ़ना",
+"चित्र देखकर शब्द",
+"संज्ञा",
+"क्रिया",
+"विलोम शब्द",
+"पर्यायवाची"
+],
+
+English:[
+"Alphabet Adventure",
+"Phonics",
+"Simple Words",
+"Colours",
+"Animals",
+"Fruits",
+"Family",
+"Grammar",
+"Opposites",
+"Reading"
+],
+
+Maths:[
+"Counting",
+"Addition",
+"Subtraction",
+"Shapes",
+"Patterns",
+"Multiplication",
+"Division",
+"Money",
+"Time",
+"Measurements"
+],
+
+EVS:[
+"Plants",
+"Animals",
+"Our Body",
+"Food",
+"Water",
+"Air",
+"Safety",
+"Transport",
+"Earth",
+"Environment"
+],
+
+Story:[
+"Animal Friends",
+"Magic Forest",
+"Space Adventure",
+"Kindness",
+"Friendship",
+"Brave Child",
+"Funny Animals",
+"Treasure Hunt",
+"Village Story",
+"Dream Adventure"
+]
+};
+
+
+/*
+5000 books are generated locally.
+No API.
+No server.
+*/
+
+const books=[];
+
+
+for(let i=1;i<=5000;i++){
+
+let subject=subjects[
+(i-1)%subjects.length
+];
+
+let list=topics[subject];
+
+let topic=
+list[
+Math.floor((i-1)/5)%list.length
+];
+
+let level=
+i%3===0
+?"Beginner":
+i%3===1
+?"Intermediate":
+"Advanced";
+
+
+let title=
+topic+
+" • Level "+
+((i%10)+1);
+
+
+books.push({
+
+id:i,
+
+title:title,
+
+subject:subject,
+
+topic:topic,
+
+level:level,
+
+icon:
+icons[(i-1)%icons.length],
+
+text:createBookText(
+subject,
+topic,
+level,
+i
+),
+
+question:createQuestion(
+subject,
+topic,
+i
+)
+
+});
+
+}
+
+
+/* BOOK TEXT */
+
+function createBookText(
+subject,
+topic,
+level,
+id
+){
+
+if(subject==="Hindi"){
+
+return `आज की किताब में हम "${topic}" सीखेंगे।
+यह Level ${level} learning activity है।
+
+इस lesson में बच्चा नए शब्दों को पहचानना,
+उन्हें पढ़ना और उनका सही उपयोग करना सीखेगा।
+
+Example:
+कमल, कलम, किताब और कहानी जैसे शब्दों को
+ध्यान से पढ़ो और बोलकर दोहराओ।
+
+Activity:
+किताब पढ़ने के बाद अपने आसपास ऐसी चीज़ खोजो
+जिसका नाम तुम हिंदी में जानते हो।
+
+Teacher Tip:
+धीरे पढ़ो, शब्दों को साफ बोलो और फिर अपने
+शब्दों में दोहराओ।
+
+Book ID: ${id}`;
+
+}
+
+
+if(subject==="English"){
+
+return `Welcome to "${topic}".
+
+This is a ${level} English lesson.
+
+Today we will learn new words and simple sentences.
+Read every word slowly and repeat it aloud.
+
+Example:
+Apple means सेब.
+Book means किताब.
+Sun means सूरज.
+
+Activity:
+Look around you and say three English words.
+
+Teacher Tip:
+Speak slowly, listen carefully and repeat each word.
+
+Book ID: ${id}`;
+
+}
+
+
+if(subject==="Maths"){
+
+return `Welcome to the Maths lesson "${topic}".
+
+This is a ${level} activity.
+
+Maths becomes easy when we practice step by step.
+
+Try counting objects around you.
+Then solve small problems using your fingers,
+drawings or numbers.
+
+Remember:
+First understand the question.
+Then choose the operation.
+Finally check your answer.
+
+Challenge:
+Create your own small maths question.
+
+Book ID: ${id}`;
+
+}
+
+
+if(subject==="EVS"){
+
+return `Welcome to "${topic}".
+
+In this ${level} EVS lesson,
+we will discover something about the world around us.
+
+Observe carefully.
+Ask questions.
+Look for examples at home and school.
+
+Activity:
+Find one real-life example related to today's topic
+and explain it in your own words.
+
+Teacher Tip:
+Learning becomes powerful when you connect
+the lesson with real life.
+
+Book ID: ${id}`;
+
+}
+
+
+return `Welcome to "${topic}".
+
+This is an original children's story adventure.
+
+Meet new characters, discover a problem,
+think about the solution and learn a positive lesson.
+
+Remember:
+Kindness, courage, curiosity and friendship
+can make every adventure better.
+
+Activity:
+Tell the story to someone at home using your own words.
+
+Book ID: ${id}`;
+
+}
+
+
+/* QUESTIONS */
+
+function createQuestion(subject,topic,id){
+
+if(subject==="Maths"){
+
+let a=(id%9)+2;
+let b=(id%7)+1;
+
+return {
+
+q:`${a} + ${b} = ?`,
+
+options:[
+String(a+b),
+String(a+b+1),
+String(a+b-1),
+String(a+b+2)
+],
+
+answer:0
+
+};
+
+}
+
+
+if(subject==="English"){
+
+return {
+
+q:"Which word means सेब?",
+
+options:[
+"Apple",
+"Book",
+"Sun",
+"Ball"
+],
+
+answer:0
+
+};
+
+}
+
+
+if(subject==="Hindi"){
+
+return {
+
+q:"'कमल' में कितने अक्षर हैं?",
+
+options:[
+"2",
+"3",
+"4",
+"5"
+],
+
+answer:1
+
+};
+
+}
+
+
+if(subject==="EVS"){
+
+return {
+
+q:"Which one is a plant?",
+
+options:[
+"Car",
+"Tree",
+"Bus",
+"Train"
+],
+
+answer:1
+
+};
+
+}
+
+
+return {
+
+q:"What is an important lesson in a good story?",
+
+options:[
+"Kindness",
+"Never help anyone",
+"Do not learn",
+"Always fight"
+],
+
+answer:0
+
+};
+
+}
+
+
+/* ==================================================
+   STATE
+================================================== */
+
+let currentFilter="All";
+
+let currentBook=null;
+
+let stars=
+Number(localStorage.getItem("vibeStars")||0);
+
+let booksRead=
+Number(localStorage.getItem("vibeBooks")||0);
+
+let score=
+Number(localStorage.getItem("vibeScore")||0);
+
+
+/* ==================================================
+   PAGE
+================================================== */
+
+function openPage(page){
+
+document
+.querySelectorAll(".page")
+.forEach(function(p){
+
+p.classList.remove("active");
+
+});
+
+
+let target=
+document.getElementById(page);
+
+if(target){
+
+target.classList.add("active");
+
+}
+
+
+document
+.querySelectorAll(".nav")
+.forEach(function(n){
+
+n.classList.remove("active");
+
+if(n.dataset.page===page){
+
+n.classList.add("active");
+
+}
+
+});
+
+
+window.scrollTo({
+top:0,
+behavior:"smooth"
+});
+
+
+if(page==="library"){
+
+renderBooks();
+
+}
+
+}
+
+
+/* ==================================================
+   LIBRARY
+================================================== */
+
+function openLibrary(subject){
+
+currentFilter=subject;
+
+openPage("library");
+
+}
+
+
+function setFilter(filter,button){
+
+currentFilter=filter;
+
+document
+.querySelectorAll(".filter")
+.forEach(function(b){
+
+b.classList.remove("active");
+
+});
+
+button.classList.add("active");
+
+renderBooks();
+
+}
+
+
+function filterBooks(){
+
+renderBooks();
+
+}
+
+
+function renderBooks(){
+
+let grid=
+document.getElementById("bookGrid");
+
+if(!grid)return;
+
+
+let search=
+(document.getElementById("bookSearch")?.value||"")
+.toLowerCase()
+.trim();
+
+
+let result=
+books.filter(function(book){
+
+let matchesFilter=
+currentFilter==="All" ||
+book.subject===currentFilter;
+
+let matchesSearch=
+!search ||
+book.title.toLowerCase().includes(search) ||
+book.topic.toLowerCase().includes(search);
+
+return matchesFilter && matchesSearch;
+
+});
+
+
+/*
+Only render 100 at once for speed.
+The complete 5,000-book library is still available.
+*/
+
+result=result.slice(0,100);
+
+
+grid.innerHTML="";
+
+
+result.forEach(function(book){
+
+let card=
+document.createElement("div");
+
+card.className="book";
+
+
+card.innerHTML=`
+
+<div class="cover ${coverClass(book.id)}">
+
+<div class="bookCount">
+BOOK #${book.id}
+</div>
+
+<div class="coverIcon">
+${book.icon}
+</div>
+
+<div class="coverTitle">
+${book.topic}
+</div>
+
+</div>
+
+<div class="bookInfo">
+
+<b>${book.title}</b>
+
+<small>
+${book.subject} • ${book.level}
+</small>
+
+</div>
+
+`;
+
+
+card.onclick=
+function(){
+
+openBook(book);
+
+};
+
+
+grid.appendChild(card);
+
+});
+
+
+if(result.length===0){
+
+grid.innerHTML=
+`<div style="
+grid-column:1/-1;
+text-align:center;
+padding:50px 10px;
+color:#ffffff70">
+📚 कोई book नहीं मिली
+</div>`;
+
+}
+
+}
+
+
+function coverClass(id){
+
+let classes=[
+"pink",
+"blue",
+"orange",
+"green",
+"purple",
+"cyan",
+"red",
+"gold"
+];
+
+return classes[
+(id-1)%classes.length
+];
+
+}
+
+
+/* ==================================================
+   HOME BOOKS
+================================================== */
+
+function renderHomeBooks(){
+
+let grid=
+document.getElementById("homeBooks");
+
+if(!grid)return;
+
+
+grid.innerHTML="";
+
+
+books.slice(0,4)
+.forEach(function(book){
+
+let card=
+document.createElement("div");
+
+card.className="book";
+
+
+card.innerHTML=`
+
+<div class="cover ${coverClass(book.id)}">
+
+<div class="bookCount">
+#${book.id}
+</div>
+
+<div class="coverIcon">
+${book.icon}
+</div>
+
+<div class="coverTitle">
+${book.topic}
+</div>
+
+</div>
+
+<div class="bookInfo">
+
+<b>${book.title}</b>
+
+<small>
+${book.subject} • ${book.level}
+</small>
+
+</div>
+
+`;
+
+
+card.onclick=
+function(){
+
+openBook(book);
+
+};
+
+
+grid.appendChild(card);
+
+});
+
+}
+
+
+/* ==================================================
+   BOOK READER
+================================================== */
+
+function openBook(book){
+
+currentBook=book;
+
+
+document.getElementById("readerTitle")
+.textContent=
+book.title;
+
+
+document.getElementById("readerIcon")
+.textContent=
+book.icon;
+
+
+document.getElementById("readerHeading")
+.textContent=
+book.title;
+
+
+document.getElementById("readerText")
+.textContent=
+book.text;
+
+
+document.getElementById("readerQuestion")
+.textContent=
+book.question.q;
+
+
+let options=
+document.getElementById("readerOptions");
+
+options.innerHTML="";
+
+
+book.question.options
+.forEach(function(option,index){
+
+let button=
+document.createElement("button");
+
+button.className="option";
+
+button.textContent=
+option;
+
+button.onclick=
+function(){
+
+checkBookAnswer(
+button,
+index
+);
+
+};
+
+options.appendChild(button);
+
+});
+
+
+document.getElementById("readerFeedback")
+.textContent="";
+
+
+document.getElementById("reader")
+.classList.add("show");
+
+}
+
+
+/* ==================================================
+   BOOK ANSWER
+================================================== */
+
+function checkBookAnswer(button,index){
+
+let all=
+document.querySelectorAll(
+"#readerOptions .option"
+);
+
+all.forEach(function(b){
+
+b.disabled=true;
+
+});
+
+
+if(index===currentBook.question.answer){
+
+button.classList.add("correct");
+
+score+=10;
+
+stars+=5;
+
+saveStats();
+
+document.getElementById("readerFeedback")
+.textContent=
+"🎉 Excellent! सही answer! +10 score और +5 stars";
+
+speakText(
+"Excellent! Your answer is correct. Great job!"
+);
+
+}else{
+
+button.classList.add("wrong");
+
+document.getElementById("readerFeedback")
+.textContent=
+"😊 Good try! थोड़ा और सोचो और अगली बार सही करो।";
+
+speakText(
+"Good try! Keep learning. You can do it!"
+);
+
+}
+
+}
+
+
+/* ==================================================
+   READ BOOK
+================================================== */
+
+function readBook(){
+
+if(!currentBook)return;
+
+
+let text=
+currentBook.title+
+". "+
+currentBook.text;
+
+
+speakText(text);
+
+}
+
+
+/* ==================================================
+   COMPLETE BOOK
+================================================== */
+
+function finishBook(){
+
+booksRead++;
+
+stars+=10;
+
+saveStats();
+
+document.getElementById("reader")
+.classList.remove("show");
+
+showToast(
+"📚 Book Complete! +10 Stars"
+);
+
+speakText(
+"Wonderful! You completed the book. Ten stars earned!"
+);
+
+}
+
+
+/* ==================================================
+   CLOSE
+================================================== */
+
+function closeReader(){
+
+document.getElementById("reader")
+.classList.remove("show");
+
+if("speechSynthesis" in window){
+
+speechSynthesis.cancel();
+
+}
+
+}
+
+
+/* ==================================================
+   VOICE ENGINE
+================================================== */
+
+function speakText(text){
+
+if(!("speechSynthesis" in window)){
+
+showToast(
+"इस browser में voice support नहीं है"
+);
+
+return;
+
+}
+
+
+speechSynthesis.cancel();
+
+
+let utterance=
+new SpeechSynthesisUtterance(text);
+
+
+utterance.lang="hi-IN";
+
+utterance.rate=.86;
+
+utterance.pitch=1.05;
+
+utterance.volume=1;
+
+
+speechSynthesis.speak(
+utterance
+);
+
+}
+
+
+/* ==================================================
+   MATH HOMEWORK
+================================================== */
+
+function checkMath(){
+
+let value=
+document
+.getElementById("mathAnswer")
+.value
+.trim();
+
+
+let feedback=
+document.getElementById("mathFeedback");
+
+
+if(value==="20"){
+
+feedback.textContent=
+"🎉 बिल्कुल सही! 12 + 8 = 20";
+
+score+=10;
+
+stars+=5;
+
+saveStats();
+
+speakText(
+"Excellent! Twelve plus eight equals twenty. Your answer is correct!"
+);
+
+showToast(
+"⭐ +5 Stars"
+);
+
+}else{
+
+feedback.textContent=
+"😊 कोशिश अच्छी थी। सही answer 20 है।";
+
+speakText(
+"Good try. The correct answer is twenty. Keep learning!"
+);
+
+}
+
+}
+
+
+/* ==================================================
+   OPTIONS
+================================================== */
+
+function answerOption(button,correct,message){
+
+if(button.disabled)return;
+
+
+let parent=
+button.parentElement;
+
+
+parent
+.querySelectorAll(".option")
+.forEach(function(b){
+
+b.disabled=true;
+
+});
+
+
+if(correct){
+
+button.classList.add("correct");
+
+score+=10;
+
+stars+=5;
+
+saveStats();
+
+speakText(message);
+
+showToast(
+"🎉 Correct! +5 Stars"
+);
+
+}else{
+
+button.classList.add("wrong");
+
+speakText(message);
+
+}
+
+}
+
+
+/* ==================================================
+   HOMEWORK
+================================================== */
+
+function completeHomework(){
+
+stars+=15;
+
+score+=20;
+
+saveStats();
+
+showToast(
+"🏆 Homework Complete! +15 Stars"
+);
+
+speakText(
+"Fantastic! Your homework is complete. You earned fifteen stars!"
+);
+
+}
+
+
+/* ==================================================
+   SAVE
+================================================== */
+
+function saveStats(){
+
+localStorage.setItem(
+"vibeStars",
+stars
+);
+
+localStorage.setItem(
+"vibeBooks",
+booksRead
+);
+
+localStorage.setItem(
+"vibeScore",
+score
+);
+
+updateStats();
+
+}
+
+
+/* ==================================================
+   UPDATE
+================================================== */
+
+function updateStats(){
+
+document.getElementById("stars")
+.textContent=stars;
+
+document.getElementById("booksRead")
+.textContent=booksRead;
+
+document.getElementById("score")
+.textContent=score;
+
+
+document.getElementById("profileStars")
+.textContent=stars;
+
+document.getElementById("profileBooks")
+.textContent=booksRead;
+
+document.getElementById("profileScore")
+.textContent=score;
+
+}
+
+
+/* ==================================================
+   PHOTO
+================================================== */
+
+function changePhoto(event){
+
+let file=
+event.target.files[0];
+
+if(!file)return;
+
+
+let reader=
+new FileReader();
+
+
+reader.onload=
+function(e){
+
+let image=
+e.target.result;
+
+
+document.getElementById("avatar")
+.style.backgroundImage=
+"url('"+image+"')";
+
+
+document.getElementById("avatar")
+.textContent="";
+
+
+localStorage.setItem(
+"vibePhoto",
+image
+);
+
+};
+
+
+reader.readAsDataURL(file);
+
+}
+
+
+/* ==================================================
+   TOAST
+================================================== */
+
+function showToast(message){
+
+let toast=
+document.getElementById("toast");
+
+toast.textContent=
+message;
+
+toast.classList.add("show");
+
+
+setTimeout(function(){
+
+toast.classList.remove("show");
+
+},2300);
+
+}
+
+
+/* ==================================================
+   START
+================================================== */
+
+window.addEventListener(
+"load",
+function(){
+
+let photo=
+localStorage.getItem(
+"vibePhoto"
+);
+
+if(photo){
+
+document.getElementById("avatar")
+.style.backgroundImage=
+"url('"+photo+"')";
+
+document.getElementById("avatar")
+.textContent="";
+
+}
+
+
+renderHomeBooks();
+
+updateStats();
+
+});
+
+</script>
+
+</body>
+</html>
